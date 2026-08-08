@@ -57,7 +57,7 @@
 
   var heroType = [$('.hero__name'), $('.hero__role')];
 
-  var revealables = $$('[data-reveal], [data-kinetic]').filter(function (el) {
+  var revealables = $$('[data-reveal], [data-kinetic], .plate').filter(function (el) {
     return heroType.indexOf(el) === -1;
   });
 
@@ -131,7 +131,7 @@
     // settles, so waiting on one would hold the curtain shut.
     var jobs = [];
 
-    var subject = $('.hero__subject');
+    var subject = $('.cut--hero .cut__img');
     if (subject) {
       jobs.push(subject.decode ? subject.decode() : Promise.resolve());
     }
@@ -199,7 +199,7 @@
   var stripViewport = $('#strip-viewport');
   var stripNow = $('#strip-now');
   var stripAll = $('#strip-all');
-  var plates = $$('.plate');
+  var plates = $$('#strip-track .plate');   // the craft inset is a .plate too
   var film = $('.film');
   var filmFrame = $('.film__frame');
   var heroStage = $('.hero__stage');
@@ -211,6 +211,7 @@
 
   var pinnedStrip = false;
   var stripSpan = 0;
+  var stripFocus = -1;
 
   function layout() {
     pinnedStrip = !reduced && finePointer && innerWidth >= 992;
@@ -228,7 +229,10 @@
         strip.style.height = '';
         stripTrack.style.transform = '';
         stripSpan = 0;
+        plates.forEach(function (pl) { pl.classList.remove('is-focus'); });
+        stripFocus = -1;
       }
+      strip.classList.toggle('is-pinned', pinnedStrip);
     }
   }
 
@@ -248,10 +252,12 @@
       heroStage.style.setProperty('--p', clamp(scrollY / (hero.offsetHeight * 0.85), 0, 1).toFixed(4));
     }
 
-    // The film opens like an iris in the first third of its pin, then holds
+    // The iris opens as the section rises into view, so it is already open by
+    // the time it pins. Driving it off pin progress left it a closed sliver for
+    // the whole approach.
     if (film && filmFrame) {
-      var fp = pinProgress(film);
-      filmFrame.style.setProperty('--p', clamp(fp / 0.34, 0, 1).toFixed(4));
+      var ft = film.getBoundingClientRect().top;
+      filmFrame.style.setProperty('--p', clamp((innerHeight - ft) / (innerHeight * 0.82), 0, 1).toFixed(4));
     }
 
     // The filmstrip walks sideways, and the rail steps aside while it does
@@ -259,7 +265,21 @@
       var sp = pinProgress(strip);
       stripTrack.style.transform = 'translate3d(' + (-sp * stripSpan).toFixed(2) + 'px,0,0)';
       strip.classList.toggle('is-ending', sp > 0.9);
-      var idx = Math.min(plates.length, Math.floor(sp * plates.length) + 1);
+      // Whichever frame is nearest the centre of the field takes the light
+      var mid = stripViewport.getBoundingClientRect().left + stripViewport.clientWidth / 2;
+      var best = 0, bestD = Infinity;
+      plates.forEach(function (pl, i) {
+        var b = pl.getBoundingClientRect();
+        var d = Math.abs(b.left + b.width / 2 - mid);
+        if (d < bestD) { bestD = d; best = i; }
+      });
+      if (best !== stripFocus) {
+        if (plates[stripFocus]) plates[stripFocus].classList.remove("is-focus");
+        plates[best].classList.add('is-focus');
+        stripFocus = best;
+      }
+
+      var idx = best + 1;
       if (idx !== lastNow) {
         lastNow = idx;
         if (stripNow) stripNow.textContent = String(idx).padStart(2, '0');

@@ -471,9 +471,77 @@ ol, ul { margin: 0; padding: 0; list-style: none; }
 .nav__links a:active span { transform: translateY(0) scale(0.97); }
 
 @media (max-width: 30rem) {
-  .nav { padding-inline: 1.1rem; gap: 0.6rem; }
-  .nav__initials { font-size: 0.88rem; letter-spacing: 0.18em; }
-  .nav__links { gap: 0.85rem; font-size: 0.58rem; letter-spacing: 0.1em; }
+  .nav { padding-inline: 0.95rem; gap: 0.5rem; }
+  .nav__initials { font-size: 0.84rem; letter-spacing: 0.16em; }
+  .nav__links { gap: 0.62rem; font-size: 0.53rem; letter-spacing: 0.06em; }
+}
+
+/* --------------------------------------------------------------------------
+   Cutout subjects
+   A transparent subject standing in a breathing pool of light.
+
+   Nothing here puts a mask and a filter on the same element. WebKit applies
+   the filter to the element box rather than the alpha silhouette in that
+   combination, which paints a hard rectangle around the cutout.
+   -------------------------------------------------------------------------- */
+
+.cut {
+  position: relative;
+  display: block;
+  margin: 0;
+}
+
+.cut__img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 30px 56px rgba(0, 0, 0, 0.6)) contrast(1.04) saturate(0.99);
+}
+
+/* Breathing aura. Three pools of colour, blurred, drifting on a slow cycle. */
+.cut__aura {
+  position: absolute;
+  left: 50%; top: 48%;
+  width: 122%; height: 122%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(34% 30% at 43% 40%, rgba(201, 168, 106, 0.40) 0%, transparent 72%),
+    radial-gradient(38% 34% at 61% 58%, rgba(18, 108, 88, 0.36) 0%, transparent 74%),
+    radial-gradient(56% 50% at 50% 52%, rgba(64, 46, 98, 0.28) 0%, transparent 78%);
+  filter: blur(40px) saturate(125%);
+  animation: aura 14s var(--ease-soft) infinite;
+  will-change: transform, opacity;
+}
+
+/* Contact light where the subject meets the floor */
+.cut__floor {
+  position: absolute;
+  left: 50%; bottom: 1%;
+  width: 74%; height: 16%;
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(201, 168, 106, 0.26) 0%, transparent 70%);
+  filter: blur(20px);
+  animation: aura-floor 14s var(--ease-soft) infinite;
+}
+
+/* A soft radial scrim rising from the base, so type can sit inside the fade.
+   Radial means it has no edge anywhere. */
+.cut__dissolve {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 48%;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(74% 100% at 50% 104%,
+    rgba(6, 6, 7, 0.94) 0%,
+    rgba(6, 6, 7, 0.66) 40%,
+    rgba(6, 6, 7, 0.24) 66%,
+    transparent 84%);
 }
 
 /* --------------------------------------------------------------------------

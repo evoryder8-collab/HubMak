@@ -18,6 +18,27 @@
   100% { transform: translate(0, 0); }
 }
 
+/* The aura behind every cutout, breathing */
+@keyframes aura {
+  0%, 100% { transform: translate(-50%, -50%) scale(1)    rotate(0deg);   opacity: 0.72; }
+  33%      { transform: translate(-50%, -50%) scale(1.11) rotate(4deg);   opacity: 1;    }
+  66%      { transform: translate(-50%, -50%) scale(1.05) rotate(-3deg);  opacity: 0.85; }
+}
+
+/* Same cycle for layers that carry no centring transform of their own */
+@keyframes aura-still {
+  0%, 100% { transform: scale(1);    opacity: 0.70; }
+  33%      { transform: scale(1.10); opacity: 1;    }
+  66%      { transform: scale(1.04); opacity: 0.84; }
+}
+
+/* Same cycle for layers that are not centre-translated */
+@keyframes aura-floor {
+  0%, 100% { transform: translateX(-50%) scaleX(1)    scaleY(1);    opacity: 0.7; }
+  33%      { transform: translateX(-50%) scaleX(1.12) scaleY(1.18); opacity: 1;   }
+  66%      { transform: translateX(-50%) scaleX(1.05) scaleY(1.08); opacity: 0.82;}
+}
+
 @keyframes cue-pulse {
   0%, 100% { transform: scaleY(0.3); opacity: 0.22; transform-origin: top; }
   50%      { transform: scaleY(1);   opacity: 1;    transform-origin: top; }
@@ -138,6 +159,12 @@
   .ambient__wash { animation: none; opacity: 0.5; }
   .ambient__gl { display: none; }
   .grain { animation: none; opacity: 0.16; }
+
+  /* Auras stay, they just stop breathing */
+  .cut__aura, .creed__aura { animation: none; opacity: 0.85; }
+  .cut__floor, .film__glow { animation: none; opacity: 0.8; }
+  .plate__wipe { transform: scaleY(0) !important; }
+  .strip.is-pinned .plate { opacity: 1 !important; transform: none !important; }
   .cursor { display: none !important; }
   body:has(.cursor) { cursor: auto; }
 

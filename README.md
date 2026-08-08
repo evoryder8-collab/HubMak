@@ -16,6 +16,7 @@ Four values still point at placeholders. Search for them and swap in the real on
 | Instagram | `index.html`, contact links | `https://www.instagram.com/` |
 | MakCare booking | `index.html`, contact links | `https://www.makcare.ca/` |
 | Domain | `CNAME.example`, see custom domain below | `hubertmak.com` |
+| Laval categories | `index.html`, the first `.campaign` block | placement and category names need confirming |
 
 ---
 
@@ -140,6 +141,15 @@ Drop the file in `assets/img/`, then add one block inside `.strip__track`:
 ```
 
 Set `width` and `height` to the real pixel size. The counter and the lightbox pick the new frame up on their own, and the pin lengthens to fit. Portrait crops around 4:5 sit best.
+
+### Never combine a mask and a filter on one element
+
+WebKit applies `filter: drop-shadow()` to the element box rather than the alpha
+silhouette when the same element also carries a `mask-image`. On a cutout that
+paints a hard rectangle around the subject, which is very visible on a dark
+page and looks like the transparency has been lost. Keep them on separate
+elements. The `.cut` component does this: the aura, the floor light, the image,
+and the dissolve scrim are four siblings, and only the image takes a filter.
 
 ### Preparing a cutout
 
