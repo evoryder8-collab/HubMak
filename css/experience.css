@@ -859,150 +859,108 @@ html { scroll-behavior: auto; overflow-x: clip; }
 
 .hero__creed {
   position: absolute;
-  left: 50%;
+  left: 0;
+  right: 0;
   top: 68.5%;
-  z-index: 7;
-  translate: -50% 0;
-  width: min(68vw, 54rem);
-  height: clamp(7.5rem, 13.5vh, 9.5rem);
-  overflow: hidden;
-  border: 1px solid rgba(244,241,236,0.09);
-  border-radius: 1.2rem;
-  background:
-    linear-gradient(100deg, rgba(6,6,7,0.86), rgba(6,6,7,0.48) 48%, rgba(6,6,7,0.82)),
-    radial-gradient(circle at 50% 35%, rgba(18,108,88,0.18), transparent 70%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 28px 80px rgba(0,0,0,0.36);
-  isolation: isolate;
-}
-
-.hero__creed::after {
-  content: "";
-  position: absolute;
-  top: -15%;
-  bottom: -15%;
-  left: -22%;
-  z-index: 3;
-  width: 16%;
-  pointer-events: none;
-  background: linear-gradient(100deg, transparent, rgba(226,202,160,0.17), transparent);
-  transform: skewX(-8deg);
-  animation: hero-creed-sweep 12s var(--ease-soft) infinite;
-  animation-play-state: paused;
-}
-.hero.is-motion-active .hero__creed::after { animation-play-state: running; }
-
-@keyframes hero-creed-sweep {
-  0%, 18% { transform: translateX(0) skewX(-8deg); opacity: 0; }
-  25% { opacity: 0.78; }
-  58% { opacity: 0.7; }
-  70%, 100% { transform: translateX(760%) skewX(-8deg); opacity: 0; }
-}
-
-.hero__creed-photo {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-}
-
-.hero__creed-photo::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(6,6,7,0.72), rgba(6,6,7,0.26) 50%, rgba(6,6,7,0.76));
-}
-
-.hero__creed-photo img {
+  z-index: auto;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 36%;
-  opacity: 0.35;
-  filter: grayscale(0.72) contrast(1.12) brightness(0.72) saturate(0.72);
+  height: clamp(8.5rem, 15vh, 10.5rem);
+  padding: 0;
+  overflow: visible;
+  pointer-events: none;
 }
 
-.hero__creed blockquote {
+.hero__creed::before {
+  inset: -92% 0;
+  z-index: 1;
+}
+
+.hero__creed .creed__figure {
+  inset: -112% 0;
+  z-index: 1;
+  overflow: visible;
+}
+
+.hero__creed .creed__quote {
   position: absolute;
   inset: 0;
+  z-index: 7;
   display: grid;
   place-content: center;
-  gap: 0.72rem;
   margin: 0;
-  padding: 1rem 4%;
-  text-align: center;
 }
 
-.hero__creed blockquote p {
-  max-width: 31ch;
-  font-family: var(--serif);
-  font-size: clamp(1.25rem, 2.8vw, 2.15rem);
-  font-weight: 300;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: rgba(244,241,236,0.94);
-  text-shadow: 0 3px 22px rgba(0,0,0,0.9);
+.hero__creed .creed__quote p {
+  text-shadow: 0 3px 24px rgba(0,0,0,0.94), 0 0 54px rgba(6,6,7,0.72);
 }
 
-.hero__creed cite {
-  font-style: normal;
-  font-size: 0.48rem;
-  font-weight: 500;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--gold-lift);
+.hero__creed .creed__quote cite {
+  margin-top: clamp(1.2rem, 3vh, 2rem);
 }
 
-/* Social links live in the document flow and keep their real brand identity. */
-.social-ribbon {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.8rem;
-  padding: 1.25rem var(--gutter);
-  padding-left: max(var(--gutter), var(--rail-w));
-  border-block: 1px solid var(--line-soft);
-  background: rgba(6,6,7,0.72);
+/* A persistent, compact social dock. Each service remains its own button. */
+.social-dock {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 135;
+  display: flex;
+  gap: 0.55rem;
+  pointer-events: none;
 }
 
-.social-link {
+.social-dock__link {
   --brand: var(--gold);
   position: relative;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  display: inline-grid;
+  place-items: center;
   align-items: center;
-  gap: 0.85rem;
-  min-width: 0;
-  padding: 0.75rem 0.9rem;
-  overflow: hidden;
-  border: 1px solid rgba(244,241,236,0.075);
-  border-radius: 0.9rem;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--brand) 8%, transparent), rgba(244,241,236,0.018));
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
-  transition: transform 600ms var(--ease-out), border-color 600ms ease, box-shadow 600ms ease;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid color-mix(in srgb, var(--brand) 48%, transparent);
+  border-radius: 50%;
+  color: var(--brand);
+  background: color-mix(in srgb, var(--brand) 8%, rgba(7,7,9,0.82));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.07),
+    0 10px 30px rgba(0,0,0,0.34),
+    0 0 22px color-mix(in srgb, var(--brand) 10%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  pointer-events: auto;
+  transition: transform 520ms var(--ease-out), border-color 520ms ease, background 520ms ease, box-shadow 520ms ease;
 }
 
-.social-link--instagram { --brand: #b54cc8; }
-.social-link--facebook { --brand: #1877f2; }
-.social-link--whatsapp { --brand: #25d366; }
-.social-link__icon {
-  display: grid;
-  place-items: center;
-  width: 2.35rem;
-  height: 2.35rem;
-  border-radius: 0.72rem;
-  color: var(--brand);
-  background: color-mix(in srgb, var(--brand) 13%, rgba(8,8,10,0.94));
-  box-shadow: 0 0 22px color-mix(in srgb, var(--brand) 16%, transparent);
+.social-dock__link--instagram { --brand: #c350c8; }
+.social-dock__link--facebook { --brand: #408cf5; }
+.social-dock__link--whatsapp { --brand: #32d56d; }
+.social-dock__link svg {
+  width: 1.22rem;
+  height: 1.22rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
-.social-link__icon svg { width: 1.16rem; height: 1.16rem; fill: none; stroke: currentColor; stroke-width: 1.6; }
-.social-link--facebook .social-link__icon svg { fill: currentColor; stroke: none; }
-.social-link > span:nth-child(2) { min-width: 0; }
-.social-link small,
-.social-link strong { display: block; }
-.social-link small { margin-bottom: 0.12rem; font-size: 0.45rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper-38); }
-.social-link strong { overflow: hidden; font-size: 0.7rem; font-weight: 400; letter-spacing: 0.08em; color: var(--paper-80); text-overflow: ellipsis; }
-.social-link > i { position: relative; width: 1.2rem; height: 1px; background: var(--brand); opacity: 0.72; }
-.social-link > i::after { content: ""; position: absolute; top: -3px; right: 0; width: 6px; height: 6px; border-top: 1px solid var(--brand); border-right: 1px solid var(--brand); transform: rotate(45deg); }
-.social-link:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--brand) 36%, transparent); box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 18px 50px color-mix(in srgb, var(--brand) 10%, transparent); }
+.social-dock__link--facebook svg { fill: currentColor; stroke: none; }
+.social-dock__link::before {
+  content: "";
+  position: absolute;
+  inset: -0.25rem;
+  border-radius: inherit;
+}
+.social-dock__link:hover,
+.social-dock__link:focus-visible {
+  transform: translateY(-4px) scale(1.055);
+  border-color: color-mix(in srgb, var(--brand) 82%, transparent);
+  background: color-mix(in srgb, var(--brand) 14%, rgba(7,7,9,0.9));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    0 14px 38px rgba(0,0,0,0.4),
+    0 0 30px color-mix(in srgb, var(--brand) 20%, transparent);
+}
+.social-dock__link:active { transform: translateY(-1px) scale(0.96); }
 
 /* Restore the transparent winning cutout and give it a broad medal glow. */
 .honors__scene {
@@ -1319,7 +1277,7 @@ html { scroll-behavior: auto; overflow-x: clip; }
   .hero--portrait .hero__stage,
   .hero__arc { top: 42.5%; }
   .hero__statement { top: 55%; }
-  .hero__creed { top: 66.5%; width: min(76vw, 48rem); }
+  .hero__creed { top: 66.5%; width: 100%; }
   .hero--portrait .hero__role,
   .hero__award { bottom: 5vh; }
   .awards-ledger { grid-template-columns: 1fr; }
@@ -1337,16 +1295,17 @@ html { scroll-behavior: auto; overflow-x: clip; }
   .hero__arc { width: min(80vw, 22rem); }
   .hero__arc--two { width: min(91vw, 25rem); }
   .hero__statement { top: 53%; }
-  .hero__creed { top: 61.5%; width: calc(100% - 2rem); height: clamp(7.5rem, 16svh, 8.8rem); border-radius: 1rem; }
-  .hero__creed blockquote { padding-inline: 1rem; }
-  .hero__creed blockquote p { max-width: 26ch; font-size: clamp(1.22rem, 5.7vw, 1.65rem); }
-  .hero--portrait .hero__role { top: 79%; bottom: auto; }
-  .hero__award { top: 85.5%; bottom: auto; }
+  .hero__creed { top: 61.5%; width: 100%; height: clamp(8.5rem, 16svh, 9.5rem); }
+  .hero__creed .creed__figure { inset: -125% 0; }
+  .hero__creed .creed__quote { padding-inline: 1rem; transform: translateY(-0.85rem); }
+  .hero__creed .creed__quote p { max-width: 20ch; }
+  .hero--portrait .hero__role { top: 84%; bottom: auto; }
+  .hero__award { top: 90%; bottom: auto; }
   .hero--portrait .hero__role,
   .hero__award { opacity: 1; }
 
-  .social-ribbon { grid-template-columns: 1fr; gap: 0.55rem; padding: 0.75rem 1rem; }
-  .social-link { min-height: 3.75rem; }
+  .social-dock { right: max(0.8rem, env(safe-area-inset-right)); bottom: max(0.8rem, env(safe-area-inset-bottom)); gap: 0.42rem; }
+  .social-dock__link { width: 2.8rem; height: 2.8rem; }
 
   .honors__scene { width: calc(100% + 1rem); margin-inline: -0.5rem; padding-block: 1.4rem 2.4rem; }
   .honors__scene::after { bottom: 1.8rem; width: 92%; height: 5.8rem; }
@@ -1390,8 +1349,14 @@ html { scroll-behavior: auto; overflow-x: clip; }
   .hero__arc { top: 44%; }
   .hero__statement { top: 53.5%; }
   .hero__creed { top: 62%; height: 7.1rem; }
-  .hero--portrait .hero__role { top: 80%; }
-  .hero__award { top: 87%; }
+  .hero__creed .creed__quote { transform: translateY(-2.9rem); }
+  .hero__creed .creed__quote p { font-size: 1.85rem; }
+  .hero__creed .creed__quote cite { margin-top: 0.4rem; }
+  .hero--portrait .hero__role { top: 83.5%; }
+  .hero__award { top: 91%; }
+  .social-dock { right: max(0.75rem, env(safe-area-inset-right)); bottom: max(0.25rem, env(safe-area-inset-bottom)); gap: 0.32rem; }
+  .social-dock__link { width: 2.25rem; height: 2.25rem; }
+  .social-dock__link svg { width: 1rem; height: 1rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1399,7 +1364,8 @@ html { scroll-behavior: auto; overflow-x: clip; }
   .hero--portrait .cut--hero,
   .hero--portrait .cut--hero::before,
   .hero--portrait .cut--hero::after,
-  .hero__creed::after,
+  .hero__creed .creed__aura,
+  .hero__creed .creed__quote::after,
   .honors__scene::before,
   .honors__scene-glow,
   .strip__hint::after,
