@@ -516,7 +516,7 @@ html { scroll-behavior: auto; overflow-x: clip; }
   position: absolute;
   inset: -8%;
   z-index: 0;
-  background: linear-gradient(rgba(5,5,7,0.38), rgba(5,5,7,0.62)), url("../assets/video/reel-poster.webp") center / cover no-repeat;
+  background: linear-gradient(rgba(5,5,7,0.38), rgba(5,5,7,0.62)), url("../assets/video/reel-poster.jpg") center / cover no-repeat;
   filter: blur(22px) saturate(0.74);
   transform: scale(1.08);
 }

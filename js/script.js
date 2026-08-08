@@ -156,7 +156,7 @@
     var poster = new Image();
     jobs.push(new Promise(function (res) {
       poster.onload = poster.onerror = res;
-      poster.src = 'assets/video/reel-poster.webp';
+      poster.src = 'assets/video/reel-poster.jpg';
     }));
 
     jobs.push(document.fonts ? document.fonts.ready : Promise.resolve());
