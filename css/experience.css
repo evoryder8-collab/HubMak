@@ -1296,7 +1296,7 @@ html { scroll-behavior: auto; overflow-x: clip; }
 
 @media (min-width: 62.01rem) {
   /* The surrounding chapter grows while the portrait keeps its original viewport geometry. */
-  .hero.hero--portrait { min-height: 148svh; }
+  .hero.hero--portrait { min-height: 164svh; }
   .hero__name { top: 40.92svh; }
   .hero--portrait .hero__stage,
   .hero__arc { top: 56.76svh; }
@@ -1305,13 +1305,14 @@ html { scroll-behavior: auto; overflow-x: clip; }
 
   .hero__creed {
     top: 102svh;
-    height: clamp(10.625rem, 18.75svh, 13.125rem);
+    height: clamp(14rem, 28svh, 16rem);
     margin-top: 0;
   }
   .hero__creed .creed__figure img,
   .hero__creed .creed__aura { top: 57%; }
+  .hero__creed .creed__quote { transform: translateY(clamp(3.5rem, 7.5vh, 4.5rem)); }
   .hero--portrait .hero__role,
-  .hero__award { top: 132svh; bottom: auto; }
+  .hero__award { top: 148svh; bottom: auto; }
 
   .hero--portrait .hero__role {
     color: rgba(244,241,236,0.64);
@@ -1373,7 +1374,9 @@ html { scroll-behavior: auto; overflow-x: clip; }
 }
 
 @media (min-width: 62.01rem) and (max-width: 76rem) {
-  .hero.hero--portrait { min-height: 156svh; }
+  .hero.hero--portrait { min-height: 180svh; }
+  .hero--portrait .hero__role,
+  .hero__award { top: 154svh; }
 }
 
 @media (max-width: 62rem) {
@@ -1408,8 +1411,8 @@ html { scroll-behavior: auto; overflow-x: clip; }
   }
   .hero__creed .creed__figure { inset: -112% 0; }
   .hero__creed .creed__figure img,
-  .hero__creed .creed__aura { top: 57%; }
-  .hero__creed .creed__quote { padding-inline: 1rem; transform: translateY(-2.5rem); }
+  .hero__creed .creed__aura { top: 50%; }
+  .hero__creed .creed__quote { padding-inline: 1rem; transform: translateY(1.25rem); }
   .hero__creed .creed__quote p { max-width: 20ch; }
   .hero--portrait .hero__role { top: 112svh; bottom: auto; }
   .hero__award { top: 122svh; bottom: auto; }
@@ -1462,7 +1465,7 @@ html { scroll-behavior: auto; overflow-x: clip; }
   .hero__spark { top: 38.4svh; }
   .hero__statement { top: 68.48svh; }
   .hero__creed { top: 88svh; height: 9rem; }
-  .hero__creed .creed__quote { transform: translateY(-3.25rem); }
+  .hero__creed .creed__quote { transform: translateY(0.4rem); }
   .hero__creed .creed__quote p { font-size: 1.85rem; }
   .hero__creed .creed__quote cite { margin-top: 0.4rem; }
   .hero--portrait .hero__role { top: 118svh; }
