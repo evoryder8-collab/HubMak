@@ -151,9 +151,16 @@ ol, ul { margin: 0; padding: 0; list-style: none; }
     radial-gradient(50% 42% at 52% 86%, color-mix(in oklab, var(--hue-violet) 74%, transparent) 0%, transparent 68%);
   filter: blur(44px) saturate(115%);
   opacity: 0.60;
-  animation: breathe 38s var(--ease-soft) infinite;
+  animation: ambient-travel 26s var(--ease-soft) infinite alternate;
   transition: opacity 2200ms ease;
   will-change: transform, opacity;
+}
+
+@keyframes ambient-travel {
+  0% { transform: translate3d(-3%, -2%, 0) scale(1.02) rotate(-1deg); opacity: 0.52; }
+  31% { transform: translate3d(4%, -5%, 0) scale(1.08) rotate(1.2deg); opacity: 0.66; }
+  67% { transform: translate3d(-2%, 5%, 0) scale(1.04) rotate(-0.4deg); opacity: 0.57; }
+  100% { transform: translate3d(5%, 2%, 0) scale(1.1) rotate(1.5deg); opacity: 0.68; }
 }
 
 .ambient__gl {

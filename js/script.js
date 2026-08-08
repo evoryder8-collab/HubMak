@@ -87,6 +87,19 @@
     revealables.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
+  // Continuous decorative motion only runs while its chapter is near view.
+  var motionRegions = $$('.hero, .proof-band, .honors, .strip');
+  if (!reduced && 'IntersectionObserver' in window) {
+    var motionObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        entry.target.classList.toggle('is-motion-active', entry.isIntersecting);
+      });
+    }, { rootMargin: '18% 0px 18% 0px', threshold: 0 });
+    motionRegions.forEach(function (region) { motionObserver.observe(region); });
+  } else {
+    motionRegions.forEach(function (region) { region.classList.add('is-motion-active'); });
+  }
+
   /* ================================================================== *
    * Overture: loader, then the curtain parts
    * ================================================================== */
@@ -210,44 +223,18 @@
   var railProgress = $('#rail-progress');
   var railLinks = $$('[data-rail]');
   var sections = $$('[data-track]');
+  var galleryPages = $$('.gallery-page', stripTrack || document);
 
-  if (stripAll) stripAll.textContent = String(plates.length).padStart(2, '0');
-
-  var pinnedStrip = false;
-  var stripSpan = 0;
-  var stripFocus = -1;
+  if (stripAll) stripAll.textContent = String(galleryPages.length).padStart(2, '0');
 
   function layout() {
-    pinnedStrip = !reduced && finePointer && innerWidth >= 992;
-
     if (strip && stripTrack && stripViewport) {
-      if (pinnedStrip) {
-        // Measure from the last frame rather than scrollWidth, which drops the
-        // track's trailing padding and would leave the last plate flush to the edge
-        var last = plates[plates.length - 1];
-        var tailPad = parseFloat(getComputedStyle(stripTrack).paddingRight) || 0;
-        var reach = last ? last.offsetLeft + last.offsetWidth + tailPad : stripTrack.scrollWidth;
-        stripSpan = Math.max(0, reach - stripViewport.clientWidth);
-        strip.style.height = (innerHeight + stripSpan) + 'px';
-      } else {
-        strip.style.height = '';
-        stripTrack.style.transform = '';
-        stripSpan = 0;
-        plates.forEach(function (pl) { pl.classList.remove('is-focus'); });
-        stripFocus = -1;
-      }
-      strip.classList.toggle('is-pinned', pinnedStrip);
+      strip.style.height = '';
+      stripTrack.style.transform = '';
+      strip.classList.remove('is-pinned', 'is-ending');
     }
   }
 
-  // Progress through a sticky-pinned section, 0 before, 1 after
-  function pinProgress(section) {
-    var travel = section.offsetHeight - innerHeight;
-    if (travel <= 0) return 0;
-    return clamp(-section.getBoundingClientRect().top / travel, 0, 1);
-  }
-
-  var lastNow = -1;
   var currentRail = '';
 
   function frame() {
@@ -264,37 +251,7 @@
       filmFrame.style.setProperty('--p', clamp((innerHeight - ft) / (innerHeight * 0.82), 0, 1).toFixed(4));
     }
 
-    // The filmstrip walks sideways, and the rail steps aside while it does
-    if (pinnedStrip && strip && stripTrack) {
-      var sp = pinProgress(strip);
-      stripTrack.style.transform = 'translate3d(' + (-sp * stripSpan).toFixed(2) + 'px,0,0)';
-      strip.classList.toggle('is-ending', sp > 0.9);
-      // Whichever frame is nearest the centre of the field takes the light
-      var mid = stripViewport.getBoundingClientRect().left + stripViewport.clientWidth / 2;
-      var best = 0, bestD = Infinity;
-      plates.forEach(function (pl, i) {
-        var b = pl.getBoundingClientRect();
-        var d = Math.abs(b.left + b.width / 2 - mid);
-        if (d < bestD) { bestD = d; best = i; }
-      });
-      if (best !== stripFocus) {
-        if (plates[stripFocus]) plates[stripFocus].classList.remove("is-focus");
-        plates[best].classList.add('is-focus');
-        stripFocus = best;
-      }
-
-      var idx = best + 1;
-      if (idx !== lastNow) {
-        lastNow = idx;
-        if (stripNow) stripNow.textContent = String(idx).padStart(2, '0');
-      }
-      if (rail) {
-        var r = strip.getBoundingClientRect();
-        rail.classList.toggle('is-dim', r.top < innerHeight * 0.5 && r.bottom > innerHeight * 0.5);
-      }
-    } else if (rail) {
-      rail.classList.remove('is-dim');
-    }
+    if (rail) rail.classList.remove('is-dim');
 
     // Rail progress and the current chapter
     if (railProgress) {
@@ -330,15 +287,118 @@
   addEventListener('resize', function () { layout(); frame(); }, { passive: true });
   if (document.fonts) document.fonts.ready.then(function () { layout(); frame(); });
 
-  // Carousel mode keeps the counter honest
+  // The gallery is a two-page deck, with six images visible on the first page.
   if (stripViewport) {
+    var galleryTick = 0;
+    var galleryPage = -1;
+
+    function updateGalleryCounter() {
+      galleryTick = 0;
+      if (!galleryPages.length) return;
+      var mid = stripViewport.getBoundingClientRect().left + stripViewport.clientWidth / 2;
+      var best = 0;
+      var bestDistance = Infinity;
+      galleryPages.forEach(function (page, i) {
+        var box = page.getBoundingClientRect();
+        var distance = Math.abs(box.left + box.width / 2 - mid);
+        if (distance < bestDistance) { bestDistance = distance; best = i; }
+      });
+      if (best !== galleryPage) {
+        galleryPage = best;
+        if (stripNow) stripNow.textContent = String(best + 1).padStart(2, '0');
+      }
+    }
+
     stripViewport.addEventListener('scroll', function () {
-      if (pinnedStrip || !plates.length) return;
-      var w = stripViewport.scrollWidth - stripViewport.clientWidth;
-      var p = w > 0 ? stripViewport.scrollLeft / w : 0;
-      var idx = Math.min(plates.length, Math.floor(p * (plates.length - 1) + 0.5) + 1);
-      if (stripNow) stripNow.textContent = String(idx).padStart(2, '0');
+      if (!galleryTick) galleryTick = requestAnimationFrame(updateGalleryCounter);
     }, { passive: true });
+
+    updateGalleryCounter();
+
+    var dragStartX = 0;
+    var dragStartScroll = 0;
+    var galleryDragging = false;
+    var suppressGalleryClick = false;
+
+    if (finePointer) {
+      stripViewport.addEventListener('pointerdown', function (e) {
+        if (e.button !== 0) return;
+        dragStartX = e.clientX;
+        dragStartScroll = stripViewport.scrollLeft;
+        galleryDragging = false;
+        stripViewport.setPointerCapture(e.pointerId);
+      });
+      stripViewport.addEventListener('pointermove', function (e) {
+        if (!stripViewport.hasPointerCapture(e.pointerId)) return;
+        var delta = e.clientX - dragStartX;
+        if (!galleryDragging && Math.abs(delta) < 5) return;
+        galleryDragging = true;
+        stripViewport.classList.add('is-dragging');
+        stripViewport.scrollLeft = dragStartScroll - delta;
+      });
+      stripViewport.addEventListener('pointerup', function (e) {
+        if (stripViewport.hasPointerCapture(e.pointerId)) stripViewport.releasePointerCapture(e.pointerId);
+        suppressGalleryClick = galleryDragging;
+        galleryDragging = false;
+        stripViewport.classList.remove('is-dragging');
+      });
+      stripViewport.addEventListener('click', function (e) {
+        if (!suppressGalleryClick) return;
+        e.preventDefault();
+        e.stopPropagation();
+        suppressGalleryClick = false;
+      }, true);
+    }
+
+    function cancelGalleryNudge() {
+      if (strip) strip.classList.remove('is-nudging');
+    }
+
+    ['pointerdown', 'touchstart', 'wheel'].forEach(function (type) {
+      stripViewport.addEventListener(type, cancelGalleryNudge, { passive: true });
+    });
+
+    if (!reduced && strip && 'IntersectionObserver' in window) {
+      var nudgeObserver = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        nudgeObserver.disconnect();
+        if (stripViewport.scrollLeft < 4) {
+          strip.classList.add('is-nudging');
+          setTimeout(cancelGalleryNudge, 2100);
+        }
+      }, { threshold: 0.32 });
+      nudgeObserver.observe(strip);
+    }
+
+    if (finePointer && !reduced) {
+      plates.forEach(function (plate) {
+        var hit = $('.plate__hit', plate);
+        if (!hit) return;
+        var tiltFrame = 0;
+        hit.addEventListener('pointermove', function (e) {
+          if (stripViewport.classList.contains('is-dragging')) return;
+          var x = e.clientX;
+          var y = e.clientY;
+          if (tiltFrame) cancelAnimationFrame(tiltFrame);
+          tiltFrame = requestAnimationFrame(function () {
+            var box = hit.getBoundingClientRect();
+            var px = clamp((x - box.left) / box.width, 0, 1);
+            var py = clamp((y - box.top) / box.height, 0, 1);
+            hit.style.setProperty('--ry', ((px - 0.5) * 8).toFixed(2) + 'deg');
+            hit.style.setProperty('--rx', ((0.5 - py) * 7).toFixed(2) + 'deg');
+            hit.style.setProperty('--gx', (px * 100).toFixed(1) + '%');
+            hit.style.setProperty('--gy', (py * 100).toFixed(1) + '%');
+          });
+        });
+        hit.addEventListener('pointerleave', function () {
+          if (tiltFrame) cancelAnimationFrame(tiltFrame);
+          hit.style.setProperty('--rx', '0deg');
+          hit.style.setProperty('--ry', '0deg');
+          hit.style.setProperty('--gx', '50%');
+          hit.style.setProperty('--gy', '50%');
+        });
+      });
+    }
   }
 
   /* ================================================================== *
@@ -473,6 +533,20 @@
     var labelEl = $('#cursor-label');
     var mx = innerWidth / 2, my = innerHeight / 2;
     var rx = mx, ry = my;
+    var trailFrame = 0;
+
+    function trail() {
+      rx += (mx - rx) * 0.14;
+      ry += (my - ry) * 0.14;
+      var t = 'translate(' + rx.toFixed(1) + 'px,' + ry.toFixed(1) + 'px) translate(-50%,-50%)';
+      ring.style.transform = t;
+      labelEl.style.transform = t;
+      if (Math.abs(mx - rx) + Math.abs(my - ry) < 0.12) {
+        rx = mx; ry = my; trailFrame = 0;
+        return;
+      }
+      trailFrame = requestAnimationFrame(trail);
+    }
 
     addEventListener('mousemove', function (e) {
       if (!cursor.classList.contains('is-awake')) {
@@ -481,16 +555,8 @@
       }
       mx = e.clientX; my = e.clientY;
       dot.style.transform = 'translate(' + mx + 'px,' + my + 'px) translate(-50%,-50%)';
+      if (!trailFrame) trailFrame = requestAnimationFrame(trail);
     }, { passive: true });
-
-    (function trail() {
-      rx += (mx - rx) * 0.14;
-      ry += (my - ry) * 0.14;
-      var t = 'translate(' + rx.toFixed(1) + 'px,' + ry.toFixed(1) + 'px) translate(-50%,-50%)';
-      ring.style.transform = t;
-      labelEl.style.transform = t;
-      requestAnimationFrame(trail);
-    })();
 
     $$('a, button, input, textarea, label').forEach(function (el) {
       var label = el.getAttribute('data-cursor') ||
@@ -551,8 +617,9 @@
     });
   }
 
-  var year = $('#year');
-  if (year) year.textContent = String(new Date().getFullYear());
+  $$('[data-year]').forEach(function (year) {
+    year.textContent = String(new Date().getFullYear());
+  });
 
   /* ================================================================== *
    * Ambient WebGL: three slow pools of colour over near black
@@ -580,13 +647,13 @@
       '  vec2 uv = gl_FragCoord.xy / u_res.xy;',
       '  float a = u_res.x / u_res.y;',
       '  uv.x *= a;',
-      '  float t = u_t * 0.042;',
+      '  float t = u_t * 0.13;',
       '  vec3 emerald = vec3(0.038, 0.196, 0.158);',
       '  vec3 gold    = vec3(0.238, 0.184, 0.084);',
       '  vec3 violet  = vec3(0.112, 0.082, 0.172);',
-      '  vec2 c1 = vec2(a * (0.25 + 0.07 * sin(t * 0.9)),       0.71 + 0.06 * cos(t * 0.7));',
-      '  vec2 c2 = vec2(a * (0.77 + 0.06 * cos(t * 0.6 + 1.7)), 0.63 + 0.07 * sin(t * 0.8 + 0.4));',
-      '  vec2 c3 = vec2(a * (0.50 + 0.09 * sin(t * 0.5 + 3.1)), 0.19 + 0.08 * cos(t * 0.45 + 2.2));',
+      '  vec2 c1 = vec2(a * (0.25 + 0.13 * sin(t * 0.9)),       0.71 + 0.11 * cos(t * 0.7));',
+      '  vec2 c2 = vec2(a * (0.77 + 0.12 * cos(t * 0.6 + 1.7)), 0.63 + 0.12 * sin(t * 0.8 + 0.4));',
+      '  vec2 c3 = vec2(a * (0.50 + 0.15 * sin(t * 0.5 + 3.1)), 0.19 + 0.13 * cos(t * 0.45 + 2.2));',
       '  float b = 0.60 + 0.13 * sin(t * 1.1);',
       '  vec3 col = emerald * pool(uv, c1, 0.62 * b) * 0.95',
       '           + gold    * pool(uv, c2, 0.52 * b) * 0.70',
@@ -643,9 +710,8 @@
 
     function draw(now) {
       requestAnimationFrame(draw);
-      if (!visible || now - last < 40) return;   // nothing here moves fast
+      if (!visible || now - last < 50) return;   // 20 fps is smooth for fields this soft
       last = now;
-      resize();
       gl.uniform1f(uT, (now - start) / 1000);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     }
