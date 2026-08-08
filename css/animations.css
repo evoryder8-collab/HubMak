@@ -1,61 +1,68 @@
 /* ==========================================================================
-   animations.css  |  keyframes, scroll reveals, kinetic type
+   animations.css  |  keyframes, reveals, kinetic type, reduced motion
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   Ambient and furniture
-   -------------------------------------------------------------------------- */
-
 @keyframes breathe {
-  0%   { transform: scale(1) translate3d(0, 0, 0);        opacity: 0.55; filter: blur(40px) hue-rotate(0deg); }
-  33%  { transform: scale(1.08) translate3d(2%, -1.5%, 0); opacity: 0.68; filter: blur(46px) hue-rotate(9deg); }
-  66%  { transform: scale(1.04) translate3d(-2%, 1.5%, 0); opacity: 0.60; filter: blur(42px) hue-rotate(-7deg); }
-  100% { transform: scale(1) translate3d(0, 0, 0);        opacity: 0.55; filter: blur(40px) hue-rotate(0deg); }
+  0%   { transform: scale(1)    translate3d(0, 0, 0);      opacity: 0.54; filter: blur(44px) hue-rotate(0deg); }
+  33%  { transform: scale(1.08) translate3d(2%, -1.4%, 0); opacity: 0.66; filter: blur(50px) hue-rotate(8deg); }
+  66%  { transform: scale(1.04) translate3d(-2%, 1.4%, 0); opacity: 0.58; filter: blur(46px) hue-rotate(-6deg); }
+  100% { transform: scale(1)    translate3d(0, 0, 0);      opacity: 0.54; filter: blur(44px) hue-rotate(0deg); }
 }
 
 @keyframes grain-shift {
   0%   { transform: translate(0, 0); }
-  20%  { transform: translate(-8px, 5px); }
-  40%  { transform: translate(6px, -9px); }
-  60%  { transform: translate(-5px, -6px); }
-  80%  { transform: translate(9px, 4px); }
+  20%  { transform: translate(-9px, 6px); }
+  40%  { transform: translate(7px, -10px); }
+  60%  { transform: translate(-6px, -7px); }
+  80%  { transform: translate(10px, 5px); }
   100% { transform: translate(0, 0); }
 }
 
 @keyframes cue-pulse {
-  0%, 100% { transform: translateX(-50%) scaleY(0.35); opacity: 0.25; transform-origin: top; }
-  50%      { transform: translateX(-50%) scaleY(1);    opacity: 1;    transform-origin: top; }
+  0%, 100% { transform: scaleY(0.3); opacity: 0.22; transform-origin: top; }
+  50%      { transform: scaleY(1);   opacity: 1;    transform-origin: top; }
 }
 
-@keyframes sound-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 168, 106, 0.00), 0 0 22px rgba(201, 168, 106, 0.10); }
-  50%      { box-shadow: 0 0 0 6px rgba(201, 168, 106, 0.00), 0 0 40px rgba(201, 168, 106, 0.24); }
+@keyframes wave {
+  0%, 100% { height: 26%; }
+  50%      { height: 100%; }
+}
+
+@keyframes sweep {
+  0%, 100% { background-position: 130% 0; }
+  50%      { background-position: -30% 0; }
 }
 
 /* --------------------------------------------------------------------------
-   Scroll reveals, driven by IntersectionObserver
+   Reveals
    -------------------------------------------------------------------------- */
 
 [data-reveal] {
   opacity: 0;
-  transform: translate3d(0, 22px, 0);
+  transform: translate3d(0, 26px, 0);
   transition:
-    opacity var(--t-slower) var(--ease-soft),
-    transform var(--t-slower) var(--ease-out);
-  transition-delay: var(--reveal-delay, 0ms);
+    opacity var(--t-3) var(--ease-soft),
+    transform var(--t-3) var(--ease-out);
+  transition-delay: var(--d, 0ms);
 }
+[data-reveal].is-visible { opacity: 1; transform: none; }
 
-[data-reveal].is-visible {
-  opacity: 1;
-  transform: none;
+/* The rule draws itself, so the row must not also slide */
+.honor[data-reveal] { opacity: 1; transform: none; }
+.honor[data-reveal] > *:not(.honor__rule) {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition:
+    opacity var(--t-3) var(--ease-soft),
+    transform var(--t-3) var(--ease-out);
 }
+.honor[data-reveal].is-visible > *:not(.honor__rule) { opacity: 1; transform: none; }
+.honor[data-reveal] > *:nth-child(2) { transition-delay: 120ms; }
+.honor[data-reveal] > *:nth-child(3) { transition-delay: 200ms; }
+.honor[data-reveal] > *:nth-child(4) { transition-delay: 300ms; }
 
-/* Kinetic elements animate their own units, so the wrapper stays put */
-[data-reveal][data-kinetic] {
-  opacity: 1;
-  transform: none;
-  transition: none;
-}
+/* Kinetic headings drive their own units */
+[data-kinetic] { opacity: 1; transform: none; }
 
 /* --------------------------------------------------------------------------
    Kinetic type
@@ -66,79 +73,49 @@
   white-space: nowrap;
 }
 
-.k-wrap {
+.k-mask {
   display: inline-block;
   overflow: hidden;
   vertical-align: bottom;
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
 }
 
 .k-unit {
   display: inline-block;
-  transform: translate3d(0, 108%, 0);
+  transform: translate3d(0, 110%, 0) rotate(2.5deg);
   opacity: 0;
   will-change: transform, opacity;
   transition:
-    transform 1100ms var(--ease-out),
-    opacity 900ms var(--ease-soft);
-  transition-delay: calc(var(--i, 0) * var(--k-step, 44ms));
+    transform 1250ms var(--ease-out),
+    opacity 1000ms var(--ease-soft);
+  transition-delay: calc(var(--i, 0) * var(--step, 46ms));
 }
-
 [data-kinetic].is-visible .k-unit {
-  transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0) rotate(0deg);
   opacity: 1;
 }
 
-.hero__name { --k-step: 62ms; }
-.hero__subtitle { --k-step: 34ms; }
-.section-title { --k-step: 48ms; }
-.philosophy__quote p { --k-step: 70ms; }
+.hero__name    { --step: 66ms; }
+.hero__role    { --step: 30ms; }
+.craft__title,
+.honors__title,
+.contact__title { --step: 52ms; }
+.creed__quote p { --step: 78ms; }
 
 /* --------------------------------------------------------------------------
-   Reel rise, fallback path
-   -------------------------------------------------------------------------- */
-
-.reel__stage {
-  opacity: 0;
-  transform: translate3d(0, 9vh, 0) scale(0.94);
-  clip-path: inset(100% 0 0 0 round 26px);
-  transition:
-    opacity 1400ms var(--ease-soft),
-    transform 1600ms var(--ease-out),
-    clip-path 1600ms var(--ease-out);
-}
-.reel__stage.is-visible {
-  opacity: 1;
-  transform: none;
-  clip-path: inset(0 0 0 0 round 26px);
-}
-
-/* --------------------------------------------------------------------------
-   Scroll-timeline enhancements, where the browser supports them
+   Scroll-linked parallax where the browser can do it natively
    -------------------------------------------------------------------------- */
 
 @supports (animation-timeline: view()) {
-  @keyframes reel-rise {
-    from { opacity: 0; transform: translate3d(0, 10vh, 0) scale(0.92); clip-path: inset(100% 0 0 0 round 26px); }
-    to   { opacity: 1; transform: none;                                clip-path: inset(0 0 0 0 round 26px); }
+  @keyframes drift {
+    from { transform: translate3d(0, 3.2%, 0); }
+    to   { transform: translate3d(0, -3.2%, 0); }
   }
 
-  @keyframes drift-up {
-    from { transform: translate3d(0, 3.5%, 0); }
-    to   { transform: translate3d(0, -3.5%, 0); }
-  }
-
-  .reel__stage {
-    transition: none;
-    animation: reel-rise linear both;
-    animation-timeline: view();
-    animation-range: entry 4% cover 32%;
-  }
-
-  /* Slow, almost imperceptible parallax on gallery and portrait imagery */
+  [data-parallax] > img,
   [data-parallax] img {
-    animation: drift-up linear both;
+    animation: drift linear both;
     animation-timeline: view();
     animation-range: entry 0% exit 100%;
   }
@@ -158,25 +135,37 @@
     transition-delay: 0ms !important;
   }
 
-  .ambient__css { animation: none; opacity: 0.55; }
+  .ambient__wash { animation: none; opacity: 0.5; }
   .ambient__gl { display: none; }
-  .grain { animation: none; opacity: 0.18; }
+  .grain { animation: none; opacity: 0.16; }
   .cursor { display: none !important; }
   body:has(.cursor) { cursor: auto; }
-  a, button, input, textarea, label { cursor: auto; }
+
+  .loader, .curtain { display: none !important; }
 
   [data-reveal],
-  .reel__stage { opacity: 1 !important; transform: none !important; clip-path: none !important; }
-
+  .honor[data-reveal] > * { opacity: 1 !important; transform: none !important; }
+  .honor__rule { transform: scaleX(1) !important; }
   .k-unit { transform: none !important; opacity: 1 !important; }
-  .k-wrap { overflow: visible; }
+  .k-mask { overflow: visible; }
 
-  .curtain { display: none; }
-  .scroll-cue { opacity: 1 !important; }
-  .scroll-cue__line { animation: none; opacity: 0.5; }
-  .reel__sound { animation: none; }
+  .cue { opacity: 1 !important; }
+  .cue__rule { animation: none; opacity: 0.45; }
+  .sound__wave i { animation: none; height: 50%; }
+
+  .creed__quote::after { animation: none; opacity: 0; }
+
+  /* No pinning, no scroll-driven transforms */
+  .hero__stage { transform: none !important; opacity: 1 !important; }
+  .film { height: auto !important; }
+  .film__pin { position: static; height: auto; min-height: 100svh; }
+  .film__frame { transform: none !important; clip-path: none !important; }
+  .strip { height: auto !important; }
+  .strip__pin { position: static; height: auto; }
+  .strip__viewport { overflow-x: auto; }
+  .strip__track { transform: none !important; }
 
   @supports (animation-timeline: view()) {
-    .reel__stage, [data-parallax] img { animation: none; }
+    [data-parallax] img { animation: none; }
   }
 }
