@@ -622,6 +622,96 @@
     });
   }
 
+  /* ================================================================== *
+   * Mobile clinic map and native directions handoff
+   * The map remains absent from desktop network traffic and only loads as
+   * a phone approaches the contact chapter.
+   * ================================================================== */
+
+  var clinicMap = $('#clinic-map');
+  var clinicLocation = $('#clinic-location');
+  var mobileMapMedia = matchMedia('(max-width: 46rem)');
+  var clinicMapObserver = null;
+
+  function loadClinicMap() {
+    if (!clinicMap || clinicMap.getAttribute('src') || !mobileMapMedia.matches) return;
+    clinicMap.setAttribute('src', clinicMap.getAttribute('data-src'));
+  }
+
+  function prepareClinicMap() {
+    if (!clinicMap || !clinicLocation || !mobileMapMedia.matches || clinicMap.getAttribute('src') || clinicMapObserver) return;
+    if ('IntersectionObserver' in window) {
+      clinicMapObserver = new IntersectionObserver(function (entries) {
+        if (!entries.some(function (entry) { return entry.isIntersecting; })) return;
+        loadClinicMap();
+        clinicMapObserver.disconnect();
+        clinicMapObserver = null;
+      }, { rootMargin: '360px 0px', threshold: 0 });
+      clinicMapObserver.observe(clinicLocation);
+    } else {
+      loadClinicMap();
+    }
+  }
+
+  prepareClinicMap();
+  if (mobileMapMedia.addEventListener) mobileMapMedia.addEventListener('change', prepareClinicMap);
+  else if (mobileMapMedia.addListener) mobileMapMedia.addListener(prepareClinicMap);
+
+  var driveHere = $('#drive-here');
+  var mapChoice = $('#map-choice');
+  var mapChoiceClose = $('#map-choice-close');
+  var mapChoiceOptions = $$('.map-choice__option');
+  var mapChoiceReturnFocus = null;
+
+  function openMapChoice() {
+    if (!driveHere || !mapChoice) return;
+    mapChoiceReturnFocus = document.activeElement;
+    mapChoice.hidden = false;
+    driveHere.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('map-choice-open');
+    requestAnimationFrame(function () {
+      if (mapChoiceOptions[0]) mapChoiceOptions[0].focus();
+    });
+  }
+
+  function closeMapChoice(restoreFocus) {
+    if (!driveHere || !mapChoice || mapChoice.hidden) return;
+    mapChoice.hidden = true;
+    driveHere.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('map-choice-open');
+    if (restoreFocus !== false && mapChoiceReturnFocus && mapChoiceReturnFocus.focus) mapChoiceReturnFocus.focus();
+  }
+
+  if (driveHere && mapChoice) {
+    driveHere.addEventListener('click', openMapChoice);
+    if (mapChoiceClose) mapChoiceClose.addEventListener('click', function () { closeMapChoice(true); });
+    mapChoice.addEventListener('click', function (e) {
+      if (e.target === mapChoice) closeMapChoice(true);
+    });
+    mapChoiceOptions.forEach(function (option) {
+      option.addEventListener('click', function () { closeMapChoice(false); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (mapChoice.hidden) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeMapChoice(true);
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      var focusable = [mapChoiceClose].concat(mapChoiceOptions).filter(Boolean);
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+  }
+
   $$('[data-year]').forEach(function (year) {
     year.textContent = String(new Date().getFullYear());
   });

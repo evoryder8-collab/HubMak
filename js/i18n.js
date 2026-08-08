@@ -33,6 +33,7 @@
       gallery_chapter: 'In Practice', gallery_1: 'Focus at the table.', gallery_2: 'Thai technique in competition.', gallery_3: 'Controlled strength and range.', gallery_4: 'Support through the neck and shoulders.', gallery_5: 'Careful shoulder work.', gallery_6: 'Cupping with assisted stretch.', gallery_7: 'Using balance and body weight.', gallery_8: 'Restoring range through movement.', gallery_9: 'Full attention at the table.', gallery_10: "Working at the client's level.", gallery_hint: 'Swipe or drag to explore',
       creed_aria: 'Philosophy', creed_quote: 'Technique matters. Connection makes it work.',
       contact_chapter: 'Contact', contact_title: "Let's Talk", contact_lede: "For appointments, seminars, media, or questions about Hubert's work.", contact_email_label: 'Direct email', contact_phone_label: 'Telephone',
+      clinic_eyebrow: 'Clinic in Markham', clinic_drive: 'Drive Here', clinic_view: 'View larger map', map_choice_title: 'Choose your maps app', map_google: 'Open in Google Maps', map_apple: 'Open in Apple Maps', map_close: 'Close directions choices', clinic_map_aria: 'Map showing MakCare Health and Wellness Centre',
       form_name: 'Name', form_email: 'Email', form_message: 'Message', form_send: 'Send', form_validation: 'Please add your name, a valid email, and a message.', form_opening: 'Opening your mail app.',
       footer_place: 'Markham, Ontario, Canada', lightbox_aria: 'Image viewer', lightbox_close: 'Close viewer', lightbox_prev: 'Previous image', lightbox_next: 'Next image',
       alt_medal: 'Hubert Mak receiving his gold medal in Paris', alt_craft: 'Hubert Mak performing a Thai stretch during competition', alt_connection: "Hubert Mak supporting a client's head during treatment", alt_celebration: 'Hubert Mak celebrating with Team Canada in Paris', alt_treatment: 'Hubert Mak performing massage treatment'
@@ -65,6 +66,7 @@
       gallery_chapter: 'En pratique', gallery_1: 'Concentration à la table.', gallery_2: 'Technique thaï en compétition.', gallery_3: 'Force et amplitude maîtrisées.', gallery_4: 'Soutien du cou et des épaules.', gallery_5: 'Travail précis des épaules.', gallery_6: 'Ventouses et étirement assisté.', gallery_7: 'Équilibre et poids du corps.', gallery_8: "Retrouver de l'amplitude par le mouvement.", gallery_9: 'Une attention totale à la table.', gallery_10: 'Travailler au niveau du client.', gallery_hint: 'Balayez ou faites glisser',
       creed_aria: 'Philosophie', creed_quote: 'La technique compte. La connexion la rend efficace.',
       contact_chapter: 'Contact', contact_title: 'Parlons-en', contact_lede: 'Pour un rendez-vous, un séminaire, les médias ou une question sur le travail de Hubert.', contact_email_label: 'E-mail direct', contact_phone_label: 'Téléphone',
+      clinic_eyebrow: 'Clinique à Markham', clinic_drive: 'Itinéraire', clinic_view: 'Voir la carte', map_choice_title: 'Choisissez votre application de cartes', map_google: 'Ouvrir dans Google Maps', map_apple: 'Ouvrir dans Plans', map_close: "Fermer les options d'itinéraire", clinic_map_aria: 'Carte du centre MakCare Health and Wellness',
       form_name: 'Nom', form_email: 'E-mail', form_message: 'Message', form_send: 'Envoyer', form_validation: 'Ajoutez votre nom, une adresse e-mail valide et un message.', form_opening: 'Ouverture de votre messagerie.',
       footer_place: 'Markham, Ontario, Canada', lightbox_aria: "Visionneuse d'images", lightbox_close: 'Fermer', lightbox_prev: 'Image précédente', lightbox_next: 'Image suivante',
       alt_medal: "Hubert Mak reçoit sa médaille d'or à Paris", alt_craft: 'Hubert Mak réalise un étirement thaï en compétition', alt_connection: "Hubert Mak soutient la tête d'un client pendant un traitement", alt_celebration: "Hubert Mak célèbre avec l'équipe canadienne à Paris", alt_treatment: 'Hubert Mak réalise un traitement de massage'
@@ -97,6 +99,7 @@
       gallery_chapter: '治療現場', gallery_1: '專注於治療床。', gallery_2: '比賽中的泰式手法。', gallery_3: '受控的力量同幅度。', gallery_4: '承托頸部同肩膊。', gallery_5: '細心處理肩膊。', gallery_6: '拔罐配合輔助伸展。', gallery_7: '運用平衡同身體重量。', gallery_8: '透過動作回復活動幅度。', gallery_9: '全心專注於治療。', gallery_10: '配合客人的高度工作。', gallery_hint: '左右滑動查看更多',
       creed_aria: '理念', creed_quote: '技術重要。連結令治療真正發揮作用。',
       contact_chapter: '聯絡', contact_title: '傾一傾', contact_lede: '預約、講座、媒體或有關 Hubert 工作的查詢，歡迎聯絡。', contact_email_label: '直接電郵', contact_phone_label: '電話',
+      clinic_eyebrow: '萬錦市診所', clinic_drive: '前往診所', clinic_view: '查看完整地圖', map_choice_title: '選擇地圖應用程式', map_google: '以 Google 地圖開啟', map_apple: '以 Apple 地圖開啟', map_close: '關閉路線選項', clinic_map_aria: '顯示 MakCare 健康及保健中心的地圖',
       form_name: '姓名', form_email: '電郵', form_message: '訊息', form_send: '傳送', form_validation: '請填寫姓名、有效電郵同訊息。', form_opening: '正在開啟你的電郵程式。',
       footer_place: '加拿大安大略省萬錦市', lightbox_aria: '圖片檢視器', lightbox_close: '關閉', lightbox_prev: '上一張圖片', lightbox_next: '下一張圖片',
       alt_medal: 'Hubert Mak 在巴黎接受金牌', alt_craft: 'Hubert Mak 在比賽中進行泰式伸展', alt_connection: 'Hubert Mak 在治療中承托客人的頭部', alt_celebration: 'Hubert Mak 在巴黎同加拿大隊慶祝', alt_treatment: 'Hubert Mak 進行按摩治療'
@@ -129,6 +132,7 @@
       gallery_chapter: '治疗现场', gallery_1: '专注于治疗台。', gallery_2: '比赛中的泰式手法。', gallery_3: '受控的力量与幅度。', gallery_4: '支撑颈部和肩部。', gallery_5: '细致的肩部治疗。', gallery_6: '拔罐配合辅助拉伸。', gallery_7: '运用平衡和身体重量。', gallery_8: '通过动作恢复活动幅度。', gallery_9: '全心专注于治疗。', gallery_10: '配合客户的高度工作。', gallery_hint: '左右滑动查看更多',
       creed_aria: '理念', creed_quote: '技术很重要。连接让治疗真正有效。',
       contact_chapter: '联系', contact_title: '聊一聊', contact_lede: '预约、讲座、媒体或有关 Hubert 工作的问题，欢迎联系。', contact_email_label: '直接邮件', contact_phone_label: '电话',
+      clinic_eyebrow: '万锦市诊所', clinic_drive: '驾车前往', clinic_view: '查看完整地图', map_choice_title: '选择地图应用', map_google: '在 Google 地图中打开', map_apple: '在 Apple 地图中打开', map_close: '关闭路线选项', clinic_map_aria: '显示 MakCare 健康与保健中心的地图',
       form_name: '姓名', form_email: '电子邮件', form_message: '留言', form_send: '发送', form_validation: '请填写姓名、有效电子邮件和留言。', form_opening: '正在打开您的邮件应用。',
       footer_place: '加拿大安大略省万锦市', lightbox_aria: '图片查看器', lightbox_close: '关闭', lightbox_prev: '上一张图片', lightbox_next: '下一张图片',
       alt_medal: 'Hubert Mak 在巴黎接受金牌', alt_craft: 'Hubert Mak 在比赛中进行泰式拉伸', alt_connection: 'Hubert Mak 在治疗中支撑客户的头部', alt_celebration: 'Hubert Mak 在巴黎与加拿大队庆祝', alt_treatment: 'Hubert Mak 进行按摩治疗'
@@ -161,6 +165,7 @@
       gallery_chapter: '施術の現場', gallery_1: '施術台に集中。', gallery_2: '競技でのタイ式テクニック。', gallery_3: '制御された力と可動域。', gallery_4: '首と肩を支える。', gallery_5: '丁寧な肩への施術。', gallery_6: 'カッピングと補助ストレッチ。', gallery_7: 'バランスと体重を使う。', gallery_8: '動きによって可動域を戻す。', gallery_9: '施術台での完全な集中。', gallery_10: 'クライアントと同じ高さで。', gallery_hint: 'スワイプまたはドラッグ',
       creed_aria: '理念', creed_quote: '技術は大切です。つながりが技術を生かします。',
       contact_chapter: 'お問い合わせ', contact_title: 'お話ししましょう', contact_lede: '予約、セミナー、メディア、Hubert の仕事についてのご質問はこちらから。', contact_email_label: '直接メール', contact_phone_label: '電話',
+      clinic_eyebrow: 'マーカムのクリニック', clinic_drive: 'ここまで運転', clinic_view: '大きな地図で見る', map_choice_title: '地図アプリを選択', map_google: 'Google マップで開く', map_apple: 'Apple マップで開く', map_close: '経路オプションを閉じる', clinic_map_aria: 'MakCare Health and Wellness Centre の地図',
       form_name: 'お名前', form_email: 'メール', form_message: 'メッセージ', form_send: '送信', form_validation: 'お名前、有効なメールアドレス、メッセージを入力してください。', form_opening: 'メールアプリを開いています。',
       footer_place: 'カナダ、オンタリオ州マーカム', lightbox_aria: '画像ビューア', lightbox_close: '閉じる', lightbox_prev: '前の画像', lightbox_next: '次の画像',
       alt_medal: 'パリで金メダルを受け取る Hubert Mak', alt_craft: '競技中にタイ式ストレッチを行う Hubert Mak', alt_connection: '施術中にクライアントの頭を支える Hubert Mak', alt_celebration: 'パリでチームカナダと祝う Hubert Mak', alt_treatment: 'マッサージ施術を行う Hubert Mak'
@@ -193,6 +198,7 @@
       gallery_chapter: 'In der Praxis', gallery_1: 'Fokus an der Behandlungsliege.', gallery_2: 'Thai-Technik im Wettbewerb.', gallery_3: 'Kontrollierte Kraft und Beweglichkeit.', gallery_4: 'Stütze für Nacken und Schultern.', gallery_5: 'Sorgfältige Schulterarbeit.', gallery_6: 'Schröpfen mit unterstützter Dehnung.', gallery_7: 'Balance und Körpergewicht nutzen.', gallery_8: 'Beweglichkeit durch Bewegung zurückgewinnen.', gallery_9: 'Volle Aufmerksamkeit an der Liege.', gallery_10: 'Auf der Höhe des Klienten arbeiten.', gallery_hint: 'Wischen oder ziehen',
       creed_aria: 'Philosophie', creed_quote: 'Technik zählt. Verbindung macht sie wirksam.',
       contact_chapter: 'Kontakt', contact_title: 'Sprechen wir', contact_lede: 'Für Termine, Seminare, Medien oder Fragen zu Huberts Arbeit.', contact_email_label: 'Direkte E-Mail', contact_phone_label: 'Telefon',
+      clinic_eyebrow: 'Praxis in Markham', clinic_drive: 'Route starten', clinic_view: 'Größere Karte ansehen', map_choice_title: 'Karten-App auswählen', map_google: 'In Google Maps öffnen', map_apple: 'In Apple Karten öffnen', map_close: 'Routenoptionen schließen', clinic_map_aria: 'Karte des MakCare Health and Wellness Centre',
       form_name: 'Name', form_email: 'E-Mail', form_message: 'Nachricht', form_send: 'Senden', form_validation: 'Bitte Namen, gültige E-Mail-Adresse und eine Nachricht eingeben.', form_opening: 'E-Mail-App wird geöffnet.',
       footer_place: 'Markham, Ontario, Kanada', lightbox_aria: 'Bildansicht', lightbox_close: 'Schließen', lightbox_prev: 'Vorheriges Bild', lightbox_next: 'Nächstes Bild',
       alt_medal: 'Hubert Mak erhält in Paris seine Goldmedaille', alt_craft: 'Hubert Mak führt im Wettbewerb eine Thai-Dehnung aus', alt_connection: 'Hubert Mak stützt während einer Behandlung den Kopf eines Klienten', alt_celebration: 'Hubert Mak feiert in Paris mit Team Kanada', alt_treatment: 'Hubert Mak bei einer Massagebehandlung'
@@ -225,6 +231,7 @@
       gallery_chapter: 'En la práctica', gallery_1: 'Concentración en la camilla.', gallery_2: 'Técnica tailandesa en competición.', gallery_3: 'Fuerza y rango controlados.', gallery_4: 'Apoyo para cuello y hombros.', gallery_5: 'Trabajo cuidadoso de hombros.', gallery_6: 'Ventosas con estiramiento asistido.', gallery_7: 'Uso del equilibrio y el peso corporal.', gallery_8: 'Recuperar el rango con movimiento.', gallery_9: 'Atención completa en la camilla.', gallery_10: 'Trabajar a la altura del cliente.', gallery_hint: 'Desliza o arrastra',
       creed_aria: 'Filosofía', creed_quote: 'La técnica importa. La conexión hace que funcione.',
       contact_chapter: 'Contacto', contact_title: 'Hablemos', contact_lede: 'Para citas, seminarios, medios o preguntas sobre el trabajo de Hubert.', contact_email_label: 'Correo directo', contact_phone_label: 'Teléfono',
+      clinic_eyebrow: 'Clínica en Markham', clinic_drive: 'Cómo llegar', clinic_view: 'Ver mapa ampliado', map_choice_title: 'Elige tu aplicación de mapas', map_google: 'Abrir en Google Maps', map_apple: 'Abrir en Mapas de Apple', map_close: 'Cerrar opciones de ruta', clinic_map_aria: 'Mapa de MakCare Health and Wellness Centre',
       form_name: 'Nombre', form_email: 'Correo electrónico', form_message: 'Mensaje', form_send: 'Enviar', form_validation: 'Añade tu nombre, un correo válido y un mensaje.', form_opening: 'Abriendo tu aplicación de correo.',
       footer_place: 'Markham, Ontario, Canadá', lightbox_aria: 'Visor de imágenes', lightbox_close: 'Cerrar', lightbox_prev: 'Imagen anterior', lightbox_next: 'Imagen siguiente',
       alt_medal: 'Hubert Mak recibe su medalla de oro en París', alt_craft: 'Hubert Mak realiza un estiramiento tailandés en competición', alt_connection: 'Hubert Mak sostiene la cabeza de un cliente durante el tratamiento', alt_celebration: 'Hubert Mak celebra con el equipo de Canadá en París', alt_treatment: 'Hubert Mak realiza un tratamiento de masaje'
@@ -257,6 +264,7 @@
       gallery_chapter: 'Na prática', gallery_1: 'Foco na marquesa.', gallery_2: 'Técnica tailandesa em competição.', gallery_3: 'Força e amplitude controladas.', gallery_4: 'Apoio no pescoço e ombros.', gallery_5: 'Trabalho cuidadoso dos ombros.', gallery_6: 'Ventosas com alongamento assistido.', gallery_7: 'Uso do equilíbrio e do peso corporal.', gallery_8: 'Recuperar amplitude através do movimento.', gallery_9: 'Atenção total na marquesa.', gallery_10: 'Trabalhar ao nível do cliente.', gallery_hint: 'Deslize ou arraste',
       creed_aria: 'Filosofia', creed_quote: 'A técnica importa. A ligação faz com que funcione.',
       contact_chapter: 'Contacto', contact_title: 'Vamos conversar', contact_lede: 'Para marcações, seminários, imprensa ou questões sobre o trabalho de Hubert.', contact_email_label: 'E-mail direto', contact_phone_label: 'Telefone',
+      clinic_eyebrow: 'Clínica em Markham', clinic_drive: 'Como chegar', clinic_view: 'Ver mapa maior', map_choice_title: 'Escolha a aplicação de mapas', map_google: 'Abrir no Google Maps', map_apple: 'Abrir no Mapas da Apple', map_close: 'Fechar opções de rota', clinic_map_aria: 'Mapa do MakCare Health and Wellness Centre',
       form_name: 'Nome', form_email: 'E-mail', form_message: 'Mensagem', form_send: 'Enviar', form_validation: 'Adicione o seu nome, um e-mail válido e uma mensagem.', form_opening: 'A abrir a sua aplicação de e-mail.',
       footer_place: 'Markham, Ontário, Canadá', lightbox_aria: 'Visualizador de imagens', lightbox_close: 'Fechar', lightbox_prev: 'Imagem anterior', lightbox_next: 'Imagem seguinte',
       alt_medal: 'Hubert Mak recebe a medalha de ouro em Paris', alt_craft: 'Hubert Mak realiza um alongamento tailandês em competição', alt_connection: 'Hubert Mak apoia a cabeça de um cliente durante o tratamento', alt_celebration: 'Hubert Mak celebra com a equipa do Canadá em Paris', alt_treatment: 'Hubert Mak realiza um tratamento de massagem'
@@ -289,6 +297,7 @@
       gallery_chapter: 'В практике', gallery_1: 'Полная концентрация у стола.', gallery_2: 'Тайская техника на соревновании.', gallery_3: 'Контролируемая сила и амплитуда.', gallery_4: 'Поддержка шеи и плеч.', gallery_5: 'Точная работа с плечами.', gallery_6: 'Банки и пассивная растяжка.', gallery_7: 'Баланс и вес тела в работе.', gallery_8: 'Возвращение амплитуды через движение.', gallery_9: 'Все внимание на работе.', gallery_10: 'Работа на уровне клиента.', gallery_hint: 'Проведите или перетащите',
       creed_aria: 'Философия', creed_quote: 'Техника важна. Контакт делает ее эффективной.',
       contact_chapter: 'Контакты', contact_title: 'Давайте поговорим', contact_lede: 'По вопросам записи, семинаров, прессы или работы Хьюберта.', contact_email_label: 'Прямая почта', contact_phone_label: 'Телефон',
+      clinic_eyebrow: 'Клиника в Маркеме', clinic_drive: 'Проложить маршрут', clinic_view: 'Открыть большую карту', map_choice_title: 'Выберите приложение для карт', map_google: 'Открыть в Google Картах', map_apple: 'Открыть в Apple Maps', map_close: 'Закрыть выбор маршрута', clinic_map_aria: 'Карта центра MakCare Health and Wellness Centre',
       form_name: 'Имя', form_email: 'Электронная почта', form_message: 'Сообщение', form_send: 'Отправить', form_validation: 'Укажите имя, действующий адрес электронной почты и сообщение.', form_opening: 'Открываем почтовое приложение.',
       footer_place: 'Маркем, Онтарио, Канада', lightbox_aria: 'Просмотр изображений', lightbox_close: 'Закрыть', lightbox_prev: 'Предыдущее изображение', lightbox_next: 'Следующее изображение',
       alt_medal: 'Хьюберт Мак получает золотую медаль в Париже', alt_craft: 'Хьюберт Мак выполняет тайскую растяжку на соревновании', alt_connection: 'Хьюберт Мак поддерживает голову клиента во время сеанса', alt_celebration: 'Хьюберт Мак празднует с командой Канады в Париже', alt_treatment: 'Хьюберт Мак проводит сеанс массажа'
@@ -307,6 +316,9 @@
   });
   document.querySelectorAll('[data-i18n-aria]').forEach(function (element) {
     element.setAttribute('aria-label', translate(element.getAttribute('data-i18n-aria')));
+  });
+  document.querySelectorAll('[data-i18n-title]').forEach(function (element) {
+    element.setAttribute('title', translate(element.getAttribute('data-i18n-title')));
   });
   document.querySelectorAll('[data-i18n-alt]').forEach(function (element) {
     element.setAttribute('alt', translate(element.getAttribute('data-i18n-alt')));
