@@ -91,54 +91,83 @@
 .gate__portrait-stage {
   position: relative;
   width: min(92vw, 38rem);
-  height: clamp(17rem, 47svh, 35rem);
+  height: clamp(22rem, 51svh, 34rem);
   display: grid;
   place-items: end center;
   isolation: isolate;
 }
 
 .cut--gate {
-  width: min(90%, 28rem);
-  height: 100%;
-  display: grid;
-  place-items: end center;
+  position: absolute;
+  left: 50%;
+  top: 41%;
+  width: min(72vw, 26rem);
+  height: auto;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
   view-transition-name: mak-portrait-wrap;
+}
+
+.gate__portrait-window {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(226,202,160,0.24);
+  border-radius: 50%;
+  background: #121218;
+  box-shadow:
+    inset 0 0 42px rgba(6,6,7,0.28),
+    0 34px 90px rgba(0,0,0,0.62),
+    0 0 58px rgba(201,168,106,0.07);
+}
+
+.gate__portrait-window::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, transparent 72%, rgba(6,6,7,0.18)),
+    radial-gradient(circle at 50% 48%, transparent 64%, rgba(6,6,7,0.22) 100%);
 }
 
 .cut--gate .cut__img {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  max-height: 100%;
+  left: 50%;
+  top: -12.5%;
+  width: 105.5%;
+  height: auto;
+  max-width: none;
+  max-height: none;
   min-width: 0;
   min-height: 0;
-  object-fit: contain;
-  object-position: center bottom;
+  transform: translateX(-50%);
   filter:
-    drop-shadow(0 32px 64px rgba(0,0,0,0.72))
-    drop-shadow(0 0 34px rgba(201,168,106,0.10))
     contrast(1.04) saturate(0.96);
   view-transition-name: mak-portrait;
 }
 
 .cut--gate .cut__aura {
-  width: 142%;
-  height: 136%;
-  top: 48%;
+  width: 128%;
+  height: 128%;
+  top: 50%;
   filter: blur(52px) saturate(138%);
   opacity: 0.94;
 }
 
-.cut--gate .cut__floor { bottom: 2%; width: 86%; }
-.cut--gate .cut__dissolve { height: 28%; }
+.cut--gate .cut__floor { bottom: -7%; width: 76%; }
 
 .gate__orbit {
   position: absolute;
   left: 50%;
-  top: 48%;
+  top: 41%;
   z-index: -1;
-  width: min(72vw, 30rem);
+  width: min(72vw, 26rem);
   aspect-ratio: 1;
   border-radius: 50%;
   border: 1px solid rgba(201,168,106,0.13);
@@ -171,7 +200,7 @@
 
 .gate__orbit--one { animation: gate-orbit 19s linear infinite; }
 .gate__orbit--two {
-  width: min(58vw, 24rem);
+  width: min(82vw, 30rem);
   border-color: rgba(18,108,88,0.14);
   animation: gate-orbit-reverse 27s linear infinite;
 }
@@ -179,9 +208,9 @@
 .gate__pulse {
   position: absolute;
   left: 50%;
-  top: 49%;
+  top: 41%;
   z-index: -2;
-  width: min(58vw, 24rem);
+  width: min(70vw, 25rem);
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
   border-radius: 50%;
@@ -193,7 +222,7 @@
 .gate__identity {
   position: absolute;
   left: 50%;
-  bottom: clamp(0.35rem, 1.8vh, 1rem);
+  bottom: clamp(0.2rem, 1vh, 0.65rem);
   z-index: 5;
   width: max-content;
   max-width: 88vw;
@@ -203,16 +232,26 @@
 
 .gate__identity p {
   font-family: var(--serif);
-  font-size: clamp(1.35rem, 3vw, 2rem);
+  font-size: clamp(1.45rem, 3.2vw, 2.15rem);
   letter-spacing: -0.02em;
+}
+
+.gate__identity strong {
+  display: block;
+  margin-top: 0.38rem;
+  font-family: var(--serif);
+  font-size: clamp(0.88rem, 1.45vw, 1.12rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--paper-80);
 }
 
 .gate__identity span {
   display: block;
-  margin-top: 0.18rem;
-  font-size: 0.49rem;
+  margin-top: 0.3rem;
+  font-size: 0.52rem;
   font-weight: 400;
-  letter-spacing: 0.21em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
 }
@@ -221,7 +260,7 @@
   position: relative;
   z-index: 6;
   width: min(100%, 64rem);
-  margin-top: clamp(-0.3rem, -0.8vh, 0rem);
+  margin-top: clamp(0.85rem, 2vh, 1.35rem);
 }
 
 .gate__choice h1 {
@@ -230,7 +269,7 @@
 }
 
 .gate__instruction {
-  margin-top: 0.38rem;
+  margin-top: 0.56rem;
   font-size: clamp(0.69rem, 1vw, 0.79rem);
   color: var(--paper-38);
 }
@@ -504,8 +543,7 @@
 
 @media (max-width: 62rem) {
   .language-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); max-width: 38rem; margin-inline: auto; }
-  .gate__portrait-stage { height: clamp(15rem, 39svh, 27rem); }
-  .gate__choice { margin-top: -0.3rem; }
+  .gate__portrait-stage { height: clamp(20rem, 44svh, 29rem); }
 }
 
 @media (max-width: 38rem) {
@@ -513,15 +551,19 @@
   .language-gate { min-height: 100svh; padding-inline: 0.8rem; }
   .gate__topline { padding-inline: 0.2rem; }
   .gate__topline span:last-child { display: none; }
-  .gate__portrait-stage { width: 100%; height: clamp(13.5rem, 34svh, 20rem); }
-  .cut--gate { width: min(90%, 18rem); }
-  .gate__orbit { width: min(78vw, 19rem); }
-  .gate__orbit--two { width: min(63vw, 15rem); }
-  .gate__identity { bottom: 0.05rem; }
-  .gate__identity span { font-size: 0.43rem; letter-spacing: 0.14em; }
+  .gate__composition { padding-top: 0.4rem; }
+  .gate__portrait-stage { width: 100%; height: clamp(19rem, 40svh, 21.5rem); }
+  .cut--gate, .gate__orbit { width: min(66vw, 16rem); }
+  .gate__orbit--two { width: min(75vw, 18.5rem); }
+  .gate__pulse { width: min(66vw, 16rem); }
+  .gate__identity { bottom: 0; }
+  .gate__identity p { font-size: clamp(1.45rem, 7vw, 1.85rem); }
+  .gate__identity strong { margin-top: 0.3rem; font-size: clamp(0.82rem, 3.8vw, 1rem); }
+  .gate__identity span { margin-top: 0.24rem; font-size: 0.45rem; letter-spacing: 0.16em; }
+  .gate__choice { margin-top: 1.4rem; }
   .gate__choice h1 { font-size: clamp(1.35rem, 7vw, 1.8rem); }
-  .gate__instruction { font-size: 0.62rem; }
-  .language-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.38rem; margin-top: 0.72rem; }
+  .gate__instruction { margin-top: 0.48rem; font-size: 0.62rem; }
+  .language-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.38rem; margin-top: 0.9rem; }
   .language-card { padding: 0.38rem 0.32rem 0.45rem; gap: 0.28rem; }
   .language-card__frame { width: min(100%, 4.4rem); }
   .language-card__name { font-size: 0.54rem; }
@@ -530,10 +572,23 @@
 }
 
 @media (max-height: 720px) and (min-width: 39rem) {
-  .gate__portrait-stage { height: 35svh; }
+  .gate__portrait-stage { height: 39svh; }
   .gate__instruction { display: none; }
   .language-grid { margin-top: 0.6rem; }
   .gate__status { margin-top: 0.4rem; }
+}
+
+@media (max-width: 38rem) and (max-height: 720px) {
+  .gate__portrait-stage { height: 16.8rem; }
+  .cut--gate, .gate__orbit { width: min(61vw, 14.25rem); }
+  .gate__orbit--two { width: min(70vw, 16.4rem); }
+  .gate__pulse { width: min(61vw, 14.25rem); }
+  .gate__choice { margin-top: 0.8rem; }
+  .gate__instruction { margin-top: 0.34rem; }
+  .language-grid { margin-top: 0.62rem; }
+  .language-card { padding: 0.3rem 0.28rem 0.34rem; gap: 0.2rem; }
+  .language-card__frame { width: min(100%, 3.9rem); }
+  .gate__status { margin-top: 0.3rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

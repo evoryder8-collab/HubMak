@@ -172,8 +172,8 @@ html { scroll-behavior: auto; overflow-x: clip; }
 .hero__arc {
   position: absolute;
   left: 50%;
-  top: 46%;
-  width: min(48vw, 39rem);
+  top: 48%;
+  width: min(46vw, 38rem);
   aspect-ratio: 1;
   transform: translate(-50%,-50%);
   border-radius: 50%;
@@ -190,7 +190,7 @@ html { scroll-behavior: auto; overflow-x: clip; }
   transform: rotate(28deg);
 }
 .hero__arc--two {
-  width: min(37vw, 29rem);
+  width: min(54vw, 44rem);
   border-color: rgba(18,108,88,0.13);
   animation-direction: reverse;
   animation-duration: 29s;
@@ -252,11 +252,13 @@ html { scroll-behavior: auto; overflow-x: clip; }
 .hero--portrait .hero__stage {
   position: absolute;
   left: 50%;
-  bottom: -1%;
+  top: 48%;
+  bottom: auto;
   z-index: 2;
-  width: min(40vw, 34rem);
-  height: min(86svh, 54rem);
-  transform: translate3d(-50%, calc(var(--p) * -5vh), 0) scale(calc(1 + var(--p) * 0.045));
+  width: min(46vw, 38rem);
+  height: auto;
+  aspect-ratio: 1;
+  transform: translate3d(-50%, calc(-50% - var(--p) * 5vh), 0) scale(calc(1 + var(--p) * 0.045));
   opacity: calc(1 - var(--p) * 0.82);
 }
 
@@ -274,13 +276,30 @@ html { scroll-behavior: auto; overflow-x: clip; }
   width: 100%;
   height: 100%;
   overflow: hidden;
+  border: 1px solid rgba(226,202,160,0.2);
+  border-radius: 50%;
+  background: #121218;
+  box-shadow:
+    inset 0 0 54px rgba(6,6,7,0.22),
+    0 36px 100px rgba(0,0,0,0.58),
+    0 0 70px rgba(201,168,106,0.06);
+}
+
+.hero__portrait-window::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 48%, transparent 66%, rgba(6,6,7,0.24) 100%);
 }
 
 .hero--portrait .cut--hero .cut__img {
   position: absolute;
-  top: -7%;
+  top: -12.5%;
   left: 50%;
-  width: 132%;
+  width: 105.5%;
   height: auto;
   max-height: none;
   min-width: 0;
@@ -288,11 +307,11 @@ html { scroll-behavior: auto; overflow-x: clip; }
   transform: translateX(-50%);
   object-fit: initial;
   object-position: center top;
-  filter: drop-shadow(0 32px 62px rgba(0,0,0,0.72)) drop-shadow(0 0 36px rgba(201,168,106,0.09)) contrast(1.04) saturate(0.96);
+  filter: contrast(1.04) saturate(0.96);
   view-transition-name: mak-portrait;
 }
 .hero--portrait .cut--hero .cut__aura { width: 145%; height: 135%; top: 50%; filter: blur(56px) saturate(138%); }
-.hero--portrait .cut--hero .cut__dissolve { height: 28%; }
+.hero--portrait .cut--hero .cut__dissolve { height: 18%; opacity: 0.42; }
 
 .hero--portrait .hero__role {
   position: absolute;
@@ -670,7 +689,8 @@ html { scroll-behavior: auto; overflow-x: clip; }
    -------------------------------------------------------------------------- */
 
 @media (max-width: 76rem) {
-  .hero--portrait .hero__stage { width: min(48vw, 32rem); }
+  .hero--portrait .hero__stage, .hero__arc { width: min(52vw, 32rem); }
+  .hero__arc--two { width: min(61vw, 37rem); }
   .hero--portrait .hero__role { bottom: 15vh; }
   .hero__award { bottom: 15vh; max-width: 16rem; }
   .hero__award strong { font-size: 0.96rem; }
@@ -678,7 +698,8 @@ html { scroll-behavior: auto; overflow-x: clip; }
 
 @media (max-width: 62rem) {
   .hero__name { top: 30%; font-size: clamp(4.6rem, 14vw, 8rem); }
-  .hero--portrait .hero__stage { width: min(55vw, 31rem); height: min(78svh, 48rem); }
+  .hero--portrait .hero__stage, .hero__arc { width: min(58vw, 31rem); }
+  .hero__arc--two { width: min(68vw, 36rem); }
   .hero__statement { top: 64%; }
   .hero--portrait .hero__role { left: var(--gutter); bottom: 13vh; max-width: 13rem; }
   .hero__award { right: var(--gutter); bottom: 13vh; max-width: 14rem; padding: 0.8rem; }
@@ -695,15 +716,15 @@ html { scroll-behavior: auto; overflow-x: clip; }
 
   .hero.hero--portrait { min-height: 100svh; padding: 0; }
   .hero__eyebrow { top: 5.6rem; font-size: 0.5rem; letter-spacing: 0.18em; }
-  .hero__name { top: 21%; z-index: 5; width: 100%; font-size: clamp(3.55rem, 17vw, 5.8rem); white-space: normal; line-height: 0.86; }
-  .hero--portrait .hero__stage { bottom: 4%; width: min(88vw, 25rem); height: min(69svh, 39rem); }
-  .hero__statement { top: 57%; z-index: 7; max-width: 22ch; padding-inline: 0.2rem; font-size: clamp(1.02rem, 4.2vw, 1.25rem); line-height: 1.28; }
-  .hero__arc { top: 44%; width: min(88vw, 25rem); }
-  .hero__arc--two { width: min(68vw, 19rem); }
+  .hero__name { top: 17.5%; z-index: 5; width: 100%; font-size: clamp(3.45rem, 16.5vw, 5.4rem); white-space: nowrap; line-height: 0.86; }
+  .hero--portrait .hero__stage { top: 45%; bottom: auto; width: min(80vw, 22rem); }
+  .hero__statement { top: 54.5%; z-index: 7; max-width: 22ch; padding-inline: 0.2rem; font-size: clamp(1.02rem, 4.2vw, 1.25rem); line-height: 1.28; }
+  .hero__arc { top: 45%; width: min(80vw, 22rem); }
+  .hero__arc--two { width: min(91vw, 25rem); }
   .hero--portrait .hero__role {
     left: 1rem;
     right: 1rem;
-    bottom: 8.2rem;
+    bottom: 7.8rem;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -715,12 +736,14 @@ html { scroll-behavior: auto; overflow-x: clip; }
     color: var(--paper-58);
   }
   .hero--portrait .hero__role i { width: 3px; height: 3px; border-radius: 50%; background: var(--gold-40); align-self: center; }
-  .hero__award { left: 50%; right: auto; bottom: 3.15rem; width: min(88vw, 23rem); max-width: none; transform: translateX(-50%); display: flex; justify-content: center; text-align: center; padding: 0.66rem 0.8rem; border-inline: 0; background: linear-gradient(90deg, transparent, rgba(9,9,11,0.78) 12%, rgba(9,9,11,0.78) 88%, transparent); backdrop-filter: blur(9px); }
+  .hero__award { left: 50%; right: auto; bottom: 1.35rem; width: min(90vw, 24rem); max-width: none; transform: translateX(-50%); display: block; justify-content: center; text-align: center; padding: 0.6rem 0.8rem; border-inline: 0; background: linear-gradient(90deg, transparent, rgba(9,9,11,0.78) 12%, rgba(9,9,11,0.78) 88%, transparent); backdrop-filter: blur(9px); }
   .hero__award[data-reveal] { transform: translate(-50%, 26px); }
   .hero__award[data-reveal].is-visible { transform: translate(-50%, 0); }
-  .hero__award p, .hero__award span { display: inline; font-size: 0.47rem; color: var(--paper-58); }
-  .hero__award p::after, .hero__award strong::after { content: " · "; color: var(--gold); }
+  .hero__award div { width: 100%; }
+  .hero__award p { display: inline; font-size: 0.47rem; color: var(--paper-58); }
+  .hero__award p::after { content: " · "; color: var(--gold); }
   .hero__award strong { display: inline; margin: 0; font-size: 0.76rem; }
+  .hero__award span { display: block; margin-top: 0.28rem; font-size: 0.47rem; color: var(--paper-58); white-space: nowrap; }
   .hero--portrait .hero__corner { display: none; }
   .hero--portrait .cue { display: none; }
 
@@ -728,12 +751,14 @@ html { scroll-behavior: auto; overflow-x: clip; }
   .home-book { align-items: flex-start; flex-direction: column; padding-block: 2.5rem; }
   .home-book__copy h2 { font-size: clamp(2rem, 9vw, 2.85rem); }
   .book-cta { width: 100%; min-height: 3.4rem; }
-  .film { height: 150vh; }
-  .film__pin { padding: 4.8rem 0.9rem 1.6rem; }
+  .film { height: auto; }
+  .film__pin { position: relative; top: auto; height: auto; min-height: 0; grid-template-rows: auto auto auto; padding: 4.8rem 0.9rem 1.3rem; gap: 1.2rem; }
   .film__frame { width: min(90vw, 27rem); height: min(63svh, 35rem); border-radius: 1rem; }
   .film__frame::before { inset: -4%; filter: blur(15px) brightness(0.76) saturate(0.78); }
   .film__video { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; }
   .film__edge::before { top: 0.7rem; left: 0.72rem; }
+  .film__caption { margin-top: 0.1rem; }
+  .craft { padding-top: clamp(2rem, 4.5vh, 2.8rem); }
   .honors__scene { min-height: 17rem; margin-inline: calc(var(--gutter) * -0.5); width: calc(100% + var(--gutter)); }
   .honors__scene figcaption { left: 0.8rem; bottom: 0.7rem; }
   .campaign { padding: 1rem; margin-inline: calc(var(--gutter) * -0.25); }
@@ -741,9 +766,15 @@ html { scroll-behavior: auto; overflow-x: clip; }
 
 @media (max-height: 700px) and (min-width: 47rem) {
   .hero__eyebrow { top: 5rem; }
-  .hero--portrait .hero__stage { height: 78svh; }
+  .hero--portrait .hero__stage, .hero__arc { width: min(42vw, 28rem); }
+  .hero__arc--two { width: min(49vw, 33rem); }
   .hero__statement { top: 64%; }
   .hero--portrait .hero__role, .hero__award { bottom: 10vh; }
+}
+
+@media (max-width: 46rem) and (max-height: 720px) {
+  .hero--portrait .hero__stage, .hero__arc { top: 49%; }
+  .hero__statement { top: 56.5%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
