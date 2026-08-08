@@ -1,8 +1,8 @@
 # hubertmak.com
 
-A cinematic single page for **Hubert Mak**, Registered Massage Therapist, Manual Osteopath, and Overall Winner of the International Division at the Euro Massage Championship 2026 in Paris.
+A cinematic multilingual site for **Hubert Mak**, Registered Massage Therapist, Manual Osteopath, and Overall Winner of the International Division at the Euro Massage Championship 2026 in Paris.
 
-No framework, no bundler, no build step. Plain HTML, three stylesheets, and one JavaScript file, so GitHub Pages serves the repository exactly as it sits.
+No framework, no bundler, no build step. Plain HTML, CSS, JavaScript, and SVG, so GitHub Pages serves the repository exactly as it sits.
 
 ---
 
@@ -12,11 +12,11 @@ Four values still point at placeholders. Search for them and swap in the real on
 
 | What | Where | Current placeholder |
 | --- | --- | --- |
-| Email address | `index.html` contact links, and `CONTACT_EMAIL` in `js/script.js` | `hello@hubertmak.com` |
-| Instagram | `index.html`, contact links | `https://www.instagram.com/` |
-| MakCare booking | `index.html`, contact links | `https://www.makcare.ca/` |
+| Email address | `site.html` contact links, and `CONTACT_EMAIL` in `js/script.js` | `hello@hubertmak.com` |
+| Instagram | `site.html`, contact links | `https://www.instagram.com/` |
+| MakCare booking | `site.html`, contact links | `https://www.makcare.ca/` |
 | Domain | `CNAME.example`, see custom domain below | `hubertmak.com` |
-| Laval categories | `index.html`, the first `.campaign` block | placement and category names need confirming |
+| Laval categories | `site.html`, the first `.campaign` block | placement and category names need confirming |
 
 ---
 
@@ -24,31 +24,38 @@ Four values still point at placeholders. Search for them and swap in the real on
 
 | | Chapter | What happens |
 | --- | --- | --- |
-| | **Overture** | A gold hairline fills to 100, then two panels part like curtains |
-| | **Hero** | The Team Canada cutout stands in a pool of light and dissolves into the name, set letter by letter. It recedes and fades as you scroll away |
+| | **Language portal** | The medal portrait, aura, and nine framed flags form a single opening composition. Browser language is preselected and a quiet four second invitation can enter automatically |
+| | **Transition** | Fluid fabric panels close around a bright central seam, then open into the chosen language while the portrait carries through |
+| | **Hero** | The Team Canada cutout stands between an oversized name, live proof points, orbital light, and a direct opening statement |
 | 01 | **Film** | The section pins. The reel opens from a horizontal slit into a full vertical frame, muted until asked |
-| 02 | **The Craft** | The Thai stretch portrait holds position while the autobiography scrolls past it, paragraph by paragraph, opening on a gold drop cap |
-| 03 | **Honors** | Four rows, each with its rule drawing itself left to right, closing on the gold medal |
-| 04 | **Moments** | The section pins and ten photographs travel sideways as you scroll down, counter tracking. Click any frame for the lightbox |
+| 02 | **The Work** | The Thai stretch portrait holds position while four short, practical parts of the story scroll past it |
+| 03 | **Honors** | Event campaigns and medal details build toward the full celebration portrait |
+| 04 | **Moments** | Ten photographs travel sideways as you scroll down. Click any frame for the translated lightbox |
 | | **Philosophy** | The quote with a slow light sweep across the letters |
 | 05 | **Contact** | A photographic band fades in behind the heading and out again before the form |
 
-A chapter rail on the left tracks where you are and dims itself while the filmstrip is crossing the screen.
+A chapter rail on the left tracks where you are and dims itself while the filmstrip is crossing the screen. A continuous gold journey line and proof band connect the chapters visually.
 
 ---
 
 ## Structure
 
 ```
-index.html              the whole page, one document
+index.html              language portal, metadata, and alternate-language links
+site.html               the main experience, selected with ?lang=en and equivalent codes
 css/
   base.css              tokens, reset, type scale, grain, cursor, overture, rail, nav, footer
   layout.css            every chapter, plus the lightbox
   animations.css        keyframes, reveals, kinetic type, reduced motion
+  portal.css            portal composition, flags, countdown, and fluid entry panels
+  experience.css        new hero, section continuity, campaign cards, and responsive polish
 js/
   script.js             overture, reveals, one scroll loop, film, lightbox, cursor, form, WebGL
+  gate.js               language detection, countdown, cancellation, memory, and entry transition
+  i18n.js               all visible copy for nine language versions
 assets/
   favicon.svg
+  flags.svg             consistently shaped SVG flag sprite
   img/                  photography and transparent cutouts, .webp
   video/                reel.mp4 and its poster frame
 .nojekyll               tells Pages to serve the files untouched
@@ -66,6 +73,15 @@ One `requestAnimationFrame` loop writes a single `--p` custom property per pinne
 - **`prefers-reduced-motion`** removes the overture, the cursor, the pinning, the parallax, and every reveal. The page renders fully visible and scrolls normally.
 - **Touch and narrow screens** get a snapping horizontal carousel instead of the pinned filmstrip.
 
+### How the language gate works
+
+- The portal detects `navigator.languages`, including separate Cantonese and Mandarin matching, and falls back to English.
+- The selected flag has a visible four second countdown. Pointer movement, tap, key press, wheel, touch, or scroll cancels it for the rest of that browser session.
+- Choosing a language stores `hm_language` in local storage. Returning visitors go straight to `site.html` in that language.
+- The language pill in the main navigation returns to `index.html?choose=1`, which deliberately shows the portal again.
+- With `prefers-reduced-motion: reduce`, the composition stays still and automatic entry is disabled. The visitor chooses manually.
+- The version codes are `en`, `fr`, `yue`, `zh`, `ja`, `de`, `es`, `pt`, and `ru`. Canonical URLs, document language, and `hreflang` alternates update for each one.
+
 ---
 
 ## Running it locally
@@ -76,7 +92,7 @@ Any static server works. From the repository root:
 python3 -m http.server 4321
 ```
 
-Then open `http://localhost:4321`. Opening `index.html` from the file system mostly works, but the video will not stream properly without a server.
+Then open `http://localhost:4321`. To inspect the portal again after making a choice, use `http://localhost:4321/index.html?choose=1`. Opening the files directly mostly works, but the video will not stream properly without a server.
 
 ---
 
@@ -130,7 +146,7 @@ Everything lives in `assets/img/` as `.webp`. Two kinds:
 
 ### Adding a frame to the filmstrip
 
-Drop the file in `assets/img/`, then add one block inside `.strip__track`:
+Drop the file in `assets/img/`, then add one block inside `.strip__track` in `site.html`:
 
 ```html
 <figure class="plate"><button class="plate__hit" type="button" data-cursor="View"

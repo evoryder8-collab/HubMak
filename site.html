@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en" class="site-root">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hubert Mak | Massage Champion, Manual Osteopath</title>
+<meta name="description" content="Hubert Mak is a Registered Massage Therapist and Manual Osteopath in Markham, Ontario, and the 2026 International Division Overall Winner in Paris.">
+<meta name="theme-color" content="#060607">
+<link rel="canonical" href="https://hubertmak.com/site.html?lang=en">
+<link rel="alternate" hreflang="en" href="https://hubertmak.com/site.html?lang=en">
+<link rel="alternate" hreflang="fr" href="https://hubertmak.com/site.html?lang=fr">
+<link rel="alternate" hreflang="yue-Hant-HK" href="https://hubertmak.com/site.html?lang=yue">
+<link rel="alternate" hreflang="zh-Hans" href="https://hubertmak.com/site.html?lang=zh">
+<link rel="alternate" hreflang="ja" href="https://hubertmak.com/site.html?lang=ja">
+<link rel="alternate" hreflang="de" href="https://hubertmak.com/site.html?lang=de">
+<link rel="alternate" hreflang="es" href="https://hubertmak.com/site.html?lang=es">
+<link rel="alternate" hreflang="pt" href="https://hubertmak.com/site.html?lang=pt">
+<link rel="alternate" hreflang="ru" href="https://hubertmak.com/site.html?lang=ru">
+<link rel="alternate" hreflang="x-default" href="https://hubertmak.com/">
+
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Hubert Mak | Massage Champion, Manual Osteopath">
+<meta property="og:description" content="Care, strength, and precision in every treatment.">
+<meta property="og:url" content="https://hubertmak.com/site.html?lang=en">
+<meta property="og:image" content="https://hubertmak.com/assets/img/moment-medal.webp">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;1,9..144,300&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet">
+
+<link rel="preload" as="image" href="assets/img/moment-medal.webp" fetchpriority="high">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/experience.css">
+
+<script>
+(function () {
+  var allowed = { en:'en', fr:'fr', yue:'yue-Hant-HK', zh:'zh-Hans', ja:'ja', de:'de', es:'es', pt:'pt', ru:'ru' };
+  var code = 'en';
+  try {
+    var requested = new URLSearchParams(location.search).get('lang') || localStorage.getItem('hm_language') || 'en';
+    if (allowed[requested]) code = requested;
+    localStorage.setItem('hm_language', code);
+    if (sessionStorage.getItem('hm_from_gate') === '1') {
+      document.documentElement.classList.add('from-gate');
+      sessionStorage.removeItem('hm_from_gate');
+    }
+  } catch (e) {}
+  document.documentElement.lang = allowed[code];
+  document.documentElement.setAttribute('data-language', code);
+  window.HM_LANGUAGE = code;
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Hubert Mak",
+  "jobTitle": "Registered Massage Therapist, Manual Osteopath",
+  "url": "https://hubertmak.com/",
+  "address": { "@type": "PostalAddress", "addressLocality": "Markham", "addressRegion": "Ontario", "addressCountry": "CA" },
+  "award": [
+    "Overall Winner, International Division, Euro Massage Championship 2026, Paris",
+    "Sport Massage, Empathy Award, Euro Massage Championship 2026, Paris",
+    "Best Massage Photo, Second Place, Euro Massage Championship 2026, Paris",
+    "Champion, Canadian and International Massage Therapy Championship 2026, Laval, Quebec"
+  ]
+}
+</script>
+</head>
+
+<body class="site-page is-booting is-i18n-loading">
+
+<!-- Ambient field: WebGL shader over a CSS gradient that carries on alone if WebGL is absent -->
+<div class="ambient" aria-hidden="true">
+  <div class="ambient__wash"></div>
+  <canvas class="ambient__gl" id="ambient-gl"></canvas>
+</div>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Overture -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__inner">
+    <p class="loader__mark">Hubert Mak</p>
+    <div class="loader__track"><span class="loader__fill" id="loader-fill"></span></div>
+    <p class="loader__count"><span id="loader-count">00</span></p>
+  </div>
+</div>
+
+<div class="curtain" id="curtain" aria-hidden="true">
+  <span class="curtain__panel curtain__panel--l"></span>
+  <span class="curtain__panel curtain__panel--r"></span>
+  <span class="curtain__seam"></span>
+</div>
+
+<div class="cursor" id="cursor" aria-hidden="true">
+  <span class="cursor__ring"></span>
+  <span class="cursor__dot"></span>
+  <span class="cursor__label" id="cursor-label"></span>
+</div>
+
+<a class="skip-link" href="#about" data-i18n="skip">Skip to content</a>
+
+<nav class="rail" id="rail" aria-label="Sections">
+  <span class="rail__line"><span class="rail__progress" id="rail-progress"></span></span>
+  <ol class="rail__list">
+    <li><a href="#reel" data-rail="film"><i>01</i><span data-i18n="rail_film">Film</span></a></li>
+    <li><a href="#about" data-rail="craft"><i>02</i><span data-i18n="rail_approach">Approach</span></a></li>
+    <li><a href="#honors" data-rail="honors"><i>03</i><span data-i18n="rail_awards">Awards</span></a></li>
+    <li><a href="#gallery" data-rail="strip"><i>04</i><span data-i18n="rail_moments">Moments</span></a></li>
+    <li><a href="#contact" data-rail="contact"><i>05</i><span data-i18n="rail_contact">Contact</span></a></li>
+  </ol>
+</nav>
+
+<header class="nav" id="nav">
+  <a class="nav__mark" href="#top" aria-label="Hubert Mak, back to top">
+    <span class="nav__initials">HM</span>
+  </a>
+  <div class="nav__right">
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#about"><span data-i18n="nav_approach">Approach</span></a>
+      <a href="#honors"><span data-i18n="nav_awards">Awards</span></a>
+      <a href="#gallery"><span data-i18n="nav_gallery">Gallery</span></a>
+      <a href="#contact"><span data-i18n="nav_contact">Contact</span></a>
+    </nav>
+    <a class="nav__language" href="index.html?choose=1" data-i18n-aria="nav_language" aria-label="Change language" data-cursor="Language">
+      <svg viewBox="0 0 48 32" aria-hidden="true"><use id="current-flag" href="assets/flags.svg#flag-en"></use></svg>
+      <span id="current-language">EN</span>
+    </a>
+  </div>
+</header>
+
+<main id="top" class="site-main">
+  <div class="journey-thread" aria-hidden="true"><span></span></div>
+
+  <!-- ============ Hero ============ -->
+  <section class="hero hero--portrait" id="hero" data-track="hero">
+    <div class="hero__field" aria-hidden="true">
+      <span class="hero__arc hero__arc--one"></span>
+      <span class="hero__arc hero__arc--two"></span>
+      <span class="hero__spark"></span>
+    </div>
+
+    <div class="hero__mast">
+      <p class="hero__eyebrow" data-reveal data-i18n="hero_eyebrow">Registered care · International results</p>
+      <h1 class="hero__name" data-kinetic="letters">Hubert Mak</h1>
+      <p class="hero__statement" data-reveal data-i18n="hero_statement">Care, strength, and precision in every treatment.</p>
+    </div>
+
+    <div class="hero__stage">
+      <figure class="cut cut--hero">
+        <span class="cut__aura" aria-hidden="true"></span>
+        <span class="cut__floor" aria-hidden="true"></span>
+        <img class="cut__img hero__portrait" src="assets/img/moment-medal.webp" width="843" height="1400"
+             alt="Hubert Mak receiving his gold medal in Paris" data-i18n-alt="alt_medal"
+             fetchpriority="high" decoding="async">
+        <span class="cut__dissolve" aria-hidden="true"></span>
+      </figure>
+    </div>
+
+    <div class="hero__role" data-reveal>
+      <span data-i18n="hero_role_one">Registered Massage Therapist</span>
+      <i></i>
+      <span data-i18n="hero_role_two">Manual Osteopath</span>
+      <i></i>
+      <span data-i18n="hero_role_three">Founder of MakCare</span>
+    </div>
+
+    <aside class="hero__award" data-reveal>
+      <span class="hero__award-mark" aria-hidden="true">01</span>
+      <div>
+        <p data-i18n="hero_award_label">2026 Overall Winner</p>
+        <strong data-i18n="hero_award_title">International Division</strong>
+        <span data-i18n="hero_award_place">Euro Massage Championship · Paris</span>
+      </div>
+    </aside>
+
+    <div class="hero__corner hero__corner--l">
+      <span>Markham</span><span>Ontario · Canada</span>
+    </div>
+    <div class="hero__corner hero__corner--r">
+      <span>Paris <i>·</i> Laval</span><span>2026</span>
+    </div>
+
+    <a class="cue" href="#reel" data-cursor="Scroll">
+      <span class="cue__rule"></span>
+      <span class="cue__word" data-i18n="hero_scroll">Scroll</span>
+    </a>
+  </section>
+
+  <div class="proof-band" aria-label="2026 highlights">
+    <div class="proof-band__track">
+      <span data-i18n="proof_one">Paris · International Division Overall Winner</span><i></i>
+      <span data-i18n="proof_two">Laval · Championship Winner</span><i></i>
+      <span data-i18n="proof_three">Markham · MakCare Health and Wellness</span><i></i>
+      <span aria-hidden="true" data-i18n="proof_one">Paris · International Division Overall Winner</span><i aria-hidden="true"></i>
+      <span aria-hidden="true" data-i18n="proof_two">Laval · Championship Winner</span><i aria-hidden="true"></i>
+      <span aria-hidden="true" data-i18n="proof_three">Markham · MakCare Health and Wellness</span><i aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <!-- ============ 01 Film ============ -->
+  <section class="film" id="reel" data-track="film" aria-label="Film" data-i18n-aria="film_aria">
+    <div class="film__pin">
+      <p class="chapter film__chapter"><i>01</i><span data-i18n="film_chapter">In Motion</span></p>
+
+      <div class="film__frame">
+        <span class="film__glow" aria-hidden="true"></span>
+        <video class="film__video" id="reel-video"
+               poster="assets/video/reel-poster.webp"
+               preload="none" muted loop playsinline
+               width="720" height="1280"
+               aria-label="Hubert Mak at the Euro Massage Championship 2026" data-i18n-aria="film_video_alt"></video>
+        <span class="film__edge" aria-hidden="true"></span>
+
+        <button class="sound" id="reel-sound" type="button" aria-pressed="false" data-cursor="Listen">
+          <span class="sound__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="sound__label" data-i18n="sound_on">Turn sound on</span>
+        </button>
+      </div>
+
+      <p class="film__caption" data-i18n="film_caption">A minute inside the work.</p>
+    </div>
+  </section>
+
+  <!-- ============ 02 The Craft ============ -->
+  <section class="craft" id="about" data-track="craft">
+    <div class="craft__head">
+      <p class="chapter" data-reveal><i>02</i><span data-i18n="craft_chapter">Approach</span></p>
+      <h2 class="craft__title" data-kinetic="words" data-i18n="craft_title">The Work Behind the Results</h2>
+    </div>
+
+    <div class="craft__grid">
+      <div class="craft__stage">
+        <figure class="cut cut--craft" data-parallax="0.05">
+          <span class="cut__aura" aria-hidden="true"></span>
+          <span class="cut__floor" aria-hidden="true"></span>
+          <img class="cut__img" src="assets/img/portrait-craft.webp" width="1500" height="1107"
+               loading="lazy" decoding="async"
+               alt="Hubert Mak performing a Thai stretch on a client during competition" data-i18n-alt="alt_craft">
+        </figure>
+        <p class="craft__stage-note" data-reveal data-i18n="craft_stage_note">Clinical training · Thai massage · Stretch therapy · Acupuncture</p>
+      </div>
+
+      <div class="craft__body">
+        <p class="craft__lede" data-reveal data-i18n="craft_p1">Hubert Mak is a Registered Massage Therapist and Manual Osteopath based in Markham. His work brings clinical training together with Thai massage, stretch therapy, acupuncture, and years of hands-on experience.</p>
+
+        <p data-reveal data-i18n="craft_p2">He founded MakCare Health and Wellness Centre to bring those methods into one practical approach. Each treatment starts with the person in front of him: understand what the body needs, choose the right method, and help the client move and feel better.</p>
+
+        <figure class="plate plate--inset" data-reveal>
+          <span class="plate__wipe" aria-hidden="true"></span>
+          <img src="assets/img/craft-04-connection.webp" width="1200" height="1500" loading="lazy" decoding="async"
+               alt="Hubert Mak supporting a client's head during treatment" data-i18n-alt="alt_connection">
+          <figcaption data-i18n="craft_inset_caption">Care starts with attention.</figcaption>
+        </figure>
+
+        <p data-reveal data-i18n="craft_p3">The same focus shapes his competition work. In 2026, Hubert won in Laval and then took the International Division overall title in Paris. Those results reflect years of practice, preparation, and clear decisions under pressure.</p>
+
+        <p data-reveal data-i18n="craft_p4">He continues to treat, study, and refine his technique. The goal stays simple: deliver care that is skilled, attentive, and useful.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 Honors ============ -->
+  <section class="honors" id="honors" data-track="honors">
+    <div class="honors__head">
+      <p class="chapter" data-reveal><i>03</i><span data-i18n="honors_chapter">Awards</span></p>
+      <h2 class="honors__title" data-kinetic="words" data-i18n="honors_title">Two Events. A Standout Season.</h2>
+      <p class="honors__lede" data-reveal data-i18n="honors_lede">A championship win in Laval and the International Division overall title in Paris, both in 2026.</p>
+    </div>
+
+    <figure class="honors__scene" data-reveal>
+      <span class="honors__scene-glow" aria-hidden="true"></span>
+      <img src="assets/img/hero-celebration.webp" width="1500" height="1058" loading="lazy" decoding="async"
+           alt="Hubert Mak celebrating with Team Canada in Paris" data-i18n-alt="alt_celebration">
+      <figcaption><span data-i18n="honors_scene_caption">Paris, 2026</span><i data-i18n="honors_scene_note">The result, shared with Team Canada.</i></figcaption>
+    </figure>
+
+    <!-- Campaign one: Laval -->
+    <article class="campaign" data-reveal>
+      <header class="campaign__head">
+        <p class="campaign__place"><span>Laval</span><i>Quebec, Canada</i></p>
+        <p class="campaign__event">Canadian and International Massage Therapy Championship</p>
+        <p class="campaign__date">Massage Therapy Summit <em>April 2026</em></p>
+      </header>
+
+      <ol class="honors__list">
+        <!-- TODO before launch: confirm the exact Laval category names and placements -->
+        <li class="honor honor--lead" data-reveal>
+          <span class="honor__rule" aria-hidden="true"></span>
+          <p class="honor__index">i</p>
+          <div class="honor__main">
+            <p class="honor__rank" data-i18n="laval_rank">Champion</p>
+            <h3 class="honor__name" data-i18n="laval_name">Canadian and International Championship</h3>
+          </div>
+          <div class="honor__aside">
+            <p class="honor__where">Massage Therapy Summit <em>Laval</em></p>
+            <p class="honor__note" data-i18n="laval_note">The season began with a championship win in Laval at the Massage Therapy Summit.</p>
+          </div>
+        </li>
+      </ol>
+    </article>
+
+    <!-- Campaign two: Paris -->
+    <article class="campaign" data-reveal>
+      <header class="campaign__head">
+        <p class="campaign__place"><span>Paris</span><i>France</i></p>
+        <p class="campaign__event">Euro Massage Championship</p>
+        <p class="campaign__date">International Division <em>2026</em></p>
+      </header>
+
+      <ol class="honors__list">
+        <li class="honor honor--lead" data-reveal>
+          <span class="honor__rule" aria-hidden="true"></span>
+          <p class="honor__index">ii</p>
+          <div class="honor__main">
+            <p class="honor__rank" data-i18n="paris_rank">Overall Winner</p>
+            <h3 class="honor__name" data-i18n="paris_name">International Division</h3>
+          </div>
+          <div class="honor__aside">
+            <p class="honor__where">Euro Massage Championship <em>Paris</em></p>
+            <p class="honor__note" data-i18n="paris_note">Named the top therapist across the International Division.</p>
+          </div>
+        </li>
+
+        <li class="honor" data-reveal>
+          <span class="honor__rule" aria-hidden="true"></span>
+          <p class="honor__index">iii</p>
+          <div class="honor__main">
+            <p class="honor__rank" data-i18n="empathy_rank">Empathy Award</p>
+            <h3 class="honor__name" data-i18n="empathy_name">Sport Massage</h3>
+          </div>
+          <div class="honor__aside">
+            <p class="honor__where">Euro Massage Championship <em>Paris</em></p>
+            <p class="honor__note" data-i18n="empathy_note">Recognized for the care, attention, and communication shown during treatment.</p>
+          </div>
+        </li>
+
+        <li class="honor" data-reveal>
+          <span class="honor__rule" aria-hidden="true"></span>
+          <p class="honor__index">iv</p>
+          <div class="honor__main">
+            <p class="honor__rank" data-i18n="photo_rank">Second Place</p>
+            <h3 class="honor__name" data-i18n="photo_name">Best Massage Photo</h3>
+          </div>
+          <div class="honor__aside">
+            <p class="honor__where">Euro Massage Championship <em>Paris</em></p>
+            <p class="honor__note" data-i18n="photo_note">Second place for an image that captured the quality of the work.</p>
+          </div>
+        </li>
+
+        <li class="honor" data-reveal>
+          <span class="honor__rule" aria-hidden="true"></span>
+          <p class="honor__index">v</p>
+          <div class="honor__main">
+            <p class="honor__rank" data-i18n="multi_rank">Multiple Top Placements</p>
+            <h3 class="honor__name" data-i18n="multi_name">Sport Massage and Western Traditions</h3>
+          </div>
+          <div class="honor__aside">
+            <p class="honor__where">Euro Massage Championship <em>Paris</em></p>
+            <p class="honor__note" data-i18n="multi_note">Strong results across sport massage and Western-inspired categories.</p>
+          </div>
+        </li>
+      </ol>
+    </article>
+
+  </section>
+
+  <!-- ============ 04 Moments ============ -->
+  <section class="strip" id="gallery" data-track="strip">
+    <div class="strip__pin">
+      <div class="strip__head">
+        <p class="chapter"><i>04</i><span data-i18n="gallery_chapter">In Practice</span></p>
+        <p class="strip__counter"><span id="strip-now">01</span><i>/</i><span id="strip-all">10</span></p>
+      </div>
+
+      <div class="strip__viewport" id="strip-viewport">
+        <div class="strip__track" id="strip-track">
+
+          <figure class="plate"><button class="plate__hit" type="button" data-cursor="View" data-full="assets/img/craft-01-focus.webp" data-caption="Focus at the table." data-i18n-caption="gallery_1">
+            <span class="plate__wipe" aria-hidden="true"></span>
+            <img src="assets/img/craft-01-focus.webp" width="1200" height="1500" decoding="async" alt="Hubert Mak focused on treatment at the table" data-i18n-alt="alt_treatment">
+          </button><figcaption><i>01</i><span data-i18n="gallery_1">Focus at the table.</span></figcaption></figure>
+
+          <figure class="plate"><button class="plate__hit" type="button" data-cursor="View" data-full="assets/img/craft-02-thai.webp" data-caption="Thai technique in competition." data-i18n-caption="gallery_2">
+            <span class="plate__wipe" aria-hidden="true"></span>
+            <img src="assets/img/craft-02-thai.webp" width="1200" height="1500" loading="lazy" decoding="async" alt="Hubert Mak performing a Thai stretch with cupping" data-i18n-alt="alt_treatment">
+          </button><figcaption><i>02</i><span data-i18n="gallery_2">Thai technique in competition.</span></figcaption></figure>
+
+          <figure class="plate"><button class="plate__hit" type="button" data-cursor="View" data-full="assets/img/craft-03-lift.webp" data-caption="Controlled strength and range." data-i18n-caption="gallery_3">
+            <span class="plate__wipe" aria-hidden="true"></span>
+            <img src="assets/img/craft-03-lift.webp" width="1200" height="1500" loading="lazy" decoding="async" alt="Hubert Mak lifting and stretching a client's leg" data-i18n-alt="alt_treatment">
+          </button><figcaption><i>03</i><span data-i18n="gallery_3">Controlled strength and range.</span></figcaption></figure>
+
+          <figure class="plate"><button class="plate__hit" type="button" data-cursor="View" data-full="assets/img/craft-04-connection.webp" data-caption="Support through the neck and shoulders." data-i18n-caption="gallery_4">
+            <span class="plate__wipe" aria-hidden="true"></span>
+            <img src="assets/img/craft-04-connection.webp" width="1200" height="1500" loading="lazy" decoding="async" alt="Hubert Mak supporting a client's head during treatment" data-i18n-alt="alt_treatment">
+          </button><figcaption><i>04</i><span data-i18n="gallery_4">Support through the neck and shoulders.</span></figcaption></figure>
+
+          <figure class="plate"><button class="plate__hit" type="button" data-cursor="View" data-full="assets/img/craft-05-shoulders.webp" data-caption="Careful shoulder work." data-i18n-caption="gallery_5">
+            <span class="plate__wipe" aria-hidden="true"></span>
+            <img src="assets/img/craft-05-shoulders.webp" width="1000" height="1500" loading="lazy" decoding="async" alt="Hubert Mak working on a client's shoulders" data-i18n-alt="alt_treatment">
+          </button><figcaption><i>05</i><span data-i18n="gallery_5">Careful shoulder work.</span></figcaption></figure>
+
+          <figure class="plate"><button class="plate__hit" type="button" data-cursor="View" data-full="assets/img/craft-06-cups.webp" data-caption="Cupping with assisted stretch." data-i18n-caption="gallery_6">
+            <span class="plate__wipe" aria-hidden="true"></span>
+            <img src="assets/img/craft-06-cups.webp" width="1200" height="1500" loading="lazy" decoding="async" alt="Hubert Mak stretching a client with cupping in place" data-i18n-alt="alt_treatment">
+          </button><figcaption><i>06</i><span data-i18n="gallery_6">Cupping with assisted stretch.</span></figcaption></figure>
+
+          <figure class="plate"><button class="plate__hit" type="button" data-cursor="View" data-full="assets/img/craft-07-lunge.webp" data-caption="Using balance and body weight." data-i18n-caption="gallery_7">
+            <span class="plate__wipe" aria-hidden="true"></span>
+            <img src="assets/img/craft-07-lunge.webp" width="1200" height="1500" loading="lazy" decoding="async" alt="Hubert Mak using a deep lunge during treatment" data-i18n-alt="alt_treatment">
+          </button><figcaption><i>07</i><span data-i18n="gallery_7">Using balance and body weight.</span></figcaption></figure>
+
+          <figure class="plate"><button class="plate__hit" type="button" data-cursor="View" data-full="assets/img/craft-08-extension.webp" data-caption="Restoring range through movement." data-i18n-caption="gallery_8">
+            <span class="plate__wipe" aria-hidden="true"></span>
+            <img src="assets/img/craft-08-extension.webp" width="1200" height="1500" loading="lazy" decoding="async" alt="Hubert Mak extending a client's leg on the table" data-i18n-alt="alt_treatment">
+          </button><figcaption><i>08</i><span data-i18n="gallery_8">Restoring range through movement.</span></figcaption></figure>
+
+          <figure class="plate"><button class="plate__hit" type="button" data-cursor="View" data-full="assets/img/craft-09-table.webp" data-caption="Full attention at the table." data-i18n-caption="gallery_9">
+            <span class="plate__wipe" aria-hidden="true"></span>
+            <img src="assets/img/craft-09-table.webp" width="1200" height="1500" loading="lazy" decoding="async" alt="Hubert Mak focused on a treatment at the table" data-i18n-alt="alt_treatment">
+          </button><figcaption><i>09</i><span data-i18n="gallery_9">Full attention at the table.</span></figcaption></figure>
+
+          <figure class="plate"><button class="plate__hit" type="button" data-cursor="View" data-full="assets/img/craft-10-kneel.webp" data-caption="Working at the client's level." data-i18n-caption="gallery_10">
+            <span class="plate__wipe" aria-hidden="true"></span>
+            <img src="assets/img/craft-10-kneel.webp" width="1000" height="1500" loading="lazy" decoding="async" alt="Hubert Mak kneeling on the table beside a client" data-i18n-alt="alt_treatment">
+          </button><figcaption><i>10</i><span data-i18n="gallery_10">Working at the client's level.</span></figcaption></figure>
+
+        </div>
+      </div>
+
+      <p class="strip__hint" aria-hidden="true"><span data-i18n="gallery_hint">Keep scrolling</span></p>
+    </div>
+  </section>
+
+  <!-- ============ Philosophy ============ -->
+  <section class="creed" aria-label="Philosophy" data-i18n-aria="creed_aria">
+    <div class="creed__figure" aria-hidden="true">
+      <span class="creed__aura"></span>
+      <img src="assets/img/moment-embrace.webp" width="811" height="900" loading="lazy" decoding="async" alt="">
+    </div>
+
+    <blockquote class="creed__quote">
+      <p data-kinetic="words" data-i18n="creed_quote">Technique matters. Connection makes it work.</p>
+      <cite>Hubert Mak</cite>
+    </blockquote>
+  </section>
+
+  <!-- ============ 05 Contact ============ -->
+  <section class="contact" id="contact" data-track="contact">
+    <div class="contact__bg" aria-hidden="true">
+      <img src="assets/img/finale-canada.webp" width="1900" height="1069" loading="lazy" decoding="async" alt="">
+    </div>
+
+    <div class="contact__inner">
+      <div class="contact__head">
+        <p class="chapter" data-reveal><i>05</i><span data-i18n="contact_chapter">Contact</span></p>
+        <h2 class="contact__title" data-kinetic="words" data-i18n="contact_title">Let's Talk</h2>
+        <p class="contact__lede" data-reveal data-i18n="contact_lede">For appointments, seminars, media, or questions about Hubert's work.</p>
+      </div>
+
+      <form class="form" id="contact-form" novalidate data-reveal>
+        <div class="field">
+          <input id="name" name="name" type="text" autocomplete="name" placeholder=" " required>
+          <label for="name" data-i18n="form_name">Name</label>
+          <span class="field__rule" aria-hidden="true"></span>
+        </div>
+        <div class="field">
+          <input id="email" name="email" type="email" autocomplete="email" placeholder=" " required>
+          <label for="email" data-i18n="form_email">Email</label>
+          <span class="field__rule" aria-hidden="true"></span>
+        </div>
+        <div class="field field--wide">
+          <textarea id="message" name="message" rows="3" placeholder=" " required></textarea>
+          <label for="message" data-i18n="form_message">Message</label>
+          <span class="field__rule" aria-hidden="true"></span>
+        </div>
+        <button class="btn" type="submit" data-cursor="Send">
+          <span class="btn__label" data-i18n="form_send">Send</span>
+          <span class="btn__rule" aria-hidden="true"></span>
+        </button>
+        <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <ul class="contact__links" data-reveal>
+        <!-- TODO before launch: replace these three destinations with the real ones -->
+        <li><a href="mailto:hello@hubertmak.com" data-cursor="Write"><span data-i18n="form_email">Email</span></a></li>
+        <li><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" data-cursor="Follow"><span>Instagram</span></a></li>
+        <li><a href="https://www.makcare.ca/" target="_blank" rel="noopener noreferrer" data-cursor="Book"><span>MakCare</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p class="footer__name">Hubert Mak</p>
+  <p class="footer__meta"><span data-i18n="footer_place">Markham, Ontario, Canada</span><span id="year">2026</span></p>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" data-i18n-aria="lightbox_aria" hidden>
+  <button class="lightbox__close" id="lightbox-close" type="button" aria-label="Close viewer" data-i18n-aria="lightbox_close" data-cursor="Close"></button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" type="button" aria-label="Previous image" data-i18n-aria="lightbox_prev"></button>
+  <button class="lightbox__nav lightbox__nav--next" id="lightbox-next" type="button" aria-label="Next image" data-i18n-aria="lightbox_next"></button>
+  <figure class="lightbox__figure">
+    <img id="lightbox-img" src="" alt="">
+    <figcaption>
+      <span id="lightbox-caption"></span>
+      <i id="lightbox-count"></i>
+    </figcaption>
+  </figure>
+</div>
+
+<script src="js/i18n.js" defer></script>
+<script src="js/script.js" defer></script>
+</body>
+</html>

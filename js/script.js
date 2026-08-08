@@ -11,6 +11,7 @@
   var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var t = window.HM_TRANSLATE || function (key) { return key; };
 
   /* ================================================================== *
    * Kinetic type
@@ -55,7 +56,7 @@
    * Reveals
    * ================================================================== */
 
-  var heroType = [$('.hero__name'), $('.hero__role')];
+  var heroType = [$('.hero__eyebrow'), $('.hero__name'), $('.hero__statement'), $('.hero__role'), $('.hero__award')];
 
   var revealables = $$('[data-reveal], [data-kinetic], .plate').filter(function (el) {
     return heroType.indexOf(el) === -1;
@@ -120,8 +121,11 @@
 
     if (curtain) curtain.classList.add('is-parting');
     setTimeout(function () { curtain && curtain.classList.add('is-open'); }, 260);
-    setTimeout(function () { heroType[0] && heroType[0].classList.add('is-visible'); }, 1100);
-    setTimeout(function () { heroType[1] && heroType[1].classList.add('is-visible'); }, 1780);
+    setTimeout(function () { heroType[0] && heroType[0].classList.add('is-visible'); }, 720);
+    setTimeout(function () { heroType[1] && heroType[1].classList.add('is-visible'); }, 980);
+    setTimeout(function () { heroType[2] && heroType[2].classList.add('is-visible'); }, 1480);
+    setTimeout(function () { heroType[3] && heroType[3].classList.add('is-visible'); }, 1820);
+    setTimeout(function () { heroType[4] && heroType[4].classList.add('is-visible'); }, 2020);
     setTimeout(showChrome, 2200);
     setTimeout(function () { curtain && curtain.classList.add('is-done'); }, 2600);
   }
@@ -379,7 +383,7 @@
         video.muted = !video.muted;
         var on = !video.muted;
         soundBtn.setAttribute('aria-pressed', String(on));
-        if (soundLabel) soundLabel.textContent = on ? 'Turn sound off' : 'Turn sound on';
+        if (soundLabel) soundLabel.textContent = on ? t('sound_off') : t('sound_on');
         soundBtn.setAttribute('data-cursor', on ? 'Mute' : 'Listen');
         if (video.paused) play();
       });
@@ -536,11 +540,11 @@
       var message = form.message.value.trim();
 
       if (!name || !email || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        status.textContent = 'Please add your name, a valid email, and a message.';
+        status.textContent = t('form_validation');
         return;
       }
 
-      status.textContent = 'Opening your mail app.';
+      status.textContent = t('form_opening');
       location.href = 'mailto:' + CONTACT_EMAIL +
         '?subject=' + encodeURIComponent('Enquiry from ' + name) +
         '&body=' + encodeURIComponent(message + '\n\n' + name + '\n' + email);
