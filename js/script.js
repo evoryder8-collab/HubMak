@@ -224,6 +224,7 @@
   var railLinks = $$('[data-rail]');
   var sections = $$('[data-track]');
   var galleryPages = $$('.gallery-page', stripTrack || document);
+  var heroMotionHeight = hero ? hero.offsetHeight : 0;
 
   if (stripAll) stripAll.textContent = String(galleryPages.length).padStart(2, '0');
 
@@ -233,6 +234,10 @@
       stripTrack.style.transform = '';
       strip.classList.remove('is-pinned', 'is-ending');
     }
+    if (hero) {
+      var motionVh = Number.parseFloat(getComputedStyle(hero).getPropertyValue('--hero-motion-vh'));
+      heroMotionHeight = Number.isFinite(motionVh) ? innerHeight * motionVh / 100 : hero.offsetHeight;
+    }
   }
 
   var currentRail = '';
@@ -240,7 +245,7 @@
   function frame() {
     // Hero recedes as you leave it
     if (heroStage && hero) {
-      heroStage.style.setProperty('--p', clamp(scrollY / (hero.offsetHeight * 0.85), 0, 1).toFixed(4));
+      heroStage.style.setProperty('--p', clamp(scrollY / (heroMotionHeight * 0.85), 0, 1).toFixed(4));
     }
 
     // The iris opens as the section rises into view, so it is already open by

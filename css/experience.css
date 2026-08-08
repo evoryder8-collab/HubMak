@@ -795,7 +795,10 @@ html { scroll-behavior: auto; overflow-x: clip; }
    ========================================================================== */
 
 /* The first chapter now has enough room for the portrait, philosophy and proof. */
-.hero.hero--portrait { min-height: 132svh; }
+.hero.hero--portrait {
+  min-height: 132svh;
+  --hero-motion-vh: 132;
+}
 .hero--portrait .hero__stage,
 .hero__arc { top: 43%; }
 .hero__statement { top: 57%; }
@@ -896,6 +899,11 @@ html { scroll-behavior: auto; overflow-x: clip; }
 
 .hero__creed .creed__quote cite {
   margin-top: clamp(1.2rem, 3vh, 2rem);
+}
+
+@keyframes award-label-gleam {
+  0%, 18%, 100% { background-position: 100% 50%; }
+  52%, 68% { background-position: 0% 50%; }
 }
 
 /* A persistent, compact social dock. Each service remains its own button. */
@@ -1227,17 +1235,18 @@ html { scroll-behavior: auto; overflow-x: clip; }
 /* Contact choices now look and behave like choices. */
 .contact__links {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(17rem, 1.2fr) repeat(2, minmax(15rem, 1fr));
   gap: 0.8rem;
 }
 .contact__links li { min-width: 0; }
 .contact__links a {
+  position: relative;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: 0.85rem;
   min-height: 6rem;
-  padding: 1rem;
+  padding: 1rem 2.9rem 1rem 1rem;
   overflow: visible;
   border: 1px solid rgba(244,241,236,0.09);
   border-radius: 1rem;
@@ -1262,8 +1271,21 @@ html { scroll-behavior: auto; overflow-x: clip; }
 .contact-link__icon svg { width: 1.15rem; height: 1.15rem; fill: none; stroke: currentColor; stroke-width: 1.45; stroke-linecap: round; stroke-linejoin: round; }
 .contact-link__copy { display: block !important; min-width: 0; }
 .contact__links .contact-link__copy small { margin-bottom: 0.34rem; color: var(--gold); }
-.contact__links .contact-link__copy strong { display: block; overflow: hidden; font-family: var(--serif); font-size: clamp(0.9rem, 1.35vw, 1.12rem); font-weight: 300; line-height: 1.2; letter-spacing: -0.01em; color: var(--paper); text-overflow: ellipsis; }
-.contact-link__arrow { position: relative; width: 1.35rem; height: 1px; background: var(--gold); opacity: 0.72; transition: transform 600ms var(--ease-out), opacity 600ms ease; }
+.contact__links .contact-link__copy strong {
+  display: block;
+  overflow: visible;
+  font-family: var(--serif);
+  font-size: clamp(0.9rem, 1.35vw, 1.12rem);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+  white-space: normal;
+  overflow-wrap: normal;
+  text-overflow: clip;
+}
+.contact__email .contact-link__copy strong { font-size: clamp(0.84rem, 1vw, 0.94rem); white-space: nowrap; }
+.contact-link__arrow { position: absolute; top: 50%; right: 1rem; width: 1.35rem; height: 1px; background: var(--gold); opacity: 0.72; transition: transform 600ms var(--ease-out), opacity 600ms ease; }
 .contact-link__arrow::after { content: ""; position: absolute; top: -3px; right: 0; width: 6px; height: 6px; border-top: 1px solid var(--gold); border-right: 1px solid var(--gold); transform: rotate(45deg); }
 .contact__links a:hover .contact-link__arrow { transform: translateX(0.25rem); opacity: 1; }
 
@@ -1271,6 +1293,88 @@ html { scroll-behavior: auto; overflow-x: clip; }
 .footer__credit { grid-column: 1 / -1; margin-top: 1rem; padding-top: 1.2rem; border-top: 1px solid var(--line-soft); font-size: 0.54rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--paper-38); text-align: right; }
 .footer__credit a { color: var(--gold); transition: color 500ms ease; }
 .footer__credit a:hover { color: var(--gold-lift); }
+
+@media (min-width: 62.01rem) {
+  /* The surrounding chapter grows while the portrait keeps its original viewport geometry. */
+  .hero.hero--portrait { min-height: 148svh; }
+  .hero__name { top: 40.92svh; }
+  .hero--portrait .hero__stage,
+  .hero__arc { top: 56.76svh; }
+  .hero__spark { top: 39.6svh; }
+  .hero__statement { top: 75.24svh; }
+
+  .hero__creed {
+    top: 102svh;
+    height: clamp(10.625rem, 18.75svh, 13.125rem);
+    margin-top: 0;
+  }
+  .hero__creed .creed__figure img,
+  .hero__creed .creed__aura { top: 57%; }
+  .hero--portrait .hero__role,
+  .hero__award { top: 132svh; bottom: auto; }
+
+  .hero--portrait .hero__role {
+    color: rgba(244,241,236,0.64);
+    text-shadow: 0 2px 18px rgba(0,0,0,0.9);
+  }
+  .hero--portrait .hero__role i { background: var(--gold-40); }
+  .hero--portrait .cue__word { color: rgba(244,241,236,0.42); }
+  .rail__list a { color: rgba(244,241,236,0.4); }
+  .proof-band__track span { color: rgba(244,241,236,0.5); }
+  .film__caption { color: rgba(244,241,236,0.62); text-shadow: 0 2px 16px rgba(0,0,0,0.88); }
+
+  .hero__award {
+    width: min(22rem, 28vw);
+    max-width: 22rem;
+    padding: 1.15rem 1.2rem;
+    border-color: rgba(201,168,106,0.28);
+    background:
+      linear-gradient(115deg, rgba(201,168,106,0.1), rgba(9,9,11,0.72) 34%, rgba(9,9,11,0.58)),
+      rgba(9,9,11,0.62);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.065),
+      0 24px 72px rgba(0,0,0,0.38),
+      0 0 42px rgba(201,168,106,0.08);
+  }
+  .hero__award-mark {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid rgba(226,202,160,0.34);
+    border-radius: 50%;
+    font-size: 1.35rem;
+    color: var(--gold-lift);
+    background: radial-gradient(circle, rgba(201,168,106,0.16), transparent 72%);
+    box-shadow: inset 0 0 20px rgba(201,168,106,0.08), 0 0 26px rgba(201,168,106,0.08);
+    opacity: 1;
+  }
+  .hero__award p {
+    width: max-content;
+    max-width: 100%;
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--gold-lift);
+    background: linear-gradient(100deg, #9f7838 0%, #f4dfa9 28%, #b48742 48%, #fff0c5 58%, #a87d38 78%, #e2c68f 100%);
+    background-size: 250% 100%;
+    background-position: 100% 50%;
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: award-label-gleam 10s var(--ease-soft) infinite;
+  }
+  .hero__award strong { margin-block: 0.28rem 0.38rem; font-size: 1.3rem; color: var(--paper); }
+  .hero__award span { font-size: 0.55rem; color: rgba(244,241,236,0.62); }
+
+  /* The film keeps its reveal but releases the page almost immediately afterwards. */
+  .film { height: 100vh; }
+  .craft { padding-top: clamp(3.5rem, 6vh, 5rem); }
+}
+
+@media (min-width: 62.01rem) and (max-width: 76rem) {
+  .hero.hero--portrait { min-height: 156svh; }
+}
 
 @media (max-width: 62rem) {
   .hero.hero--portrait { min-height: 124svh; }
@@ -1286,26 +1390,34 @@ html { scroll-behavior: auto; overflow-x: clip; }
 }
 
 @media (max-width: 46rem) {
-  .hero.hero--portrait { min-height: 118svh; }
+  .hero.hero--portrait { min-height: 142svh; --hero-motion-vh: 118; }
   .hero__eyebrow { top: 5.6rem; }
-  .hero__name { top: 15.5%; }
+  .hero__name { top: 18.29svh; }
   .hero--portrait .hero__stage,
-  .hero__arc { top: 43%; }
+  .hero__arc { top: 50.74svh; }
+  .hero__spark { top: 35.4svh; }
   .hero--portrait .hero__stage { width: min(80vw, 22rem); }
   .hero__arc { width: min(80vw, 22rem); }
   .hero__arc--two { width: min(91vw, 25rem); }
-  .hero__statement { top: 53%; }
-  .hero__creed { top: 61.5%; width: 100%; height: clamp(8.5rem, 16svh, 9.5rem); }
-  .hero__creed .creed__figure { inset: -125% 0; }
-  .hero__creed .creed__quote { padding-inline: 1rem; transform: translateY(-0.85rem); }
+  .hero__statement { top: 62.54svh; }
+  .hero__creed {
+    top: 82svh;
+    width: 100%;
+    height: clamp(10.625rem, 20svh, 11.875rem);
+    margin-top: 0;
+  }
+  .hero__creed .creed__figure { inset: -112% 0; }
+  .hero__creed .creed__figure img,
+  .hero__creed .creed__aura { top: 57%; }
+  .hero__creed .creed__quote { padding-inline: 1rem; transform: translateY(-2.5rem); }
   .hero__creed .creed__quote p { max-width: 20ch; }
-  .hero--portrait .hero__role { top: 84%; bottom: auto; }
-  .hero__award { top: 90%; bottom: auto; }
+  .hero--portrait .hero__role { top: 112svh; bottom: auto; }
+  .hero__award { top: 122svh; bottom: auto; }
   .hero--portrait .hero__role,
   .hero__award { opacity: 1; }
 
-  .social-dock { right: max(0.8rem, env(safe-area-inset-right)); bottom: max(0.8rem, env(safe-area-inset-bottom)); gap: 0.42rem; }
-  .social-dock__link { width: 2.8rem; height: 2.8rem; }
+  .social-dock { right: max(0.75rem, env(safe-area-inset-right)); bottom: max(0.8rem, env(safe-area-inset-bottom)); gap: 0.32rem; }
+  .social-dock__link { width: 2.6rem; height: 2.6rem; }
 
   .honors__scene { width: calc(100% + 1rem); margin-inline: -0.5rem; padding-block: 1.4rem 2.4rem; }
   .honors__scene::after { bottom: 1.8rem; width: 92%; height: 5.8rem; }
@@ -1343,17 +1455,18 @@ html { scroll-behavior: auto; overflow-x: clip; }
 }
 
 @media (max-width: 46rem) and (max-height: 720px) {
-  .hero.hero--portrait { min-height: 128svh; }
-  .hero__name { top: 16%; }
+  .hero.hero--portrait { min-height: 152svh; --hero-motion-vh: 128; }
+  .hero__name { top: 20.48svh; }
   .hero--portrait .hero__stage,
-  .hero__arc { top: 44%; }
-  .hero__statement { top: 53.5%; }
-  .hero__creed { top: 62%; height: 7.1rem; }
-  .hero__creed .creed__quote { transform: translateY(-2.9rem); }
+  .hero__arc { top: 56.32svh; }
+  .hero__spark { top: 38.4svh; }
+  .hero__statement { top: 68.48svh; }
+  .hero__creed { top: 88svh; height: 9rem; }
+  .hero__creed .creed__quote { transform: translateY(-3.25rem); }
   .hero__creed .creed__quote p { font-size: 1.85rem; }
   .hero__creed .creed__quote cite { margin-top: 0.4rem; }
-  .hero--portrait .hero__role { top: 83.5%; }
-  .hero__award { top: 91%; }
+  .hero--portrait .hero__role { top: 118svh; }
+  .hero__award { top: 130svh; }
   .social-dock { right: max(0.75rem, env(safe-area-inset-right)); bottom: max(0.25rem, env(safe-area-inset-bottom)); gap: 0.32rem; }
   .social-dock__link { width: 2.25rem; height: 2.25rem; }
   .social-dock__link svg { width: 1rem; height: 1rem; }
