@@ -527,7 +527,7 @@
    * See the README for the one line that swaps in a form service.
    * ================================================================== */
 
-  var CONTACT_EMAIL = 'hello@hubertmak.com';
+  var CONTACT_EMAIL = 'info@makcare.com';
 
   var form = $('#contact-form');
   var status = $('#form-status');

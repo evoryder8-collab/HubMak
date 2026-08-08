@@ -62,12 +62,14 @@
   "name": "Hubert Mak",
   "jobTitle": "Registered Massage Therapist, Manual Osteopath",
   "url": "https://hubertmak.com/",
+  "email": "mailto:healing@hubertmak.com",
+  "telephone": "+1-905-609-1238",
   "address": { "@type": "PostalAddress", "addressLocality": "Markham", "addressRegion": "Ontario", "addressCountry": "CA" },
   "award": [
     "Overall Winner, International Division, Euro Massage Championship 2026, Paris",
     "Sport Massage, Empathy Award, Euro Massage Championship 2026, Paris",
     "Best Massage Photo, Second Place, Euro Massage Championship 2026, Paris",
-    "Champion, Canadian and International Massage Therapy Championship 2026, Laval, Quebec"
+    "Second Place, Sports Category, Massage Therapy Summit 2026, Laval, Quebec"
   ]
 }
 </script>
@@ -135,8 +137,6 @@
 </header>
 
 <main id="top" class="site-main">
-  <div class="journey-thread" aria-hidden="true"><span></span></div>
-
   <!-- ============ Hero ============ -->
   <section class="hero hero--portrait" id="hero" data-track="hero">
     <div class="hero__field" aria-hidden="true">
@@ -155,10 +155,12 @@
       <figure class="cut cut--hero">
         <span class="cut__aura" aria-hidden="true"></span>
         <span class="cut__floor" aria-hidden="true"></span>
-        <img class="cut__img hero__portrait" src="assets/img/moment-medal.webp" width="843" height="1400"
-             alt="Hubert Mak receiving his gold medal in Paris" data-i18n-alt="alt_medal"
-             fetchpriority="high" decoding="async">
-        <span class="cut__dissolve" aria-hidden="true"></span>
+        <span class="hero__portrait-window">
+          <img class="cut__img hero__portrait" src="assets/img/moment-medal.webp" width="843" height="1400"
+               alt="Hubert Mak receiving his gold medal in Paris" data-i18n-alt="alt_medal"
+               fetchpriority="high" decoding="async">
+          <span class="cut__dissolve" aria-hidden="true"></span>
+        </span>
       </figure>
     </div>
 
@@ -195,13 +197,24 @@
   <div class="proof-band" aria-label="2026 highlights">
     <div class="proof-band__track">
       <span data-i18n="proof_one">Paris · International Division Overall Winner</span><i></i>
-      <span data-i18n="proof_two">Laval · Championship Winner</span><i></i>
+      <span data-i18n="proof_two">Laval · Sports Category Silver</span><i></i>
       <span data-i18n="proof_three">Markham · MakCare Health and Wellness</span><i></i>
       <span aria-hidden="true" data-i18n="proof_one">Paris · International Division Overall Winner</span><i aria-hidden="true"></i>
-      <span aria-hidden="true" data-i18n="proof_two">Laval · Championship Winner</span><i aria-hidden="true"></i>
+      <span aria-hidden="true" data-i18n="proof_two">Laval · Sports Category Silver</span><i aria-hidden="true"></i>
       <span aria-hidden="true" data-i18n="proof_three">Markham · MakCare Health and Wellness</span><i aria-hidden="true"></i>
     </div>
   </div>
+
+  <section class="home-book" id="book" aria-labelledby="home-book-title">
+    <div class="home-book__copy">
+      <p data-i18n="book_eyebrow">Treatment in Markham</p>
+      <h2 id="home-book-title" data-i18n="book_title">Ready to feel and move better?</h2>
+    </div>
+    <a class="book-cta" href="https://www.makcare.com/Services.php" target="_blank" rel="noopener noreferrer" data-cursor="Book">
+      <span data-i18n="book_button">Book a massage</span>
+      <i aria-hidden="true"></i>
+    </a>
+  </section>
 
   <!-- ============ 01 Film ============ -->
   <section class="film" id="reel" data-track="film" aria-label="Film" data-i18n-aria="film_aria">
@@ -236,7 +249,7 @@
 
     <div class="craft__grid">
       <div class="craft__stage">
-        <figure class="cut cut--craft" data-parallax="0.05">
+        <figure class="cut cut--craft">
           <span class="cut__aura" aria-hidden="true"></span>
           <span class="cut__floor" aria-hidden="true"></span>
           <img class="cut__img" src="assets/img/portrait-craft.webp" width="1500" height="1107"
@@ -258,7 +271,7 @@
           <figcaption data-i18n="craft_inset_caption">Care starts with attention.</figcaption>
         </figure>
 
-        <p data-reveal data-i18n="craft_p3">The same focus shapes his competition work. In 2026, Hubert won in Laval and then took the International Division overall title in Paris. Those results reflect years of practice, preparation, and clear decisions under pressure.</p>
+        <p data-reveal data-i18n="craft_p3">The same focus shapes his competition work. In 2026, Hubert earned silver in the Sports Category in Laval, then took the International Division overall title in Paris. Those results reflect years of practice, preparation, and clear decisions under pressure.</p>
 
         <p data-reveal data-i18n="craft_p4">He continues to treat, study, and refine his technique. The goal stays simple: deliver care that is skilled, attentive, and useful.</p>
       </div>
@@ -270,7 +283,7 @@
     <div class="honors__head">
       <p class="chapter" data-reveal><i>03</i><span data-i18n="honors_chapter">Awards</span></p>
       <h2 class="honors__title" data-kinetic="words" data-i18n="honors_title">Two Events. A Standout Season.</h2>
-      <p class="honors__lede" data-reveal data-i18n="honors_lede">A championship win in Laval and the International Division overall title in Paris, both in 2026.</p>
+      <p class="honors__lede" data-reveal data-i18n="honors_lede">Sports Category silver in Laval and the International Division overall title in Paris, both in 2026.</p>
     </div>
 
     <figure class="honors__scene" data-reveal>
@@ -289,17 +302,16 @@
       </header>
 
       <ol class="honors__list">
-        <!-- TODO before launch: confirm the exact Laval category names and placements -->
         <li class="honor honor--lead" data-reveal>
           <span class="honor__rule" aria-hidden="true"></span>
           <p class="honor__index">i</p>
           <div class="honor__main">
-            <p class="honor__rank" data-i18n="laval_rank">Champion</p>
-            <h3 class="honor__name" data-i18n="laval_name">Canadian and International Championship</h3>
+            <p class="honor__rank" data-i18n="laval_rank">Second Place</p>
+            <h3 class="honor__name" data-i18n="laval_name">Sports Category</h3>
           </div>
           <div class="honor__aside">
             <p class="honor__where">Massage Therapy Summit <em>Laval</em></p>
-            <p class="honor__note" data-i18n="laval_note">The season began with a championship win in Laval at the Massage Therapy Summit.</p>
+            <p class="honor__note" data-i18n="laval_note">Hubert took silver in the Sports Category at the Massage Therapy Summit in Laval.</p>
           </div>
         </li>
       </ol>
@@ -464,7 +476,7 @@
         <p class="contact__lede" data-reveal data-i18n="contact_lede">For appointments, seminars, media, or questions about Hubert's work.</p>
       </div>
 
-      <form class="form" id="contact-form" novalidate data-reveal>
+      <form class="form" id="contact-form" action="mailto:info@makcare.com" method="post" enctype="text/plain" novalidate data-reveal>
         <div class="field">
           <input id="name" name="name" type="text" autocomplete="name" placeholder=" " required>
           <label for="name" data-i18n="form_name">Name</label>
@@ -488,10 +500,9 @@
       </form>
 
       <ul class="contact__links" data-reveal>
-        <!-- TODO before launch: replace these three destinations with the real ones -->
-        <li><a href="mailto:hello@hubertmak.com" data-cursor="Write"><span data-i18n="form_email">Email</span></a></li>
-        <li><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" data-cursor="Follow"><span>Instagram</span></a></li>
-        <li><a href="https://www.makcare.ca/" target="_blank" rel="noopener noreferrer" data-cursor="Book"><span>MakCare</span></a></li>
+        <li><a href="mailto:healing@hubertmak.com" data-cursor="Write"><small data-i18n="contact_email_label">Direct email</small><span>healing@hubertmak.com</span></a></li>
+        <li><a href="tel:+19056091238" data-cursor="Call"><small data-i18n="contact_phone_label">Telephone</small><span>+1 905-609-1238</span></a></li>
+        <li><a href="https://www.makcare.com/Services.php" target="_blank" rel="noopener noreferrer" data-cursor="Book"><small data-i18n="book_eyebrow">Treatment in Markham</small><span data-i18n="book_button">Book a massage</span></a></li>
       </ul>
     </div>
   </section>

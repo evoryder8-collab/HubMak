@@ -6,17 +6,16 @@ No framework, no bundler, no build step. Plain HTML, CSS, JavaScript, and SVG, s
 
 ---
 
-## Before launch
+## Launch details
 
-Four values still point at placeholders. Search for them and swap in the real ones.
-
-| What | Where | Current placeholder |
-| --- | --- | --- |
-| Email address | `site.html` contact links, and `CONTACT_EMAIL` in `js/script.js` | `hello@hubertmak.com` |
-| Instagram | `site.html`, contact links | `https://www.instagram.com/` |
-| MakCare booking | `site.html`, contact links | `https://www.makcare.ca/` |
-| Domain | `CNAME.example`, see custom domain below | `hubertmak.com` |
-| Laval categories | `site.html`, the first `.campaign` block | placement and category names need confirming |
+| What | Current value |
+| --- | --- |
+| Public email | `healing@hubertmak.com` |
+| Website form destination | `info@makcare.com` |
+| Telephone | `+1 905-609-1238` |
+| MakCare booking | `https://www.makcare.com/Services.php` |
+| Laval result | Second place, Sports Category |
+| Domain | `hubertmak.com`, pending the DNS change described below |
 
 ---
 
@@ -195,7 +194,7 @@ HEVC will not play in Chrome or Firefox, so always transcode to H.264 even if th
 
 ## The contact form
 
-Static hosting has no mail server, so submitting opens a prefilled message in the visitor's mail app. That works everywhere and needs no account.
+Static hosting has no mail server, so submitting opens a prefilled message to `info@makcare.com` in the visitor's mail app. The public contact email shown on the site is `healing@hubertmak.com`.
 
 For a form that arrives as email instead, create one at a service such as Formspree and change the `<form>` tag to:
 
