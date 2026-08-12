@@ -15,7 +15,7 @@ No framework, no bundler, no build step. Plain HTML, CSS, JavaScript, and SVG, s
 | Telephone | `+1 905-609-1238` |
 | MakCare booking | `https://www.makcare.com/Services.php` |
 | Laval result | Second place, Sports Category |
-| Domain | `hubertmak.com`, pending the DNS change described below |
+| Domain | `hubertmak.com`, live on GitHub Pages with HTTPS |
 
 ---
 
@@ -42,6 +42,8 @@ A chapter rail on the left tracks where you are and dims itself while the filmst
 ```
 index.html              language portal, metadata, and alternate-language links
 site.html               the main experience, selected with ?lang=en and equivalent codes
+robots.txt              crawl access and the public sitemap location
+sitemap.xml             canonical pages, language versions, images, and the reel video
 css/
   base.css              tokens, reset, type scale, grain, cursor, overture, rail, nav, footer
   layout.css            every chapter, plus the lightbox
@@ -107,32 +109,22 @@ To turn Pages on the first time: **Settings** then **Pages**, set **Source** to 
 
 ---
 
+## Google indexing and SEO maintenance
+
+The repository includes self-referencing canonicals, reciprocal `hreflang` links for all nine language URLs, crawl directives, an XML sitemap, image and video discovery data, social preview metadata, and Schema.org data for Hubert, MakCare, the clinic address, awards, images, and reel.
+
+After any material content or media update:
+
+1. Change the affected `<lastmod>` dates in `sitemap.xml` to the real update date.
+2. Keep every sitemap URL aligned with its canonical URL.
+3. Check that `https://hubertmak.com/robots.txt` and `https://hubertmak.com/sitemap.xml` still return successfully after deployment.
+4. In Google Search Console, use a Domain property for `hubertmak.com`, submit `https://hubertmak.com/sitemap.xml`, and inspect the root and English URLs after major releases.
+
+Search Console submission is the discovery request. It is not a guarantee of ranking or immediate inclusion. Rankings still depend on useful content, reputation, links, local relevance, and competition.
+
 ## Custom domain, hubertmak.com
 
-Do this only once the DNS records are in place. Adding the domain first makes the `github.io` preview redirect to a domain that does not resolve yet.
-
-**1. DNS at the registrar.** Four `A` records on the apex, host `@`:
-
-```
-185.199.108.153
-185.199.109.153
-185.199.110.153
-185.199.111.153
-```
-
-And one `CNAME` for `www`:
-
-```
-www   ->   evoryder8-collab.github.io
-```
-
-**2. Tell the repository**
-
-```bash
-git mv CNAME.example CNAME && git commit -m "Point at hubertmak.com" && git push
-```
-
-**3. Wait, then tick Enforce HTTPS** in Settings, Pages, once GitHub reports the domain verified.
+The custom domain is already connected. The root `CNAME` file must remain in the repository, and GitHub Pages should keep **Enforce HTTPS** enabled. The apex DNS records point to GitHub Pages, while the existing Infomaniak mail records remain separate.
 
 ---
 

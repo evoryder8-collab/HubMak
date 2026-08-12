@@ -330,14 +330,51 @@
   document.title = translate('meta_title');
   var description = document.querySelector('meta[name="description"]');
   if (description) description.setAttribute('content', translate('meta_description'));
+  var localizedUrl = 'https://hubertmak.com/site.html?lang=' + code;
   var canonical = document.querySelector('link[rel="canonical"]');
-  if (canonical) canonical.href = 'https://hubertmak.com/site.html?lang=' + code;
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.setAttribute('rel', 'canonical');
+    document.head.appendChild(canonical);
+  }
+  canonical.href = localizedUrl;
   var ogUrl = document.querySelector('meta[property="og:url"]');
-  if (ogUrl) ogUrl.setAttribute('content', 'https://hubertmak.com/site.html?lang=' + code);
+  if (ogUrl) ogUrl.setAttribute('content', localizedUrl);
   var ogTitle = document.querySelector('meta[property="og:title"]');
   if (ogTitle) ogTitle.setAttribute('content', translate('meta_title'));
   var ogDescription = document.querySelector('meta[property="og:description"]');
   if (ogDescription) ogDescription.setAttribute('content', translate('hero_statement'));
+  var twitterTitle = document.querySelector('meta[name="twitter:title"]');
+  if (twitterTitle) twitterTitle.setAttribute('content', translate('meta_title'));
+  var twitterDescription = document.querySelector('meta[name="twitter:description"]');
+  if (twitterDescription) twitterDescription.setAttribute('content', translate('hero_statement'));
+  var ogLocale = document.querySelector('meta[property="og:locale"]');
+  var ogLocales = { en:'en_CA', fr:'fr_CA', yue:'yue_HK', zh:'zh_CN', ja:'ja_JP', de:'de_DE', es:'es_ES', pt:'pt_PT', ru:'ru_RU' };
+  if (ogLocale) ogLocale.setAttribute('content', ogLocales[code] || 'en_CA');
+
+  var structuredData = document.getElementById('site-structured-data');
+  if (structuredData) {
+    try {
+      var schema = JSON.parse(structuredData.textContent);
+      var graph = schema['@graph'] || [];
+      graph.forEach(function (node) {
+        if (node['@type'] === 'ProfilePage') {
+          node['@id'] = localizedUrl + '#webpage';
+          node.url = localizedUrl;
+          node.name = translate('meta_title');
+          node.description = translate('meta_description');
+          node.inLanguage = document.documentElement.lang;
+        }
+        if (node['@type'] === 'VideoObject') {
+          node['@id'] = localizedUrl + '#reel-video';
+          node.name = translate('film_video_alt');
+          node.description = translate('film_caption');
+          node.inLanguage = document.documentElement.lang;
+        }
+      });
+      structuredData.textContent = JSON.stringify(schema);
+    } catch (error) {}
+  }
 
   var flag = document.getElementById('current-flag');
   var currentLanguage = document.getElementById('current-language');

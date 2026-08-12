@@ -400,12 +400,20 @@ html { scroll-behavior: auto; overflow-x: clip; }
   display: flex;
   align-items: center;
   width: max-content;
-  min-width: 200%;
-  padding-block: 1rem;
-  animation: proof-run 30s linear infinite;
+  min-width: 0;
+  animation: proof-run 38s linear infinite;
   animation-play-state: paused;
+  will-change: transform;
 }
 .proof-band.is-motion-active .proof-band__track { animation-play-state: running; }
+.proof-band__cycle {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-around;
+  min-width: 50vw;
+  padding-block: 1rem;
+}
 .proof-band__track span {
   padding-inline: clamp(1.8rem, 4vw, 4rem);
   font-size: 0.57rem;
@@ -785,8 +793,9 @@ html { scroll-behavior: auto; overflow-x: clip; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero__arc, .hero__spark, .proof-band__track, .honors__scene-glow { animation: none !important; }
-  .proof-band__track { min-width: 100%; width: 100%; flex-wrap: wrap; justify-content: center; }
-  .proof-band__track [aria-hidden="true"], .proof-band__track i[aria-hidden="true"] { display: none; }
+  .proof-band__track { display: block; min-width: 100%; width: 100%; }
+  .proof-band__cycle { width: 100%; min-width: 100%; flex-wrap: wrap; justify-content: center; }
+  .proof-band__cycle[aria-hidden="true"] { display: none; }
   ::view-transition-group(*) { animation-duration: 0.001ms !important; }
 }
 

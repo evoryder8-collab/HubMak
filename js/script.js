@@ -414,7 +414,7 @@
   var soundBtn = $('#reel-sound');
 
   if (video) {
-    var wired = false;
+    var wired = Boolean(video.querySelector('source'));
 
     function play() {
       var p = video.play();
