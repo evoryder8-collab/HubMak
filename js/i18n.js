@@ -7,18 +7,18 @@
 
   var copy = {
     en: {
-      meta_title: 'Hubert Mak | Massage Champion, Manual Osteopath',
-      meta_description: 'Hubert Mak is a Registered Massage Therapist and Manual Osteopath in Markham, Ontario, and the 2026 International Division Overall Winner in Paris.',
+      meta_title: 'Massage Therapy in Markham | Hubert Mak, Award-Winning RMT',
+      meta_description: 'Award-winning massage therapy in Markham with Hubert Mak, Registered Massage Therapist and Manual Osteopath. Book at MakCare Health and Wellness Centre.',
       skip: 'Skip to content', nav_approach: 'Approach', nav_awards: 'Awards', nav_gallery: 'Gallery', nav_contact: 'Contact', nav_language: 'Change language',
       rail_film: 'Film', rail_approach: 'Approach', rail_awards: 'Awards', rail_moments: 'Moments', rail_contact: 'Contact',
-      hero_eyebrow: 'Registered care · International results', hero_statement: 'Care, strength, and precision in every treatment.',
+      hero_eyebrow: 'Massage therapy in Markham · International results', hero_statement: 'Care, strength, and precision in every treatment.',
       hero_role_one: 'Registered Massage Therapist', hero_role_two: 'Manual Osteopath', hero_role_three: 'Founder of MakCare',
       hero_award_label: '2026 Overall Winner', hero_award_title: 'International Division', hero_award_place: 'Euro Massage Championship · Paris', hero_scroll: 'Scroll',
       proof_one: 'Paris · International Division Overall Winner', proof_two: 'Laval · Sports Category Silver', proof_three: 'Markham · MakCare Health and Wellness',
-      book_eyebrow: 'Treatment in Markham', book_title: 'Ready to feel and move better?', book_button: 'Book a massage',
+      book_eyebrow: 'Massage in Markham', book_title: 'Award-winning massage therapy in Markham.', book_button: 'Book a massage',
       film_aria: 'Film', film_chapter: 'In Motion', film_video_alt: 'Hubert Mak at the Euro Massage Championship 2026', sound_on: 'Turn sound on', sound_off: 'Turn sound off', film_caption: 'A minute inside the work.',
       craft_chapter: 'Approach', craft_title: 'The Work Behind the Results', craft_stage_note: 'Clinical training · Thai massage · Stretch therapy · Acupuncture',
-      craft_p1: 'Hubert Mak is a Registered Massage Therapist and Manual Osteopath based in Markham. His work brings clinical training together with Thai massage, stretch therapy, acupuncture, and years of hands-on experience.',
+      craft_p1: 'Hubert Mak provides massage therapy in Markham as a Registered Massage Therapist and Manual Osteopath. His work brings clinical training together with Thai massage, stretch therapy, acupuncture, and years of hands-on experience.',
       craft_p2: 'He founded MakCare Health and Wellness Centre to bring those methods into one practical approach. Each treatment starts with the person in front of him: understand what the body needs, choose the right method, and help the client move and feel better.',
       craft_inset_caption: 'Care starts with attention.',
       craft_p3: 'The same focus shapes his competition work. In 2026, Hubert earned silver in the Sports Category in Laval, then took the International Division overall title in Paris. Those results reflect years of practice, preparation, and clear decisions under pressure.',
@@ -343,11 +343,11 @@
   var ogTitle = document.querySelector('meta[property="og:title"]');
   if (ogTitle) ogTitle.setAttribute('content', translate('meta_title'));
   var ogDescription = document.querySelector('meta[property="og:description"]');
-  if (ogDescription) ogDescription.setAttribute('content', translate('hero_statement'));
+  if (ogDescription) ogDescription.setAttribute('content', translate('meta_description'));
   var twitterTitle = document.querySelector('meta[name="twitter:title"]');
   if (twitterTitle) twitterTitle.setAttribute('content', translate('meta_title'));
   var twitterDescription = document.querySelector('meta[name="twitter:description"]');
-  if (twitterDescription) twitterDescription.setAttribute('content', translate('hero_statement'));
+  if (twitterDescription) twitterDescription.setAttribute('content', translate('meta_description'));
   var ogLocale = document.querySelector('meta[property="og:locale"]');
   var ogLocales = { en:'en_CA', fr:'fr_CA', yue:'yue_HK', zh:'zh_CN', ja:'ja_JP', de:'de_DE', es:'es_ES', pt:'pt_PT', ru:'ru_RU' };
   if (ogLocale) ogLocale.setAttribute('content', ogLocales[code] || 'en_CA');
