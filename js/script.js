@@ -101,6 +101,128 @@
   }
 
   /* ================================================================== *
+   * Proof band: a ticker you can throw
+   * It cruises at reading pace. Drag it either way; release with speed
+   * and it spins with real momentum, then eases back to reading pace in
+   * the direction it was thrown. Holding it still lets it be read.
+   * ================================================================== */
+
+  (function proofBand() {
+    var band = $('.proof-band');
+    var track = band && $('.proof-band__track', band);
+    var cycle = track && $('.proof-band__cycle', track);
+    if (!band || !track || !cycle || reduced || !window.requestAnimationFrame) return;
+
+    var SETTLE = 0.45;          // seconds for a throw to relax back to cruise
+    var MAX_THROW = 9000;       // px per second, so a wild flick stays legible
+    var SAMPLE_MS = 90;         // release velocity is read from this window
+
+    var width = 0;              // one cycle, the distance after which the loop repeats
+    var cruise = 0;             // px per second at reading pace
+    var x = 0;                  // current offset, always within (-width, 0]
+    var v = 0;                  // current velocity, px per second
+    var dir = -1;               // -1 drifts left, 1 drifts right
+    var dragging = false;
+    var pointerId = null;
+    var lastPointerX = 0;
+    var travel = 0;             // unwrapped drag distance, for velocity sampling
+    var samples = [];
+    var lastFrame = 0;
+
+    function measure() {
+      width = cycle.getBoundingClientRect().width;
+      // The original CSS loop crossed two cycles every 38 seconds
+      cruise = width / 19;
+      if (!dragging && v === 0) v = dir * cruise;
+    }
+
+    function wrap(n) {
+      if (!width) return 0;
+      n = n % width;
+      return n > 0 ? n - width : n;
+    }
+
+    function paint() {
+      track.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
+    }
+
+    function frame(now) {
+      requestAnimationFrame(frame);
+      var dt = lastFrame ? Math.min(0.05, (now - lastFrame) / 1000) : 0;
+      lastFrame = now;
+      if (dragging || !width) return;
+
+      var target = dir * cruise;
+      // Off screen and already at cruise: nothing to draw
+      if (!band.classList.contains('is-motion-active') && Math.abs(v - target) < 0.5) return;
+
+      // Exponential relaxation: a fast throw sheds speed quickly at first,
+      // then settles smoothly onto the reading pace
+      v = target + (v - target) * Math.exp(-dt / SETTLE);
+      x = wrap(x + v * dt);
+      paint();
+    }
+
+    function onDown(e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      dragging = true;
+      pointerId = e.pointerId;
+      lastPointerX = e.clientX;
+      travel = 0;
+      samples = [{ t: e.timeStamp, p: 0 }];
+      v = 0;
+      band.classList.add('is-dragging');
+      try { band.setPointerCapture(pointerId); } catch (err) {}
+    }
+
+    function onMove(e) {
+      if (!dragging || e.pointerId !== pointerId) return;
+      var dx = e.clientX - lastPointerX;
+      lastPointerX = e.clientX;
+      travel += dx;
+      x = wrap(x + dx);
+      paint();
+      samples.push({ t: e.timeStamp, p: travel });
+      while (samples.length > 2 && e.timeStamp - samples[0].t > SAMPLE_MS) samples.shift();
+    }
+
+    function onUp(e) {
+      if (!dragging || e.pointerId !== pointerId) return;
+      dragging = false;
+      band.classList.remove('is-dragging');
+      try { band.releasePointerCapture(pointerId); } catch (err) {}
+
+      var first = samples[0];
+      var lastS = samples[samples.length - 1];
+      var span = lastS.t - first.t;
+      // A finger that stopped before lifting throws nothing
+      var stale = e.timeStamp - lastS.t > 60;
+      var throwV = (span > 8 && !stale) ? (lastS.p - first.p) / (span / 1000) : 0;
+      v = clamp(throwV, -MAX_THROW, MAX_THROW);
+      if (Math.abs(v) > 60) dir = v > 0 ? 1 : -1;
+      lastFrame = 0;
+    }
+
+    band.addEventListener('pointerdown', onDown);
+    band.addEventListener('pointermove', onMove);
+    band.addEventListener('pointerup', onUp);
+    band.addEventListener('pointercancel', onUp);
+    band.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
+    measure();
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(function () { measure(); x = wrap(x); paint(); }).observe(cycle);
+    } else {
+      addEventListener('resize', function () { measure(); x = wrap(x); paint(); }, { passive: true });
+    }
+
+    v = dir * cruise;
+    band.classList.add('is-physics');
+    paint();
+    requestAnimationFrame(frame);
+  })();
+
+  /* ================================================================== *
    * Overture: loader, then the curtain parts
    * ================================================================== */
 
