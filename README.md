@@ -1,6 +1,6 @@
 # hubertmak.com
 
-A cinematic multilingual site for **Hubert Mak**, Registered Massage Therapist, Manual Osteopath, and Overall Winner of the International Division at the Euro Massage Championship 2026 in Paris.
+A cinematic multilingual site for **Hubert Mak**, Registered Massage Therapist, Osteopathic Manual Practitioner, and Overall Winner of the International Division at the Euro Massage Championship 2026 in Paris.
 
 No framework, no bundler, no build step. Plain HTML, CSS, JavaScript, and SVG, so GitHub Pages serves the repository exactly as it sits.
 
@@ -11,7 +11,7 @@ No framework, no bundler, no build step. Plain HTML, CSS, JavaScript, and SVG, s
 | What | Current value |
 | --- | --- |
 | Public email | `healing@hubertmak.com` |
-| Website form destination | `info@makcare.com` |
+| Website form destination | `hubert@makcare.com` |
 | Telephone | `+1 905-609-1238` |
 | MakCare booking | `https://www.makcare.com/Services.php` |
 | Laval result | Second place, Sports Category |
@@ -186,7 +186,7 @@ HEVC will not play in Chrome or Firefox, so always transcode to H.264 even if th
 
 ## The contact form
 
-Static hosting has no mail server, so submitting opens a prefilled message to `info@makcare.com` in the visitor's mail app. The public contact email shown on the site is `healing@hubertmak.com`.
+Static hosting has no mail server, so submitting opens a prefilled message to `hubert@makcare.com` in the visitor's mail app. The public contact email shown on the site is `healing@hubertmak.com`.
 
 For a form that arrives as email instead, create one at a service such as Formspree and change the `<form>` tag to:
 
