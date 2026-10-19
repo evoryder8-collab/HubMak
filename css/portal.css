@@ -4,12 +4,11 @@
 
 @view-transition { navigation: auto; }
 
-::view-transition-old(mak-portrait),
-::view-transition-new(mak-portrait) {
-  animation-duration: 1150ms;
-  animation-timing-function: var(--ease-out);
-  mix-blend-mode: normal;
-}
+/* The portrait is deliberately not given a view-transition-name. A named
+   element is captured without its ancestors' clipping or opacity and drawn in
+   the top layer, so the cutout escaped its circle and flew over the closed
+   curtain for the length of the morph. The page crossfade is dark to dark
+   here anyway: the portal's veil closes, then the site's curtain opens. */
 
 .gate-root,
 .gate-body { min-height: 100%; }
@@ -105,7 +104,6 @@
   height: auto;
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
-  view-transition-name: mak-portrait-wrap;
 }
 
 .gate__portrait-window {
@@ -149,7 +147,6 @@
   transform: translateX(-50%);
   filter:
     contrast(1.04) saturate(0.96);
-  view-transition-name: mak-portrait;
 }
 
 .cut--gate .cut__aura {
