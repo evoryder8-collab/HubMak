@@ -484,62 +484,57 @@ body.site-page.is-booting>.loader{position:fixed;inset:0;z-index:2147483647;disp
     </figure>
 
     <div class="awards-ledger">
-      <article class="award-event award-event--laval" data-reveal>
-        <header class="award-event__head">
-          <span class="award-seal award-seal--silver" aria-hidden="true">
-            <svg viewBox="0 0 80 80"><path d="M28 62C17 54 12 42 15 27M52 62c11-8 16-20 13-35"></path><path d="M18 48c7 0 11 3 14 8M16 38c7 1 11 4 14 9M17 28c6 2 9 5 12 10M62 48c-7 0-11 3-14 8M64 38c-7 1-11 4-14 9M63 28c-6 2-9 5-12 10"></path><circle cx="40" cy="34" r="14"></circle></svg>
-            <b>2</b>
-          </span>
-          <div>
-            <p class="award-event__date">April 2026 <i>02</i></p>
-            <h3 class="award-event__title award-event__title--silver"><span data-i18n="laval_medal">Silver Medal</span><span class="award-event__qualifier"><span class="award-event__join"> - </span><span data-i18n="laval_name">Sports Category</span></span></h3>
-            <p>Massage Therapy Summit <span>Laval · Quebec, Canada</span></p>
-          </div>
-        </header>
-        <div class="award-results">
-          <div class="award-result award-result--silver" data-reveal>
-            <span class="award-result__medal" aria-hidden="true"><i></i></span>
-            <div>
-              <p data-i18n="laval_rank">Second Place</p>
-              <h4 data-i18n="laval_name">Sports Category</h4>
-              <span data-i18n="laval_note">Hubert took silver in the Sports Category at the Massage Therapy Summit in Laval.</span>
-            </div>
-          </div>
-        </div>
-      </article>
-
+      <!-- Medal metal carries meaning: gold is a first place, silver a second,
+           champagne a special award. -->
       <article class="award-event award-event--paris" data-reveal>
         <header class="award-event__head">
-          <span class="award-seal award-seal--gold" aria-hidden="true">
-            <svg viewBox="0 0 80 80"><path d="M28 62C17 54 12 42 15 27M52 62c11-8 16-20 13-35"></path><path d="M18 48c7 0 11 3 14 8M16 38c7 1 11 4 14 9M17 28c6 2 9 5 12 10M62 48c-7 0-11 3-14 8M64 38c-7 1-11 4-14 9M63 28c-6 2-9 5-12 10"></path><circle cx="40" cy="34" r="14"></circle></svg>
-            <b>1</b>
-          </span>
-          <div>
-            <p class="award-event__date">2026 <i>01</i></p>
-            <h3 class="award-event__title award-event__title--gold"><span data-i18n="paris_rank">Overall Winner</span><span class="award-event__qualifier"><span class="award-event__join"> - </span><span data-i18n="paris_name">International Division</span></span></h3>
-            <p>Euro Massage Championship <span>Paris · France</span></p>
-          </div>
+          <p class="award-event__place"><span>Paris</span><i>France</i><b>2026</b></p>
+          <h3 class="award-event__name">Euro Massage Championship</h3>
         </header>
-        <div class="award-results award-results--paris">
-          <div class="award-result award-result--winner" data-reveal>
-            <span class="award-result__trophy" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 4h8v4.5c0 3.1-1.7 5.5-4 5.5s-4-2.4-4-5.5V4Z"></path><path d="M8 6H4c0 3.4 1.7 5 4.7 5M16 6h4c0 3.4-1.7 5-4.7 5M12 14v4M8.5 21h7M10 18h4"></path></svg></span>
-            <div>
-              <p data-i18n="paris_rank">Overall Winner</p>
-              <h4 data-i18n="paris_name">International Division</h4>
-              <span data-i18n="paris_note">Named the top therapist across the International Division.</span>
-            </div>
+
+        <div class="award-feature" data-reveal>
+          <span class="medal medal--gold medal--feature" aria-hidden="true">
+            <svg class="medal__ribbon" viewBox="0 0 60 70"><path class="medal__strap" d="M3 0h18l17 70H21Z"/><path class="medal__strap medal__strap--front" d="M57 0H39L22 70h17Z"/><path class="medal__stripe" d="M12 0l17 70M48 0 31 70"/><rect class="medal__clasp" x="16" y="25.5" width="28" height="6.5" rx="2"/></svg>
+            <span class="medal__disc"><svg class="medal__laurel" viewBox="0 0 80 80"><path d="M29 66C16 58 10 44 13 28M51 66c13-8 19-22 16-38"/><path d="M17 52c7 0 11 3 14 8M14 42c7 1 11 4 14 9M14 32c6 2 9 5 12 10M63 52c-7 0-11 3-14 8M66 42c-7 1-11 4-14 9M66 32c-6 2-9 5-12 10"/></svg><b>1</b></span>
+          </span>
+          <div class="award-feature__copy">
+            <p class="award-rank" data-i18n="paris_rank">Overall Winner</p>
+            <h4 class="award-feature__title award-feature__title--gold" data-i18n="paris_name">International Division</h4>
+            <span data-i18n="paris_note">Named the top therapist across the International Division.</span>
           </div>
-          <div class="award-result" data-reveal>
-            <span class="award-result__dot" aria-hidden="true"></span>
-            <div><p data-i18n="empathy_rank">Empathy Award</p><h4 data-i18n="empathy_name">Sport Massage</h4><span data-i18n="empathy_note">Recognized for the care, attention, and communication shown during treatment.</span></div>
-          </div>
-          <div class="award-result" data-reveal>
-            <span class="award-result__dot" aria-hidden="true"></span>
-            <div><p data-i18n="photo_rank">Second Place</p><h4 data-i18n="photo_name">Best Massage Photo</h4><span data-i18n="photo_note">Second place for an image that captured the quality of the work.</span></div>
-          </div>
-          <div class="award-result" data-reveal>
-            <span class="award-result__dot" aria-hidden="true"></span>
-            <div><p data-i18n="multi_rank">Multiple Top Placements</p><h4 data-i18n="multi_name">Sport Massage and Western Traditions</h4><span data-i18n="multi_note">Strong results across sport massage and Western-inspired categories.</span></div>
+        </div>
+
+        <ul class="award-list">
+          <li class="award-item" data-reveal>
+            <span class="medal medal--champagne" aria-hidden="true"><span class="medal__disc"><svg viewBox="0 0 24 24"><path d="M12 9.1c-.9-1.6-3.4-1.5-4 .3-.5 1.5.8 2.9 4 5.2 3.2-2.3 4.5-3.7 4-5.2-.6-1.8-3.1-1.9-4-.3Z"/><path d="M3.8 12.6c.3 4.1 3.8 7.2 8.2 7.2s7.9-3.1 8.2-7.2"/><path d="M3.8 12.6 6 11.3M20.2 12.6 18 11.3"/></svg></span></span>
+            <div><p class="award-rank" data-i18n="empathy_rank">Empathy Award</p><h4 data-i18n="empathy_name">Sport Massage</h4><span data-i18n="empathy_note">Recognized for the care, attention, and communication shown during treatment.</span></div>
+          </li>
+          <li class="award-item" data-reveal>
+            <span class="medal medal--silver" aria-hidden="true"><span class="medal__disc"><svg viewBox="0 0 24 24"><path d="M3.8 8.4h3.1l1.7-2.3h6.8l1.7 2.3h3.1v10.1H3.8Z"/><circle cx="12" cy="13.2" r="3.4"/><path d="M17.4 10.6h.01"/></svg></span><i class="medal__pip">2</i></span>
+            <div><p class="award-rank award-rank--silver" data-i18n="photo_rank">Second Place</p><h4 data-i18n="photo_name">Best Massage Photo</h4><span data-i18n="photo_note">Second place for an image that captured the quality of the work.</span></div>
+          </li>
+          <li class="award-item" data-reveal>
+            <span class="medal medal--champagne" aria-hidden="true"><span class="medal__disc"><svg viewBox="0 0 24 24"><path d="M3 19.5h18M4.2 19.5v-4.6h5v4.6M9.2 19.5v-7.6h5.6v7.6M14.8 19.5v-3.2h5v3.2"/><path d="m12 3.6.9 1.8 2 .3-1.4 1.4.3 2-1.8-.9-1.8.9.3-2-1.4-1.4 2-.3Z"/></svg></span></span>
+            <div><p class="award-rank" data-i18n="multi_rank">Multiple Top Placements</p><h4 data-i18n="multi_name">Sport Massage and Western Traditions</h4><span data-i18n="multi_note">Strong results across sport massage and Western-inspired categories.</span></div>
+          </li>
+        </ul>
+      </article>
+
+      <article class="award-event award-event--laval" data-reveal>
+        <header class="award-event__head">
+          <p class="award-event__place"><span>Laval</span><i>Quebec, Canada</i><b>2026</b></p>
+          <h3 class="award-event__name">Massage Therapy Summit</h3>
+        </header>
+
+        <div class="award-feature" data-reveal>
+          <span class="medal medal--silver medal--feature" aria-hidden="true">
+            <svg class="medal__ribbon" viewBox="0 0 60 70"><path class="medal__strap" d="M3 0h18l17 70H21Z"/><path class="medal__strap medal__strap--front" d="M57 0H39L22 70h17Z"/><path class="medal__stripe" d="M12 0l17 70M48 0 31 70"/><rect class="medal__clasp" x="16" y="25.5" width="28" height="6.5" rx="2"/></svg>
+            <span class="medal__disc"><svg class="medal__laurel" viewBox="0 0 80 80"><path d="M29 66C16 58 10 44 13 28M51 66c13-8 19-22 16-38"/><path d="M17 52c7 0 11 3 14 8M14 42c7 1 11 4 14 9M14 32c6 2 9 5 12 10M63 52c-7 0-11 3-14 8M66 42c-7 1-11 4-14 9M66 32c-6 2-9 5-12 10"/></svg><b>2</b></span>
+          </span>
+          <div class="award-feature__copy">
+            <p class="award-rank award-rank--silver" data-i18n="laval_medal">Silver Medal</p>
+            <h4 class="award-feature__title award-feature__title--silver" data-i18n="laval_name">Sports Category</h4>
+            <span data-i18n="laval_note">Hubert took silver in the Sports Category at the Massage Therapy Summit in Laval.</span>
           </div>
         </div>
       </article>
