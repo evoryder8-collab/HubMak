@@ -277,6 +277,28 @@ ol, ul { margin: 0; padding: 0; list-style: none; }
 .curtain.is-open .curtain__seam { opacity: 0; }
 .curtain.is-done { display: none; }
 
+/* Physical drapery (js/curtain.js). The CSS panels stay as the fallback and
+   only hide once the drape has drawn its first frame. */
+.curtain-drape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+.is-drape-ready > .curtain-drape { opacity: 1; }
+.is-drape-ready > .curtain__panel,
+.is-drape-ready > .gate-veil__panel { visibility: hidden; transition: visibility 0s 240ms; }
+/* The drape leaves on its own schedule, once the cloth has settled */
+.curtain.has-drape.is-done:not(.is-drape-finished),
+.gate-veil.has-drape.is-open:not(.is-drape-finished) { display: block; }
+.has-drape.is-drape-finished { display: none !important; }
+/* When the cloth sweeps closed, the seam only exists once the edges meet */
+.gate-veil.has-drape.is-closing .gate-veil__seam { opacity: 0; animation: drape-seam-in 500ms ease 620ms forwards; }
+@keyframes drape-seam-in { to { opacity: 0.75; } }
+
 /* --------------------------------------------------------------------------
    Cursor, fine pointers only
    -------------------------------------------------------------------------- */

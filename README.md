@@ -52,6 +52,7 @@ css/
   experience.css        new hero, section continuity, campaign cards, and responsive polish
 js/
   script.js             overture, reveals, one scroll loop, film, lightbox, cursor, form, WebGL
+  curtain.js            physical drapery for the portal veil and the site curtain (WebGL, CSS panels as fallback)
   gate.js               language detection, countdown, cancellation, memory, and entry transition
   i18n.js               all visible copy for nine language versions
 assets/
