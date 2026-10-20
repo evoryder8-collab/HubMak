@@ -503,38 +503,56 @@ body.site-page.is-booting>.loader{position:fixed;inset:0;z-index:2147483647;disp
       <figcaption><span data-i18n="honors_scene_caption">Paris, 2026</span><i data-i18n="honors_scene_note">The result, shared with Team Canada.</i></figcaption>
     </figure>
 
-    <!-- Every medal here is a real placement. Honors without a placement are
-         named in the note under their event rather than given a medal. -->
-    <ol class="award-record">
-      <li class="award-record__item award-record__item--lead" data-reveal>
-        <img class="award-record__medal" src="assets/img/medal-gold.webp" width="240" height="288" loading="lazy" decoding="async" alt="">
-        <div>
-          <h3>Euro Massage Championship</h3>
-          <p class="award-record__result"><span data-i18n="paris_rank">Overall Winner</span> · <span data-i18n="paris_name">International Division</span></p>
-          <p class="award-record__place">Paris, France · 2026</p>
-          <ul class="award-record__also">
-            <li><span data-i18n="empathy_rank">Empathy Award</span> · <span data-i18n="empathy_name">Sport Massage</span></li>
-            <li><span data-i18n="multi_rank">Multiple Top Placements</span> · <span data-i18n="multi_name">Sport Massage and Western Traditions</span></li>
-          </ul>
+    <div class="awards-ledger">
+      <!-- Medal metal carries meaning: gold is a first place, silver a second,
+           champagne (a laurel with no rank) a special award. -->
+      <article class="award-event award-event--paris" data-reveal>
+        <header class="award-event__head">
+          <p class="award-event__place"><span>Paris</span><i>France</i><b>2026</b></p>
+          <h3 class="award-event__name">Euro Massage Championship</h3>
+        </header>
+
+        <div class="award-feature" data-reveal>
+          <img class="medal-art medal-art--feature" src="assets/img/medal-gold.webp" width="240" height="288" loading="lazy" decoding="async" alt="" aria-hidden="true">
+          <div class="award-feature__copy">
+            <p class="award-rank" data-i18n="paris_rank">Overall Winner</p>
+            <h4 class="award-feature__title award-feature__title--gold" data-i18n="paris_name">International Division</h4>
+            <span data-i18n="paris_note">Named the top therapist across the International Division.</span>
+          </div>
         </div>
-      </li>
-      <li class="award-record__item" data-reveal>
-        <img class="award-record__medal" src="assets/img/medal-silver.webp" width="226" height="288" loading="lazy" decoding="async" alt="">
-        <div>
-          <h3>Massage Therapy Summit</h3>
-          <p class="award-record__result award-record__result--silver"><span data-i18n="laval_medal">Silver Medal</span> · <span data-i18n="laval_name">Sports Category</span></p>
-          <p class="award-record__place">Laval, Quebec, Canada · 2026</p>
+
+        <ul class="award-list">
+          <li class="award-item" data-reveal>
+            <img class="medal-art" src="assets/img/medal-honor.webp" width="240" height="288" loading="lazy" decoding="async" alt="" aria-hidden="true">
+            <div><p class="award-rank" data-i18n="empathy_rank">Empathy Award</p><h4 data-i18n="empathy_name">Sport Massage</h4><span data-i18n="empathy_note">Recognized for the care, attention, and communication shown during treatment.</span></div>
+          </li>
+          <li class="award-item" data-reveal>
+            <img class="medal-art" src="assets/img/medal-silver.webp" width="226" height="288" loading="lazy" decoding="async" alt="" aria-hidden="true">
+            <div><p class="award-rank award-rank--silver" data-i18n="photo_rank">Second Place</p><h4 data-i18n="photo_name">Best Massage Photo</h4><span data-i18n="photo_note">Second place for an image that captured the quality of the work.</span></div>
+          </li>
+          <li class="award-item" data-reveal>
+            <img class="medal-art" src="assets/img/medal-honor.webp" width="240" height="288" loading="lazy" decoding="async" alt="" aria-hidden="true">
+            <div><p class="award-rank" data-i18n="multi_rank">Multiple Top Placements</p><h4 data-i18n="multi_name">Sport Massage and Western Traditions</h4><span data-i18n="multi_note">Strong results across sport massage and Western-inspired categories.</span></div>
+          </li>
+        </ul>
+      </article>
+
+      <article class="award-event award-event--laval" data-reveal>
+        <header class="award-event__head">
+          <p class="award-event__place"><span>Laval</span><i>Quebec, Canada</i><b>2026</b></p>
+          <h3 class="award-event__name">Massage Therapy Summit</h3>
+        </header>
+
+        <div class="award-feature" data-reveal>
+          <img class="medal-art medal-art--feature" src="assets/img/medal-silver.webp" width="226" height="288" loading="lazy" decoding="async" alt="" aria-hidden="true">
+          <div class="award-feature__copy">
+            <p class="award-rank award-rank--silver" data-i18n="laval_medal">Silver Medal</p>
+            <h4 class="award-feature__title award-feature__title--silver" data-i18n="laval_name">Sports Category</h4>
+            <span data-i18n="laval_note">Hubert took silver in the Sports Category at the Massage Therapy Summit in Laval.</span>
+          </div>
         </div>
-      </li>
-      <li class="award-record__item" data-reveal>
-        <img class="award-record__medal" src="assets/img/medal-silver.webp" width="226" height="288" loading="lazy" decoding="async" alt="">
-        <div>
-          <h3 data-i18n="photo_name">Best Massage Photo</h3>
-          <p class="award-record__result award-record__result--silver"><span data-i18n="photo_rank">Second Place</span> · Euro Massage Championship</p>
-          <p class="award-record__place">Paris, France · 2026</p>
-        </div>
-      </li>
-    </ol>
+      </article>
+    </div>
 
   </section>
 

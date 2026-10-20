@@ -1076,72 +1076,236 @@ html { scroll-behavior: auto; overflow-x: clip; }
 .honors__scene figcaption i { color: rgba(244,241,236,0.76); font-weight: 400; }
 
 /* Two stops, one clear season. */
-/* ---------- Award record ----------
-   Struck medals for real placements only, one quiet row each, hairlines
-   between. Honors without a placement are named under their event. */
-.award-record {
-  list-style: none;
+.awards-ledger {
+  position: relative;
+  display: grid;
+  gap: clamp(1rem, 2.4vw, 1.75rem);
+}
+
+.award-event {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: clamp(1.2rem, 2.4vw, 1.9rem);
+  padding: clamp(1.15rem, 2.8vw, 2.4rem);
+  border: 1px solid rgba(244,241,236,0.09);
+  border-radius: clamp(1rem, 2vw, 1.5rem);
+  background:
+    radial-gradient(circle at 12% 5%, rgba(201,168,106,0.09), transparent 34%),
+    linear-gradient(145deg, rgba(244,241,236,0.034), rgba(244,241,236,0.008));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.035), 0 34px 90px rgba(0,0,0,0.22);
+}
+.award-event--paris {
+  border-color: rgba(226,202,160,0.22);
+  background:
+    radial-gradient(circle at 74% 0%, rgba(201,168,106,0.16), transparent 42%),
+    linear-gradient(145deg, rgba(201,168,106,0.055), rgba(244,241,236,0.008));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.055),
+    0 34px 90px rgba(0,0,0,0.24),
+    0 0 0 1px rgba(201,168,106,0.055),
+    0 0 46px rgba(201,168,106,0.13);
+}
+.award-event--laval {
+  border-color: rgba(206,214,222,0.17);
+  background:
+    radial-gradient(circle at 74% 0%, rgba(181,189,198,0.14), transparent 42%),
+    linear-gradient(145deg, rgba(214,220,226,0.042), rgba(244,241,236,0.006));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.045),
+    0 34px 90px rgba(0,0,0,0.22),
+    0 0 0 1px rgba(198,207,216,0.04),
+    0 0 42px rgba(188,198,208,0.09);
+}
+
+/* The header names the event. The award itself lives in the feature below,
+   so nothing on the card is said twice. */
+.award-event__head { align-self: center; }
+.award-event__place {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.7rem;
+  font-size: 0.56rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.award-event--laval .award-event__place { color: #cdd4da; }
+.award-event__place i { font-style: normal; font-weight: 400; color: var(--paper-38); }
+.award-event__place b {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex: 1;
+  font-weight: 400;
+  color: var(--paper-38);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.award-event__place b::before { content: ""; flex: 1; height: 1px; background: var(--line); }
+.award-event__name {
+  font-family: var(--serif);
+  font-size: clamp(1.45rem, 2.6vw, 2.25rem);
+  font-weight: 300;
+  line-height: 1.06;
+  color: var(--paper);
+}
+
+/* Shared label above every award */
+.award-rank {
+  margin-bottom: 0.35rem;
+  font-size: 0.52rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.award-rank--silver { color: #cdd4da; }
+
+/* ---------- The medal ----------
+   Struck medal artwork. Gold is a first place, silver a second, champagne
+   a laurel with no rank for an honor that was not a placement. Each one
+   hangs from its ribbon, so it swings from the top. */
+.medal-art {
+  flex: none;
+  display: block;
+  width: 3.5rem;
+  height: auto;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.55)) drop-shadow(0 0 18px rgba(201,168,106,0.12));
+  transform-origin: 50% 3%;
+  -webkit-user-drag: none;
+}
+.medal-art--feature {
+  width: clamp(5.6rem, 8.4vw, 7rem);
+  filter: drop-shadow(0 12px 18px rgba(0,0,0,0.6)) drop-shadow(0 0 30px rgba(201,168,106,0.18));
+}
+
+/* ---------- Feature: the headline result of each event ---------- */
+.award-feature {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1.1rem, 2.4vw, 1.9rem);
+  padding: clamp(0.9rem, 2vw, 1.4rem) clamp(1rem, 2.2vw, 1.6rem) clamp(1rem, 2.2vw, 1.5rem);
+  border: 1px solid rgba(201,168,106,0.2);
+  border-radius: 1.05rem;
+  background: linear-gradient(110deg, rgba(201,168,106,0.09), rgba(6,6,8,0.4) 60%);
+}
+.award-event--laval .award-feature {
+  border-color: rgba(206,214,222,0.16);
+  background: linear-gradient(110deg, rgba(206,214,222,0.075), rgba(6,6,8,0.4) 60%);
+}
+.award-feature__title {
+  margin: 0 0 0.55rem;
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--paper);
+}
+.award-feature__title--gold { color: #e7c77e; }
+.award-feature__title--silver { color: #dce3e8; }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .award-feature__title--gold,
+  .award-feature__title--silver {
+    width: fit-content;
+    max-width: 100%;
+    background-size: 260% 100%;
+    background-position: 100% 50%;
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: award-label-gleam 10s var(--ease-soft) infinite;
+  }
+  .award-feature__title--gold {
+    background-image: linear-gradient(100deg, #b28543 0%, #e7c77e 24%, #fff0bd 40%, #bd8d45 58%, #f8e3a6 72%, #ad8040 100%);
+  }
+  .award-feature__title--silver {
+    background-image: linear-gradient(100deg, #aab3ba 0%, #dce3e8 24%, #ffffff 40%, #aeb7be 58%, #e8edf1 72%, #9ca6ae 100%);
+  }
+}
+.award-feature__copy > span,
+.award-item > div > span {
+  display: block;
+  font-size: 0.74rem;
+  line-height: 1.6;
+  color: var(--paper-58);
+}
+
+/* ---------- Distinctions: one even row, never an orphan ---------- */
+.award-list {
+  display: grid;
+  gap: 0;
   margin: 0;
   padding: 0;
-  border-top: 1px solid rgba(201,168,106,0.22);
+  list-style: none;
+  border-top: 1px solid var(--line);
 }
-.award-record__item {
+.award-item {
+  position: relative;
   display: grid;
-  grid-template-columns: clamp(4.6rem, 7.5vw, 6.4rem) minmax(0, 1fr);
-  align-items: center;
-  gap: clamp(1.2rem, 3vw, 2.4rem);
-  padding: clamp(1.5rem, 3.2vw, 2.3rem) 0;
-  border-bottom: 1px solid rgba(201,168,106,0.16);
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 1rem;
+  padding: 1.1rem 0.4rem;
+  border-bottom: 1px solid var(--line-soft);
+  border-radius: 0.6rem;
+  transition: background-color 600ms ease;
 }
-.award-record__medal {
-  display: block;
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 10px 14px rgba(0,0,0,0.55)) drop-shadow(0 0 22px rgba(201,168,106,0.10));
-  transform-origin: 50% 8%;
-  transition: transform 900ms var(--ease-out);
-}
-/* The medal hangs from its ribbon, so it swings from the top */
-@media (hover: hover) {
-  .award-record__item:hover .award-record__medal { transform: rotate(-4deg); }
-}
-.award-record__item h3 {
-  margin: 0;
+.award-item:last-child { border-bottom: 0; }
+.award-item h4 {
+  margin: 0 0 0.4rem;
   font-family: var(--serif);
-  font-size: clamp(1.35rem, 2.6vw, 2.1rem);
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
   font-weight: 300;
   line-height: 1.12;
   color: var(--paper);
 }
-.award-record__result {
-  margin: 0.55rem 0 0;
-  font-size: clamp(0.92rem, 1.4vw, 1.05rem);
-  line-height: 1.5;
-  color: #e2c68f;
+@media (hover: hover) {
+  .award-item:hover,
+  .award-feature:hover { background-color: rgba(201,168,106,0.045); }
 }
-.award-record__result--silver { color: #d3dae0; }
-.award-record__place {
-  margin: 0.35rem 0 0;
-  font-size: 0.6rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--paper-38);
-}
-.award-record__also {
-  display: grid;
-  gap: 0.35rem;
-  margin: 1rem 0 0;
-  padding: 0.95rem 0 0;
-  list-style: none;
-  border-top: 1px solid var(--line-soft);
-  font-size: 0.82rem;
-  line-height: 1.5;
-  color: var(--paper-58);
-}
-.award-record__item--lead .award-record__medal { filter: drop-shadow(0 12px 16px rgba(0,0,0,0.6)) drop-shadow(0 0 30px rgba(201,168,106,0.18)); }
 
+/* ---------- Arrival: each medal drops onto its ribbon and swings to rest ---------- */
+.award-event .medal-art {
+  opacity: 0;
+  transform: translateY(-16px) rotate(8deg);
+  transition: opacity 700ms ease, transform 1600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-delay: calc(var(--d, 0ms) + 180ms);
+}
+.award-feature.is-visible .medal-art,
+.award-item.is-visible .medal-art { opacity: 1; transform: none; }
+@media (hover: hover) {
+  .award-feature.is-visible:hover .medal-art,
+  .award-item.is-visible:hover .medal-art { transform: rotate(-5deg); transition-delay: 0ms; }
+}
+.award-feature:active .medal-art,
+.award-item:active .medal-art { transform: rotate(-5deg); transition-delay: 0ms; }
+
+/* ---------- Wide screens: event and headline medal side by side ---------- */
 @media (min-width: 62rem) {
-  .award-record__also { grid-template-columns: repeat(2, max-content); column-gap: 2.4rem; }
+  .award-event {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    align-items: center;
+    column-gap: clamp(1.5rem, 3.4vw, 3.2rem);
+  }
+  .award-list {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: clamp(1rem, 2vw, 1.6rem);
+    padding-top: 0.4rem;
+  }
+  .award-item { border-bottom: 0; padding: 1.2rem 0.8rem 0.6rem; }
+  .award-item + .award-item::before {
+    content: "";
+    position: absolute;
+    left: calc(clamp(1rem, 2vw, 1.6rem) * -0.5);
+    top: 1.2rem;
+    bottom: 0.6rem;
+    width: 1px;
+    background: var(--line-soft);
+  }
 }
 
 /* Six images at a glance, then a second snap point. */
@@ -1495,8 +1659,14 @@ body.map-choice-open { overflow: hidden; }
   .honors__scene figcaption i { font-size: 0.48rem; line-height: 1.5; letter-spacing: 0.12em; }
 
 
-  .award-record__item { grid-template-columns: 3.6rem minmax(0, 1fr); gap: 1rem; align-items: start; }
-  .award-record__also { font-size: 0.76rem; }
+  .award-event { padding: 1rem 0.95rem 0.6rem; gap: 1.1rem; }
+  .award-feature { grid-template-columns: auto minmax(0, 1fr); gap: 1rem; padding: 0.85rem 0.95rem 1rem; }
+  .medal-art--feature { width: 5rem; }
+  .medal-art { width: 3rem; }
+  .award-feature__title { font-size: clamp(1.35rem, 6.4vw, 1.7rem); }
+  .award-item { gap: 0.85rem; padding: 0.95rem 0.15rem; }
+  .award-feature__copy > span,
+  .award-item > div > span { font-size: 0.68rem; }
 
   .strip { padding-block: clamp(4.5rem, 10vh, 6.5rem); }
   .strip__head { padding-inline: 1rem; }
@@ -1859,5 +2029,7 @@ body.map-choice-open { overflow: hidden; }
   .strip__hint::after,
   .strip.is-nudging .gallery-page:first-child { animation: none !important; }
   .strip .plate__hit { transform: none !important; }
-  .award-record__medal { transition: none !important; }
+  .award-event .medal-art { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .award-feature__title--gold,
+  .award-feature__title--silver { animation: none !important; }
 }
