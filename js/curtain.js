@@ -159,6 +159,14 @@
   var ROW_C = 40;        // damping relative to the row above
   var AIR = 4;           // drag against the air
 
+  // Opening is a diagonal draw, the way a stage curtain is pulled by hand:
+  // the hem's inner corner goes first and the rod follows TOP_LAG later,
+  // so the opening widens from the floor up and the lower pleats gather
+  // before the upper ones. PULL_K is that hand, strongest at the hem.
+  var TOP_LAG = 0.42;
+  var PULL_K = 560;
+  function pullWeight(r) { return Math.pow(r / (CTRL - 1), 1.25); }
+
   var CTRL = 6;          // control rows from rod to hem
   var ROWS = 30;         // drawn rows
   var SUB = 9;           // drawn columns per pleat
@@ -236,12 +244,14 @@
   Panel.prototype.step = function (h, t) {
     var N = this.N, x = this.x, v = this.v, k, r, i, a;
     var leadK = mode === 'closing' ? 360 : 300;
+    var opening = mode === 'opening';
+    var tRod = opening ? t - TOP_LAG : t;
     // Rod row: each ring is sprung toward where the rod wants it
     for (k = 0; k <= N; k++) {
       i = k * CTRL;
       var K = k === N ? leadK : 150;
       var C = 2 * (k === N ? 0.6 : 0.78) * Math.sqrt(K);
-      a = K * (this.target(k, t) - x[i]) - C * v[i];
+      a = K * (this.target(k, tRod) - x[i]) - C * v[i];
       v[i] += a * h;
       x[i] += v[i] * h;
     }
@@ -253,6 +263,11 @@
       for (k = 0; k <= N; k++) {
         i = k * CTRL + r;
         a = ROW_K * (x[i - 1] - x[i]) + ROW_C * (v[i - 1] - v[i]) - AIR * v[i];
+        // The hand on the leading edge, ahead of the rod by up to TOP_LAG
+        if (opening && k === N) {
+          var w = pullWeight(r), pk = PULL_K * w;
+          a += pk * (this.target(N, t - TOP_LAG * (1 - w)) - x[i]) - 2 * 0.62 * Math.sqrt(pk) * v[i];
+        }
         // Closed and hanging: the faintest draught moving the lower cloth
         if (idle) a += 200 * Math.sin(t * 1.1 + k * 0.8 + r * 0.45) * Math.pow(r / CTRL, 1.5);
         v[i] += a * h;
@@ -512,7 +527,7 @@
     }
     draw(t);
 
-    if (mode === 'opening' && t > 2.1 && (settledOpen() || t > 3.6)) {
+    if (mode === 'opening' && t > 2.1 + TOP_LAG && (settledOpen() || t > 3.6 + TOP_LAG)) {
       mode = 'open';
       finish();
       return;
