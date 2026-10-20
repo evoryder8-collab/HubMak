@@ -174,12 +174,15 @@ im.crop((xs.min(), ys.min(), xs.max()+1, ys.max()+1)).save("out.webp", "WEBP", q
 
 ### Replacing the film
 
-Put a new `reel.mp4` in `assets/video/` and a matching first frame at `reel-poster.webp`. Vertical, H.264, ideally under 20 MB. The current file was made with:
+Put a new `reel.mp4` in `assets/video/` and a matching first frame at `reel-poster.jpg`, then bump the `?v=` on the reel URL in `site.html` and `js/script.js` so phones do not mix old cached ranges with the new file. Vertical 1080x1920, H.264, and always encode from the master export, never from a previous web file. The current file (32 MB, from `Hubert REEL EMC26 subbed.mp4`) was made with:
 
 ```bash
-ffmpeg -i source.mp4 -vf "scale=720:1280:flags=lanczos" -c:v libx264 -preset slow -crf 26 \
-  -pix_fmt yuv420p -c:a aac -b:a 96k -movflags +faststart reel.mp4
+ffmpeg -i master.mp4 -map 0:v:0 -map 0:a:0 -c:v libx264 -preset slower -crf 26 \
+  -maxrate 4.5M -bufsize 9M -profile:v high -level 4.1 -pix_fmt yuv420p -g 48 \
+  -c:a aac -b:a 128k -ac 2 -movflags +faststart reel.mp4
 ```
+
+The cap on bitrate keeps busy drone shots from stalling playback on a phone. The page starts buffering the film as the curtain opens (muted, held on its first frame off screen, which is the one way iOS reliably fetches ahead), so it plays at once when scrolled to.
 
 HEVC will not play in Chrome or Firefox, so always transcode to H.264 even if the source already is an mp4.
 

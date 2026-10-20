@@ -242,6 +242,8 @@
 
   function overture() {
     document.body.classList.remove('is-booting');
+    // The critical images are in by now, so the film can start buffering
+    document.dispatchEvent(new Event('hm:overture'));
 
     if (reduced) {
       heroType.forEach(function (el) { el && el.classList.add('is-visible'); });
@@ -537,20 +539,54 @@
 
   if (video) {
     var wired = Boolean(video.querySelector('source'));
+    var filmVisible = false;
+    var primed = false;
 
     function play() {
       var p = video.play();
       if (p && p.catch) p.catch(function () {});
     }
 
+    // Buffer the film while the curtain opens, so it is ready by the time
+    // anyone scrolls to it. iOS Safari often ignores preload on its own, but
+    // it does fetch for muted inline playback, so the film is started off
+    // screen, held on its first frame, and resumed from the start on arrival.
+    // Data saver and very slow connections are left alone.
+    function primeFilm() {
+      if (primed || filmVisible) return;
+      primed = true;
+      var conn = navigator.connection;
+      if (conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ''))) return;
+      video.preload = 'auto';
+      if (video.readyState === 0) video.load();
+      // The play() promise can settle long after playback has begun, so the
+      // hold keys off the playhead itself: the moment it moves off screen,
+      // the film is paused and wound back to its first frame
+      function hold() {
+        if (filmVisible) {
+          video.removeEventListener('playing', hold);
+          video.removeEventListener('timeupdate', hold);
+          return;
+        }
+        if (!video.paused) video.pause();
+        if (video.currentTime > 0) { try { video.currentTime = 0; } catch (e) {} }
+      }
+      video.addEventListener('playing', hold);
+      video.addEventListener('timeupdate', hold);
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {});
+    }
+    document.addEventListener('hm:overture', function () { setTimeout(primeFilm, reduced ? 0 : 700); }, { once: true });
+
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
+          filmVisible = e.isIntersecting;
           if (e.isIntersecting) {
             if (!wired) {
               wired = true;
               var src = document.createElement('source');
-              src.src = 'assets/video/reel.mp4';
+              src.src = 'assets/video/reel.mp4?v=20261020';
               src.type = 'video/mp4';
               video.appendChild(src);
               video.preload = 'auto';
