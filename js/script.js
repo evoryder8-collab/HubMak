@@ -559,29 +559,121 @@
       if (conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ''))) return;
       video.preload = 'auto';
       if (video.readyState === 0) video.load();
-      // The play() promise can settle long after playback has begun, so the
-      // hold keys off the playhead itself: the moment it moves off screen,
-      // the film is paused and wound back to its first frame
+      // The hold keys off the playhead itself, on its first real tick.
+      // Pausing inside the 'playing' event is too early for WebKit: it
+      // reports paused at 0.00 while its clock keeps running underneath,
+      // and the film later resumes seconds in. One tick later, the pause
+      // and the rewind both land.
       function hold() {
         if (filmVisible) {
-          video.removeEventListener('playing', hold);
           video.removeEventListener('timeupdate', hold);
           return;
         }
-        if (!video.paused) video.pause();
-        if (video.currentTime > 0) { try { video.currentTime = 0; } catch (e) {} }
+        if (video.currentTime < 0.05) return;
+        video.pause();
+        try { video.currentTime = 0; } catch (e) {}
       }
-      video.addEventListener('playing', hold);
       video.addEventListener('timeupdate', hold);
       var p = video.play();
       if (p && p.catch) p.catch(function () {});
     }
     document.addEventListener('hm:overture', function () { setTimeout(primeFilm, reduced ? 0 : 700); }, { once: true });
 
+    var immersive = false;
+    var popped = false;
+    var arrivedOnce = false;
+    var soundLabel = soundBtn ? $('.sound__label', soundBtn) : null;
+
+    /* ---------- Spring physics ----------
+       A damped spring, solved and sampled into keyframes, so the motion is
+       physics rather than a drawn curve. It animates the individual
+       scale, translate and rotate properties, which compose with each
+       element's own transform (the sound button's centring, for one). */
+    var springsOK = !reduced && !!Element.prototype.animate && !!(window.CSS && CSS.supports &&
+      CSS.supports('scale', '1') && CSS.supports('rotate', '1deg') && CSS.supports('translate', '1px 1px'));
+
+    // Position over time for a spring released at x0 with velocity v0
+    function spring(x0, v0, stiffness, damping) {
+      var w0 = Math.sqrt(stiffness), zeta = damping / (2 * w0);
+      var wd = w0 * Math.sqrt(Math.max(1 - zeta * zeta, 1e-4));
+      var size = Math.abs(x0) + Math.abs(v0) / w0 || 1;
+      var out = [], quiet = 0;
+      for (var i = 0; i < 240; i++) {
+        var tt = i / 60, env = Math.exp(-zeta * w0 * tt);
+        var x = env * (x0 * Math.cos(wd * tt) + ((v0 + zeta * w0 * x0) / wd) * Math.sin(wd * tt));
+        out.push(x);
+        quiet = Math.abs(x) < 0.004 * size ? quiet + 1 : 0;
+        if (quiet > 5 && i > 10) break;
+      }
+      out.push(0);
+      return out;
+    }
+
+    function at(arr, i) { return i < arr.length ? arr[i] : 0; }
+
+    // Springs up from small and below, overshoots, settles
+    function popIn(el, fromScale, fromY) {
+      if (!springsOK) return;
+      var sc = spring(fromScale - 1, 0, 260, 12), y = spring(fromY, 0, 230, 13);
+      var n = Math.max(sc.length, y.length), kf = [];
+      for (var i = 0; i < n; i++) {
+        kf.push({ scale: (1 + at(sc, i)).toFixed(4), translate: '0 ' + at(y, i).toFixed(2) + 'px', opacity: Math.min(1, i / 8) });
+      }
+      el.animate(kf, { duration: (n - 1) * 1000 / 60, easing: 'linear' });
+    }
+
+    // A single tap on a bell: a sideways impulse that rings down
+    function shake(el) {
+      if (!springsOK) return;
+      var r = spring(0, 220, 520, 10), x = spring(0, -330, 520, 10);
+      var n = Math.max(r.length, x.length), kf = [];
+      for (var i = 0; i < n; i++) {
+        kf.push({ rotate: at(r, i).toFixed(3) + 'deg', translate: at(x, i).toFixed(2) + 'px 0', scale: (1 + 0.07 * Math.exp(-i / 9)).toFixed(4) });
+      }
+      el.animate(kf, { duration: (n - 1) * 1000 / 60, easing: 'linear' });
+    }
+
+    function setSound(on) {
+      video.muted = !on;
+      if (!soundBtn) return;
+      soundBtn.setAttribute('aria-pressed', String(on));
+      if (soundLabel) soundLabel.textContent = on ? t('sound_off') : t('sound_on');
+      soundBtn.setAttribute('data-cursor', on ? 'Mute' : 'Listen');
+      soundBtn.classList.toggle('is-calling', !on && popped);
+    }
+
+    /* ---------- The sound button: pops in on arrival, blinks, then nudges ---------- */
+    if (soundBtn && springsOK) soundBtn.classList.add('is-waiting');
+
+    function arrive() {
+      if (popped || !soundBtn) return;
+      popped = true;
+      soundBtn.classList.remove('is-waiting');
+      popIn(soundBtn, 0.5, 16);
+      soundBtn.classList.toggle('is-calling', video.muted);
+    }
+
+    // After four seconds actually watched, on screen and still muted, it
+    // shakes once. Off screen playback (the buffering) does not count.
+    var watched = 0, lastTime = null, nudged = false;
+    video.addEventListener('timeupdate', function () {
+      var now = video.currentTime;
+      if (lastTime !== null && filmVisible && !immersive && video.muted && !video.paused) {
+        var d = now - lastTime;
+        if (d > 0 && d < 1) watched += d;
+      }
+      lastTime = now;
+      if (!nudged && popped && watched >= 4 && video.muted && soundBtn) {
+        nudged = true;
+        shake(soundBtn);
+      }
+    });
+
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
           filmVisible = e.isIntersecting;
+          if (immersive) return;             // full screen decides for itself
           if (e.isIntersecting) {
             if (!wired) {
               wired = true;
@@ -593,6 +685,16 @@
               video.load();
             }
             play();
+            setTimeout(arrive, reduced ? 0 : 220);
+            // Safety net: the first arrival always starts from the top
+            if (!arrivedOnce) {
+              arrivedOnce = true;
+              setTimeout(function () {
+                if (!immersive && watched < 1 && video.currentTime > 1.2) {
+                  try { video.currentTime = 0; } catch (err) {}
+                }
+              }, 450);
+            }
           } else if (!video.paused) {
             video.pause();
           }
@@ -601,14 +703,108 @@
     }
 
     if (soundBtn) {
-      var soundLabel = $('.sound__label', soundBtn);
       soundBtn.addEventListener('click', function () {
-        video.muted = !video.muted;
-        var on = !video.muted;
-        soundBtn.setAttribute('aria-pressed', String(on));
-        if (soundLabel) soundLabel.textContent = on ? t('sound_off') : t('sound_on');
-        soundBtn.setAttribute('data-cursor', on ? 'Mute' : 'Listen');
+        setSound(video.muted);
         if (video.paused) play();
+      });
+    }
+
+    /* ---------- Full screen ----------
+       The page's own video moves into a full screen layer, keeping what it
+       has buffered. iPhone's native full screen player would hide anything
+       drawn over it, so the sound question lives in this layer instead.
+       Where a browser allows, the layer also goes truly full screen. */
+    var full = $('#film-full');
+    var stage = $('#film-full-stage');
+    var ask = $('#film-ask');
+    var askOn = $('#film-ask-on');
+    var askOff = $('#film-ask-off');
+    var fullClose = $('#film-full-close');
+    var expand = $('#film-expand');
+    var home = video.parentNode;
+    var homeNext = null;
+    var fullReturn = null;
+    var nativeFull = false;
+
+    function focusQuiet(el) { if (el && el.focus) { try { el.focus({ preventScroll: true }); } catch (e) { el.focus(); } } }
+
+    function showAsk() {
+      ask.hidden = false;
+      popIn(ask, 0.84, 26);
+      focusQuiet(askOn);
+    }
+
+    function answer(on) {
+      setSound(on);
+      ask.hidden = true;
+      play();
+      focusQuiet(fullClose);
+    }
+
+    function openFull() {
+      if (immersive || !full || !stage) return;
+      immersive = true;
+      fullReturn = document.activeElement;
+      homeNext = video.nextSibling;
+      stage.appendChild(video);
+      full.hidden = false;
+      document.body.classList.add('film-full-open');
+      requestAnimationFrame(function () { full.classList.add('is-open'); });
+      if (full.requestFullscreen && document.fullscreenEnabled) {
+        var fp = full.requestFullscreen();
+        if (fp && fp.then) fp.then(function () { nativeFull = true; }).catch(function () {});
+      }
+      if (video.muted) {
+        video.pause();
+        showAsk();
+      } else {
+        ask.hidden = true;
+        play();
+        focusQuiet(fullClose);
+      }
+    }
+
+    function closeFull() {
+      if (!immersive) return;
+      if (document.fullscreenElement && document.exitFullscreen) {
+        var ep = document.exitFullscreen();
+        if (ep && ep.catch) ep.catch(function () {});
+      }
+      nativeFull = false;
+      ask.hidden = true;
+      full.classList.remove('is-open');
+      document.body.classList.remove('film-full-open');
+      setTimeout(function () {
+        home.insertBefore(video, homeNext && homeNext.parentNode === home ? homeNext : null);
+        full.hidden = true;
+        immersive = false;
+        if (filmVisible) play(); else video.pause();
+        focusQuiet(fullReturn);
+      }, reduced ? 0 : 420);
+    }
+
+    if (full && expand) {
+      expand.addEventListener('click', openFull);
+      if (askOn) askOn.addEventListener('click', function () { answer(true); });
+      if (askOff) askOff.addEventListener('click', function () { answer(false); });
+      if (fullClose) fullClose.addEventListener('click', closeFull);
+      // Inside full screen, tapping the film pauses and resumes it
+      video.addEventListener('click', function () {
+        if (!immersive || !ask.hidden) return;
+        if (video.paused) play(); else video.pause();
+      });
+      document.addEventListener('fullscreenchange', function () {
+        if (!document.fullscreenElement && nativeFull && immersive) closeFull();
+      });
+      addEventListener('keydown', function (e) {
+        if (!immersive) return;
+        if (e.key === 'Escape') { e.preventDefault(); closeFull(); return; }
+        if (e.key === 'Tab') {
+          var stops = [askOn, askOff, fullClose].filter(function (el) { return el && !el.closest('[hidden]'); });
+          var i = stops.indexOf(document.activeElement);
+          e.preventDefault();
+          focusQuiet(stops[(i + (e.shiftKey ? -1 : 1) + stops.length) % stops.length]);
+        }
       });
     }
   }

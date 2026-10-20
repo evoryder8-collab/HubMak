@@ -439,6 +439,7 @@ body.site-page.is-booting>.loader{position:fixed;inset:0;z-index:2147483647;disp
           <source src="assets/video/reel.mp4?v=20261020" type="video/mp4">
         </video>
         <span class="film__edge" aria-hidden="true"></span>
+        <button class="film__expand" id="film-expand" type="button" aria-label="Watch full screen" data-i18n-aria="film_expand" data-cursor="Watch"></button>
 
         <button class="sound" id="reel-sound" type="button" aria-pressed="false" data-cursor="Listen">
           <span class="sound__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
@@ -729,6 +730,21 @@ body.site-page.is-booting>.loader{position:fixed;inset:0;z-index:2147483647;disp
 </footer>
 
 <!-- Lightbox -->
+<!-- The film, full screen. The page's own video moves in here, so nothing
+     buffered is lost, and the sound question can sit over it, which the
+     native iPhone player would not allow. -->
+<div class="film-full" id="film-full" role="dialog" aria-modal="true" aria-label="Film" data-i18n-aria="film_aria" hidden>
+  <div class="film-full__stage" id="film-full-stage"></div>
+  <div class="film-ask" id="film-ask" hidden>
+    <button class="film-ask__on" id="film-ask-on" type="button">
+      <span class="sound__wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span class="film-ask__copy"><strong data-i18n="film_ask_on">Sound on?</strong><small data-i18n="film_ask_rec">Recommended</small></span>
+    </button>
+    <button class="film-ask__off" id="film-ask-off" type="button" data-i18n="film_ask_off">Off</button>
+  </div>
+  <button class="film-full__close" id="film-full-close" type="button" aria-label="Close" data-i18n-aria="film_close"></button>
+</div>
+
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" data-i18n-aria="lightbox_aria" hidden>
   <button class="lightbox__close" id="lightbox-close" type="button" aria-label="Close viewer" data-i18n-aria="lightbox_close" data-cursor="Close"></button>
   <button class="lightbox__nav lightbox__nav--prev" id="lightbox-prev" type="button" aria-label="Previous image" data-i18n-aria="lightbox_prev"></button>
