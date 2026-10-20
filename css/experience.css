@@ -1164,8 +1164,7 @@ html { scroll-behavior: auto; overflow-x: clip; }
 .award-rank--silver { color: #cdd4da; }
 
 /* ---------- The medal ----------
-   Struck medal artwork. Gold is a first place, silver a second, champagne
-   a laurel with no rank for an honor that was not a placement. Each one
+   Struck medal artwork. Gold is a first place, silver a second. Each one
    hangs from its ribbon, so it swings from the top. */
 .medal-art {
   flex: none;
