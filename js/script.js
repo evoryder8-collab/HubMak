@@ -756,6 +756,9 @@
   var clinicMapObserver = null;
 
   function loadClinicMap() {
+    // The 3D map (js/clinic-map.js) takes over when it can, and loads this
+    // embed itself if it has to fall back
+    if (window.HM_MAP3D) return;
     if (!clinicMap || clinicMap.getAttribute('src') || !mobileMapMedia.matches) return;
     clinicMap.setAttribute('src', clinicMap.getAttribute('data-src'));
   }

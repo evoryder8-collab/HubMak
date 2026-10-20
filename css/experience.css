@@ -1863,6 +1863,94 @@ body.map-choice-open { overflow: hidden; }
   }
   .contact-map__coordinates i { width: 3px; height: 3px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 8px var(--gold); }
 
+  /* ---------- The 3D map (js/clinic-map.js) ----------
+     Fades up over the framed gradient once the first frame is drawn. The
+     drawn route, grid and colour wash belonged to the flat embed. */
+  /* maplibre-gl.css sets the container to position: relative, which would
+     collapse it to nothing, so this rule carries the extra class */
+  .contact-map__map > .contact-map__gl,
+  .contact-map__map > .contact-map__gl.maplibregl-map {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1400ms ease;
+  }
+  .contact-map.is-3d-ready .contact-map__gl { opacity: 1; }
+  .contact-map.is-3d .contact-map__map > iframe,
+  .contact-map.is-3d .contact-map__tone,
+  .contact-map.is-3d .contact-map__grid,
+  .contact-map.is-3d .contact-map__route,
+  .contact-map.is-3d .contact-map__map > .contact-map__pin { display: none; }
+  .contact-map.is-3d .contact-map__coordinates { z-index: 3; }
+  /* Darkens the lower edge so the details card sits on night, not streets */
+  .contact-map.is-3d .contact-map__map::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 46%;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent, rgba(7,9,8,0.62) 55%, rgba(7,9,8,0.9));
+  }
+
+  .contact-map__gl .maplibregl-canvas { outline: none; }
+  .contact-map__gl .maplibregl-ctrl-attrib {
+    margin: 0.55rem 0.55rem 0 0;
+    background: rgba(5,7,7,0.5) !important;
+    color: rgba(244,241,236,0.5);
+    font-size: 0.5rem;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .contact-map__gl .maplibregl-ctrl-attrib a { color: rgba(244,241,236,0.62); }
+  .contact-map__gl .maplibregl-ctrl-attrib-button { filter: invert(0.82) sepia(0.4); opacity: 0.6; }
+  .contact-map__gl .maplibregl-cooperative-gesture-screen {
+    background: rgba(5,7,7,0.62);
+    color: var(--paper);
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  /* The pin, now anchored to the clinic on the map */
+  .clinic-marker {
+    display: grid;
+    justify-items: center;
+    gap: 0.35rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .clinic-marker .contact-map__pin {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+  }
+  .clinic-marker:active .contact-map__pin { transform: scale(0.94); }
+  .clinic-marker__label {
+    order: -1;
+    padding: 0.32rem 0.6rem;
+    border: 1px solid rgba(226,202,160,0.32);
+    border-radius: 999px;
+    background: rgba(5,7,7,0.62);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    font-size: 0.5rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #f1d89c;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45), 0 0 18px rgba(201,168,106,0.16);
+  }
+
   .contact-map__details {
     position: relative;
     z-index: 8;
